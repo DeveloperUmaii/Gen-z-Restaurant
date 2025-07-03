@@ -11,7 +11,7 @@ import bannerSliderImg6 from '../assets/home/06.png';
 const BannerSlide = () => {
 
     return (
-        <div>
+        <div className='mb-12'>
             <AwesomeSlider className='h-80'>
                 <div ><img src={bannerSliderImg1} alt="Slide 1" /></div>
                 <div ><img src={bannerSliderImg2} alt="Slide 2" /></div>
