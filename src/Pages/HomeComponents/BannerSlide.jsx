@@ -1,11 +1,12 @@
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
-import bannerSliderImg1 from '../assets/home/01.jpg';
-import bannerSliderImg2 from '../assets/home/02.jpg';
-import bannerSliderImg3 from '../assets/home/03.png';
-import bannerSliderImg4 from '../assets/home/04.jpg';
-import bannerSliderImg5 from '../assets/home/05.png';
-import bannerSliderImg6 from '../assets/home/06.png';
+import bannerSliderImg1 from '../../assets/home/01.jpg';
+import bannerSliderImg2 from '../../assets/home/02.jpg';
+import bannerSliderImg3 from '../../assets/home/03.png';
+import bannerSliderImg4 from '../../assets/home/04.jpg';
+import bannerSliderImg5 from '../../assets/home/05.png';
+import bannerSliderImg6 from '../../assets/home/06.png';
+
 
 
 const BannerSlide = () => {
