@@ -8,6 +8,10 @@ const Featured = () => {
         subHeading={"Check it Out"}
         heading={"Featured Item"}
       ></SecTionTitle>
+
+
+
+      
         </div>
     );
 };

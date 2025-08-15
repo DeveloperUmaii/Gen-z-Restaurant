@@ -9,14 +9,15 @@ const PopularMenu = () => {
       .then((res) => res.json())
       .then((data) => {
         const popularItem = data.filter((item) => item.category === "popular");
-        setMenu(data), console.log(popularItem);
+        setMenu(data)
+        // console.log(popularItem);
       });
   }, []);
 
   return (
     <section className="px-4">
       <SecTionTitle
-        subHeading={"Popular Items"}
+        subHeading={"Check it out"}
         heading={"From Our Menu"}
       ></SecTionTitle>
 
@@ -35,7 +36,7 @@ const PopularMenu = () => {
         
       </div>
       <div className=" flex justify-center my-4">
-              <button className="btn btn-xs rounded-3xl border-4 shadow-none opacity-90 border-black border-x-0 border-t-0 bsm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Responsive</button>
+              <button className="btn btn-xs rounded-3xl border-4 shadow-none opacity-90 border-black border-x-0 border-t-0 bsm:btn-sm md:btn-md lg:btn-lg xl:btn-xl uppercase ">View full menu</button>
             </div>
     </section>
   );
