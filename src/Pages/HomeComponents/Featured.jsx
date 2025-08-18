@@ -1,27 +1,25 @@
 import SecTionTitle from "../../Components/SecTionTitle";
 import FeaturedImage from "../../assets/home/featured.jpg";
-import BistroBossBackground from "../../assets/home/banner.jpg";
 
 const Featured = () => {
   return (
-    <div className="">
+    <div className="my-16 ">
       <div
-        className="hero min-h-screen"
+        className="hero min-h-screen "
         style={{
-          backgroundImage:
-            "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
-        }}
+            backgroundImage: `url(${FeaturedImage})`,
+          }}
       >
-        <div className="mb-96 mt-0 w-full bg-white ">
+        <div className="mb-96 mt-0 w-full ">
           <SecTionTitle subHeading={"Check it out"} heading={"Featured Menu"} />
         </div>
         <div className="">
             <div className="flex justify-between ">
                 <div className=" w-6/12  my-1 sm:my-10 md:my-12 rounded-lg px-1 sm:px-6 md:px-10 lg:px-20 py-1">
-                  <img src={FeaturedImage} className="w-full" alt="" srcset="" />
+                  <img src={FeaturedImage} className="w-full " alt="" srcset="" />
                 </div>
 
-                <div className="w-6/12  my-1 sm:my-10 md:my-12 rounded-lg px-1 sm:px-6 md:px-10 lg:px-20 py-1">
+                <div className=" w-6/12  my-1 sm:my-10 md:my-12 rounded-lg px-1 sm:px-6 md:px-10 lg:px-20 py-1">
                   <h1 className="text-start text-white">March 20, 2023</h1>
                   <h2 className="text-start text-white">WHERE CAN I GET SOME?</h2>
                    <p className="text-start text-white">
