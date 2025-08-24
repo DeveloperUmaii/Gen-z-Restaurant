@@ -4,6 +4,8 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useEffect, useState } from "react";
+import { Rating } from "@smastrom/react-rating";
+import '@smastrom/react-rating/style.css';
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
@@ -26,44 +28,11 @@ const Testimonials = () => {
       </div>
 
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-        {
-        reviews.map((review) => (
+        {reviews.map((review) => (
           <SwiperSlide key={review?._id}>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center my-6">
               <div className="">
-                <div className="rating">
-                  <input
-                    type="radio"
-                    name="rating-2"
-                    className="mask mask-star-2 bg-orange-400"
-                    aria-label="1 star"
-                  />
-                  <input
-                    type="radio"
-                    name="rating-2"
-                    className="mask mask-star-2 bg-orange-400"
-                    aria-label="2 star"
-                  />
-                  <input
-                    type="radio"
-                    name="rating-2"
-                    className="mask mask-star-2 bg-orange-400"
-                    aria-label="3 star"
-                  />
-                  <input
-                    type="radio"
-                    name="rating-2"
-                    className="mask mask-star-2 bg-orange-400"
-                    aria-label="4 star"
-                  />
-                  {/* <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" aria-label="5 star" defaultChecked /> */}
-                  <input
-                    type="radio"
-                    name="rating-2"
-                    className="mask mask-star-2 bg-[#3f3f3f99]"
-                    aria-label="5 star"
-                  />
-                </div>
+                <Rating  className="flex w-56 h-8 " value={review?.rating} readOnly />
               </div>
               <div className="">
                 <svg
@@ -83,7 +52,9 @@ const Testimonials = () => {
                   />
                 </svg>
               </div>
-              <p className="text-[#fff] text-center w-9/12">{review?.details}</p>
+              <p className="text-[#fff] text-center w-9/12">
+                {review?.details}
+              </p>
               <h2 className="font-bold text-orange-400 py-2">{review?.name}</h2>
             </div>
           </SwiperSlide>
