@@ -55,7 +55,7 @@ const Testimonials = () => {
               <p className="text-[#fff] text-center w-9/12">
                 {review?.details}
               </p>
-              <h2 className="font-bold text-orange-400 py-2">{review?.name}</h2>
+              <h2 className="font-bold text-orange-400 py-2 text-xl font-serif">{review?.name}</h2>
             </div>
           </SwiperSlide>
         ))}
