@@ -64,7 +64,7 @@ const Footer = () => {
           <div className="w-2/6"></div>
         </div>
       </footer>
-      <footer className="bg-[#222121] footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-1">
+      <footer className="bg-[#171717] footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-1">
         <aside>
           <p className="text-white">
             Copyright © {new Date().getFullYear()} - All right reserved by <span className="font-bold text-lg"> Gen - <span className="font-semibold text-[#ff4912]">Z</span> </span> Resturant

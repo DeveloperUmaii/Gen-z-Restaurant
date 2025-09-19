@@ -7,6 +7,7 @@ import Featured from './HomeComponents/Featured';
 import Contact from './HomeComponents/Contact';
 import ChefRecomended from './HomeComponents/ChefRecomended';
 import Testimonials from './HomeComponents/Testimonials';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
                 backgroundImage: `url(${BistroBossBackground})`
             }}
         >
+            <Helmet title='Gen-Z_R|Home' />
             <BannerSlide />
             <FoodItemNameSlide />
             <BistroBossSection />
