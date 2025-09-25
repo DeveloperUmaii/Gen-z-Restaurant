@@ -4,7 +4,9 @@ import ErrorPage from '../Components/ErrorPage'
 import Home from '../Pages/Home'
 import Contact from '../Pages/HomeComponents/Contact'
 import OurMenu from '../Pages/OurMenu'
-import { Helmet } from 'react-helmet-async'
+import DashBoard from '../Pages/DashBoard'
+import OurShop from '../Pages/OurShop'
+import ContactUs from '../Pages/ContactUs'
 
 const router = createBrowserRouter([
   {
@@ -19,12 +21,12 @@ const router = createBrowserRouter([
 
       {
         path: '/contact',
-        element: <Helmet><Contact /></Helmet> 
+        element: <ContactUs />
       },
       
       {
         path: '/dashbord',
-        element: <Contact />
+        element: <DashBoard  />
       },
       {
         path: '/ourmenu',
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/ourshop',
-        element: <Contact />
+        element: <OurShop />
       },
       {
         path: '/signout',

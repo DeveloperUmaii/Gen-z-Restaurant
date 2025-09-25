@@ -8,6 +8,7 @@ import Contact from './HomeComponents/Contact';
 import ChefRecomended from './HomeComponents/ChefRecomended';
 import Testimonials from './HomeComponents/Testimonials';
 import { Helmet } from 'react-helmet-async';
+// import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     return (
@@ -18,7 +19,7 @@ const Home = () => {
             }}
         >
             <Helmet title='Gen-Z_R|Home' />
-            <BannerSlide />
+            <Helmet title='' />
             <FoodItemNameSlide />
             <BistroBossSection />
             <PopularMenu />

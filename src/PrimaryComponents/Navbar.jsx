@@ -17,7 +17,6 @@ const Navbar = () => {
                 </ul>
             </details>
         </li>
-        <li><Link to="/about"  className="text-[#fff]">About</Link></li>
     </>;
 
     return (

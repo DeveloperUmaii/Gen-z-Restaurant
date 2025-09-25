@@ -1,10 +1,11 @@
 import { Helmet } from "react-helmet-async";
+import Cover from "../Components/Cover";
 
 const OurMenu = () => {
     return (
         <div>
             <Helmet title='Gen-Z_R|Menu' />
-            <h6 className="">OUR MENU</h6>
+            <Cover />
         </div>
     );
 };
