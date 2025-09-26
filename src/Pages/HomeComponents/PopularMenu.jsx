@@ -1,18 +1,11 @@
 import SecTionTitle from "../../Components/SecTionTitle";
 import { useEffect, useState } from "react";
 import MenuItem from "./MenuItem";
+import useMenu from "../../hooks/useMenu";
 
 const PopularMenu = () => {
-  const [menu, setMenu] = useState([]);
-  useEffect(() => {
-    fetch("menu.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const popularItem = data.filter((item) => item.category === "popular");
-        setMenu(data)
-        // console.log(popularItem);
-      });
-  }, []);
+  const [menu, loading] =useMenu()
+  const popularItem = menu.filter((item) => item.category === "popular");
 
   return (
     <section className="px-4">
@@ -29,7 +22,7 @@ const PopularMenu = () => {
                     </div> )
             } */}
             {
-                menu.map( rawItem =>
+                popularItem.map( rawItem =>
                 <MenuItem key={rawItem?._id} item={rawItem}/>
                 )
             }
