@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import MenuItem from "./MenuItem";
 import useMenu from "../../hooks/useMenu";
 
-const PopularMenu = () => {
+const PopularMenu = ({categoryFilter}) => {
   const [menu, loading] =useMenu()
-  const popularItem = menu.filter((item) => item.category === "popular");
+  const popularItem = menu.filter((item) => item.category === categoryFilter);
+  // const popularItem = menu.filter((item) => item.category === `${category}`);
+  // const popularItem = menu.filter((item) => item.category === `${category}`);
 
   return (
     <section className="px-4">

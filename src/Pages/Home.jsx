@@ -22,7 +22,7 @@ const Home = () => {
             <Helmet title='' />
             <FoodItemNameSlide />
             <BistroBossSection />
-            <PopularMenu />
+            <PopularMenu categoryFilter={'popular'}/>
             <Contact />
             <ChefRecomended />
             <Featured />

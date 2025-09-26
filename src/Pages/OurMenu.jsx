@@ -9,7 +9,7 @@ const OurMenu = () => {
         <div>
             <Helmet title='Gen-Z_R|Menu' />
             <PageCover coverImg={menuCover} title={'our menu'} subTitle={'would you like to try a dish?'} />
-            <PopularMenu />
+            <PopularMenu categoryFilter={'drinks'} />
             
             <Cover coverImg={menuCover} title={'our menu'} subTitle={'would you like to try a dish?'} />
             <PopularMenu />
