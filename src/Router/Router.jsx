@@ -33,9 +33,10 @@ const router = createBrowserRouter([
         element: <OurMenu />
       },
       {
-        path: '/ourshop',
+        path: 'ourshop/:category',
         element: <OurShop />
       },
+
       {
         path: '/signout',
         element: <Contact />
