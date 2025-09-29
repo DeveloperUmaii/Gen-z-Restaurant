@@ -1,20 +1,22 @@
 import SecTionTitle from "../../Components/SecTionTitle";
-import { useEffect, useState } from "react";
 import MenuItem from "./MenuItem";
 import useMenu from "../../hooks/useMenu";
 
-const PopularMenu = ({categoryFilter}) => {
-  const [menu, loading] =useMenu()
+const PopularMenu = ({categoryFilter, menuSubHeading, menuHeading, buttonTitle}) => {
+  const [menu] =useMenu()
   const popularItem = menu.filter((item) => item.category === categoryFilter);
-  // const popularItem = menu.filter((item) => item.category === `${category}`);
-  // const popularItem = menu.filter((item) => item.category === `${category}`);
+
 
   return (
     <section className="px-4">
       <SecTionTitle
+        subHeading={menuSubHeading}
+           heading={menuHeading}
+      ></SecTionTitle>
+      {/* <SecTionTitle
         subHeading={"Check it out"}
         heading={"From Our Menu"}
-      ></SecTionTitle>
+      ></SecTionTitle> */}
 
       <div className="grid grid-cols-2 gap-x-2">
             {/* {
@@ -31,7 +33,7 @@ const PopularMenu = ({categoryFilter}) => {
         
       </div>
       <div className=" flex justify-center my-4">
-              <button className="btn btn-xs rounded-3xl border-4 shadow-none opacity-90 border-black border-x-0 border-t-0 bsm:btn-sm md:btn-md lg:btn-lg xl:btn-xl uppercase ">View full menu</button>
+              <button className="btn btn-xs rounded-3xl border-4 shadow-none opacity-90 border-black border-x-0 border-t-0 bsm:btn-sm md:btn-md lg:btn-lg xl:btn-xl uppercase ">{buttonTitle}</button>
             </div>
     </section>
   );

@@ -1,13 +1,16 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
+import shopCover from '../assets/shop/banner2.jpg';
+import PageCover from "../Components/PageCover";
+import MenuTabs from "./OurShopComponents/MenuTabs";
 
 const OurShop = () => {
-    return (
-        <div>
-                  <Helmet title='Gen-Z_R|Shop' />
-                        <h6 className="text-9xl">OUR SHOP </h6>
-        </div>
-    );
+  return (
+    <div>
+      <Helmet title="Gen-Z_R|Shop" />
+      <PageCover coverImg={shopCover} title={"OUR SHOP"} subTitle={"would you like to try a dish?"} />
+      <MenuTabs />
+    </div>
+  );
 };
 
 export default OurShop;

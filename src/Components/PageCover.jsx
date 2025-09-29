@@ -2,7 +2,7 @@ import React from 'react';
 
 const PageCover = ({coverImg, title, subTitle}) => {
     return (
-    <div className="mt-20">
+    <div className="">
       <div
         className="hero border-[#8080805d] bg-cover bg-center"
         style={{
