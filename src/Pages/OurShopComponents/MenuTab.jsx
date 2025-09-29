@@ -16,7 +16,7 @@ const MenuTab = () => {
       {/* ✅ Helmet এখানে বসানো হলো যাতে tabIndex চেঞ্জ হলে টাইটেলও বদলায় */}
       <Helmet>
         <title>Gen-Z_R | Shop/{categories[tabIndex]} </title>
-        {/* ✅ টাইটেল হবে যেমন: SALAD | Our Shop */}
+
       </Helmet>
 
       <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
