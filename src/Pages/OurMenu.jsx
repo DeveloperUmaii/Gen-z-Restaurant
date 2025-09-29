@@ -22,10 +22,10 @@ const OurMenu = () => {
             <PopularMenu categoryFilter={'pizza'} buttonTitle={'ORDER YOUR FAVOURITE FOOD'} />
 
             <Cover coverImg={saladCover} title={'Salads'} subTitle={'would you like to try a dish?'} />
-            <PopularMenu categoryFilter={'salads'} buttonTitle={'ORDER YOUR FAVOURITE FOOD'} />
+            <PopularMenu categoryFilter={'salad'} buttonTitle={'ORDER YOUR FAVOURITE FOOD'} />
 
             <Cover coverImg={soupCover} title={'Soups'} subTitle={'would you like to try a dish?'} />
-            <PopularMenu categoryFilter={'soups'} buttonTitle={'ORDER YOUR FAVOURITE FOOD'} />
+            <PopularMenu categoryFilter={'soup'} buttonTitle={'ORDER YOUR FAVOURITE FOOD'} />
         </div>
     );
 };
