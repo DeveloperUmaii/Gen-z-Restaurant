@@ -1,18 +1,10 @@
 import { useEffect, useState } from "react";
 import SecTionTitle from "../../Components/SecTionTitle";
 import ChefRecomendedCard from "./ChefRecomendedCard";
+import useMenu from "../../hooks/useMenu";
 
 const ChefRecomended = () => {
-  const [ChefRecomended, setChefRecomended] = useState ([]);
-  console.log(ChefRecomended);
-    useEffect ( () => {
-      fetch ('menu.json')
-        .then( (res) => res.json())
-        .then ((data) => {
-          setChefRecomended(data)
-        })
-    }, [] )
-
+  const [menu] = useMenu();
 
   return (
     <div>
@@ -20,16 +12,13 @@ const ChefRecomended = () => {
         subHeading={"Should Try"}
         heading={"Chef Recommendes"}
       ></SecTionTitle>
-      
+
       <div className="grid grid-cols-3 gap-x-2 gap-y-1">
-          {
-            ChefRecomended.map( ChefReciepe => 
-            <ChefRecomendedCard key={ChefReciepe?._id} ChefCard ={ChefReciepe} 
-            />
-         )}
+        {menu.map((ChefReciepe) => (
+          <ChefRecomendedCard key={ChefReciepe?._id} ChefCard={ChefReciepe} />
+        ))}
       </div>
     </div>
-    
   );
 };
 
