@@ -33,7 +33,7 @@ const ChefRecomended = () => {
         pagination={{
           clickable: true,
           renderBullet: (index, className) => {
-            return `<span class="${className} w-20 h-20 flex items-center justify-center rounded-full bg-blue-500 text-white mx-1">${index + 1}</span>`;
+            return `<span class="${className} w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 text-white mx-1">${index + 1}</span>`;
           },
         }}
         className="mySwiper"
@@ -66,3 +66,4 @@ const ChefRecomended = () => {
 };
 
 export default ChefRecomended;
+
