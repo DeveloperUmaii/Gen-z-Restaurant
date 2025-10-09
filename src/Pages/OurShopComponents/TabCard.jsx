@@ -40,20 +40,6 @@ const TabCard = ({ categoryFilter }) => {
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
-      // নিচের ব্লকটা মুছে দাও — (Tailwind class string Swiper DOM এ সাপোর্ট করে না)
-      /*
-      return `
-        <span class="${className} 
-          flex items-center justify-center 
-          p-4 content-center
-          bg-blue-500 text-white font-bold text-xl  
-          rounded-full shadow-md cursor-pointer 
-          transition-all duration-300 
-          hover:bg-blue-200 hover:scale-105">
-          ${index + 1}
-        </span>
-      `;
-      */
 
       // ✅ নতুন কোড — custom class যোগ করা হয়েছে, ডিজাইন এখন TabCard.css থেকে আসবে
       return `

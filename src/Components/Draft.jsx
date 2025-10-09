@@ -1,6 +1,6 @@
-// git add .
-// git commit -m"Pagination Perfect with Css"
-// git push
+git add .
+git commit -m"Draft cut"
+git push
 
 
 // eita hocche 1st copy with pagination
