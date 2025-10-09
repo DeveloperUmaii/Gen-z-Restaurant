@@ -40,8 +40,6 @@ const TabCard = ({ categoryFilter }) => {
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
-
-      // ✅ নতুন কোড — custom class যোগ করা হয়েছে, ডিজাইন এখন TabCard.css থেকে আসবে
       return `
         <span class="${className} custom-bullet"> 
           ${index + 1}
@@ -55,7 +53,7 @@ const TabCard = ({ categoryFilter }) => {
       <Swiper
         pagination={pagination}
         modules={[Pagination]}
-        className="mySwiper pb-16" // ✅ নিচে জায়গা বাড়ানো হয়েছে যাতে pagination নিচে ঠিকভাবে দেখা যায়
+        className="mySwiper pb-16" 
       >
         {slideMenu.map((slideItems, slideIndex) => (
           <SwiperSlide key={slideIndex}>
