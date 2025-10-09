@@ -2,7 +2,7 @@ const ChefRecomendedCard = ({ ChefCard }) => {
   const { recipe, name, image } = ChefCard;
   return (
     <div>
-      <div className="card bg-base-100 w-72 shadow-sm">
+      <div className="border-2 border-red-500 card bg-base-100 w-72 shadow-sm">
         <figure className="px-10 pt-10">
           <img
             src={image}
