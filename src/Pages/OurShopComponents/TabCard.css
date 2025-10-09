@@ -1,0 +1,37 @@
+/* Swiper pagination এর মূল কনটেইনার */
+.swiper-pagination {
+  position: relative;
+  margin-top: 25px; /* নিচে সরানো */
+  text-align: center; /* মাঝে রাখা */
+  transform: translateX(-10px); /* একটু বামে সরানো */
+}
+
+/* কাস্টম বুলেট (pagination number) */
+.custom-bullet {
+  background-color: #3b82f6; /* blue-500 */
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px;
+  font-size: 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.custom-bullet:hover {
+  background-color: #2563eb; /* blue-600 */
+  transform: scale(1.15);
+}
+
+/* Active bullet */
+.swiper-pagination-bullet-active.custom-bullet {
+  background-color: #f97316; /* orange-500 */
+  transform: scale(1.25);
+}

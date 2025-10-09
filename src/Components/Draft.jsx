@@ -1,5 +1,5 @@
 // git add .
-// git commit -m"Pagination Perfect almost"
+// git commit -m"Pagination Perfect with Css"
 // git push
 
 
@@ -109,4 +109,9 @@ const TabCard = ({ categoryFilter }) => {
 };
 
 export default TabCard;
+
+
+<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
+
+<span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" aria-current="true">1</span>
 
