@@ -1,6 +1,4 @@
-// ✅ নতুন যোগ করা — CSS ফাইল ইমপোর্ট করেছি pagination ডিজাইন আলাদা রাখার জন্য
-import "./TabCard.css"; // added to handle custom pagination styling
-
+import "./TabCard.css";
 import useMenu from "../../hooks/useMenu";
 import ChefRecomendedCard from "../HomeComponents/ChefRecomendedCard";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,7 +14,7 @@ const TabCard = ({ categoryFilter }) => {
   if (loading) {
     return (
       <p className="text-center text-orange-500 text-lg font-bold">
-        ডেটা লোড হচ্ছে...
+        Data Loading...
       </p>
     );
   }

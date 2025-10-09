@@ -1,5 +1,5 @@
 git add .
-git commit -m"Draft cut"
+git commit -m"Dn"
 git push
 
 
