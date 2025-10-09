@@ -20,11 +20,7 @@ const TabCard = ({ categoryFilter }) => {
   }
 
   if (filteredItem.length === 0) {
-    return (
-      <p className="text-center text-gray-500 text-lg font-bold">
-        এই ক্যাটাগরিতে কোনো আইটেম নেই
-      </p>
-    );
+    return (<p className="text-center text-gray-500 text-base font-bold">There's Have No Data!</p>);
   }
 
   // pagination data split
