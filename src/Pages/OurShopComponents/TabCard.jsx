@@ -1,4 +1,4 @@
-// import { Helmet } from "react-helmet-async";
+ // import { Helmet } from "react-helmet-async";
 import useMenu from "../../hooks/useMenu";
 import ChefRecomendedCard from "../HomeComponents/ChefRecomendedCard";
 
@@ -11,6 +11,7 @@ import { Pagination } from "swiper/modules";
 const TabCard = ({ categoryFilter }) => {
   const [menu, loading] = useMenu();
   const filteredItem = menu.filter((item) => item.category === categoryFilter);
+  
   if (loading) {
     return (
       <p className="text-center text-orange-500 text-lg font-bold">
@@ -18,14 +19,24 @@ const TabCard = ({ categoryFilter }) => {
       </p>
     );
   }
-console.log('21 er niche pagination')
-  // pagination
+
+  // যদি কোনো আইটেম না থাকে
+  if (filteredItem.length === 0) {
+    return (
+      <p className="text-center text-gray-500 text-lg font-bold">
+        এই ক্যাটাগরিতে কোনো আইটেম নেই
+      </p>
+    );
+  }
+
+  // pagination এর জন্য স্লাইড তৈরি
   const itemsPerPage = 6;
   const slideMenu = [];
   for (let i = 0; i < filteredItem.length; i += itemsPerPage) {
     slideMenu.push(filteredItem.slice(i, i + itemsPerPage));
   }
-console.log('filterd item gulo',filteredItem)
+
+  // Pagination configuration
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
@@ -35,27 +46,24 @@ console.log('filterd item gulo',filteredItem)
 
   return (
     <div>
- <Swiper
-  key={categoryFilter}   // 👈 বাধ্য করে পুনরায় রেন্ডার
-  pagination={pagination}
-  modules={[Pagination]}
-  autoHeight={true}
-  observer={true}
-  observeParents={true}
->
-  {slideMenu.map((items, index) => (
-    <SwiperSlide key={index}>
-      <div className="grid grid-cols-3 gap-x-2 gap-y-1">
-        {items.map((chefReciepe) => (
-          <ChefRecomendedCard
-            key={chefReciepe?._id}
-            ChefCard={chefReciepe}
-          />
+      <Swiper
+        pagination={pagination}
+        modules={[Pagination]}
+        className="mySwiper"
+      >
+        {slideMenu.map((slideItems, slideIndex) => (
+          <SwiperSlide key={slideIndex}>
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {slideItems.map((chefReciepe) => (
+                <ChefRecomendedCard
+                  key={chefReciepe?._id}
+                  ChefCard={chefReciepe}
+                />
+              ))}
+            </div>
+          </SwiperSlide>
         ))}
-      </div>
-    </SwiperSlide>
-  ))}
-</Swiper>
+      </Swiper>
     </div>
   );
 };
