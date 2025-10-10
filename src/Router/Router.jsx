@@ -7,6 +7,7 @@ import OurMenu from '../Pages/OurMenu'
 import DashBoard from '../Pages/DashBoard'
 import OurShop from '../Pages/OurShop'
 import ContactUs from '../Pages/ContactUs'
+import Login from '../Pages/Login/Login'
 
 const router = createBrowserRouter([
   {
@@ -38,8 +39,8 @@ const router = createBrowserRouter([
       },
 
       {
-        path: '/signout',
-        element: <Contact />
+        path: '/login',
+        element: <Login />
       },
 
     ],

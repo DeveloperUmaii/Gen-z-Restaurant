@@ -7,7 +7,7 @@ const Navbar = () => {
         <li><Link to="/dashbord" className="text-[#fff] uppercase">Dashboard</Link></li>
         <li><Link to="/ourmenu" className="text-[#fff] uppercase">Our Menu</Link></li>
         <li><Link to="/ourshop/salad" className="text-[#fff] uppercase">Our Shop</Link></li>
-        <li><Link to="/signout" className="text-[#fff] uppercase">Sign Out</Link></li>
+        <li><Link to="/login" className="text-[#fff] uppercase">Log In</Link></li>
         <li tabIndex={0}>
             <details>
                 <summary  className="text-[#fff]">Parent</summary>
