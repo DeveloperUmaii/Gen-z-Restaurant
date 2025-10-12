@@ -115,7 +115,7 @@ const Login = () => {
               <div className="mb-6">
                 <div className="flex flex-col sm:flex-row items-center gap-4 mb-2">
                   <div className="bg-gray-200 text-gray-800 font-serif font-bold text-2xl px-4 py-2 tracking-widest border border-gray-300 rounded select-none w-32 text-center">
-                    UAgIuo
+                    ChadR5
                   </div>
                   <button
                     type="button"
