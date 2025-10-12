@@ -1,6 +1,17 @@
 import loginPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
+import React, { useState } from "react";
 
 const Login = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div>
       <h6 className="text-center text-lg font-semibold mt-4">Log IN Please</h6>
@@ -27,12 +38,12 @@ const Login = () => {
           </div>
 
           {/* Right Side */}
-          <div className="lg:w-1/2 p-8 sm:p-12">
+          <div className="lg:w-1/2 p-8 sm:p-12 relative">
             <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
               Login
             </h1>
 
-            <form>
+            <form onSubmit={handleLogin}>
               {/* Email */}
               <div className="mb-4">
                 <label className="label">
@@ -40,21 +51,64 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="Type here"
                   className="input input-bordered w-full"
                 />
               </div>
 
               {/* Password */}
-              <div className="mb-4">
+              <div className="mb-4 relative">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
+                  name="password"
                   placeholder="Enter your password"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full pr-12"
                 />
+
+                {/* Show/Hide Button */}
+                <span
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-[55%] transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-gray-700 transition duration-200"
+                >
+                  {showPassword ? (
+                    // Eye Open Icon
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="feather feather-eye"
+                    >
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  ) : (
+                    // Eye Closed Icon
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="feather feather-eye-off"
+                    >
+                      <path d="M17.94 17.94A10.97 10.97 0 0 1 12 20c-7 0-11-8-11-8a21.12 21.12 0 0 1 5.06-5.94" />
+                      <path d="M1 1l22 22" />
+                      <path d="M9.88 9.88a3 3 0 0 0 4.24 4.24" />
+                    </svg>
+                  )}
+                </span>
               </div>
 
               {/* Captcha */}
@@ -81,12 +135,7 @@ const Login = () => {
               <div className="mb-6">
                 <button
                   type="submit"
-                  className="btn w-full"
-                  style={{
-                    backgroundColor: "#d1b48b",
-                    borderColor: "#d1b48b",
-                    color: "#5c3c0a",
-                  }}
+                  className="btn w-full bg-[#d1b48b] text-[#5c3c0a] border-[#d1b48b] hover:bg-[#c9a77a]"
                 >
                   Sign In
                 </button>
