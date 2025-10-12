@@ -1,4 +1,4 @@
-import React from "react";
+import loginPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
 
 const Login = () => {
   return (
@@ -16,7 +16,7 @@ const Login = () => {
           <div className="lg:w-1/2 p-10 flex items-center justify-center bg-gray-50 border-r border-gray-100">
             <div className="w-full max-w-sm text-center">
               <img
-                src="your-illustration-image-url.svg"
+                src={loginPageThemeImage}
                 alt="Login Illustration"
                 className="w-full h-auto object-contain hidden md:block mx-auto"
               />

@@ -1,5 +1,5 @@
 git add .
-git commit -m"login start"
+git commit -m"L"
 git push
 
 upDateUserProfileNow(displayName, photoURL)
