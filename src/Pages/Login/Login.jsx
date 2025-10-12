@@ -70,9 +70,9 @@ const Login = () => {
                 />
 
                 {/* Show/Hide Button */}
-                <span
+                <span 
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-[55%] transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-gray-700 transition duration-200"
+                  className=" w-7  absolute right-3 top-[50%] transform  cursor-pointer text-gray-500 hover:text-gray-700 "
                 >
                   {showPassword ? (
                     // Eye Open Icon
