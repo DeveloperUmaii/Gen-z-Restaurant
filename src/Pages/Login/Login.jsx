@@ -76,6 +76,9 @@ const Login = () => {
                 >
                   {showPassword ? (
                     // Eye Open Icon
+                    // Eye Open Icon
+                    // Eye Open Icon
+                    // Eye Open Icon
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="22"
