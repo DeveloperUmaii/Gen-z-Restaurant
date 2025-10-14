@@ -1,17 +1,41 @@
 import loginPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
-import React, { useState } from "react";
-
+import React, { useEffect, useRef, useState } from "react";
+// capcha
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  LoadCanvasTemplateNoReload,
+  validateCaptcha,
+} from "react-simple-captcha";
 const Login = () => {
+  const captchaRef = useRef(null);
+  // submit button
+  const [disable, setDisable] = useState(true);
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    const captcha = form.captcha.value;
+    console.log(email, password, captcha);
   };
 
   const [showPassword, setShowPassword] = useState(false);
 
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
+  const handleCaptchaVerify = () => {
+    const captchaValue = captchaRef.current.value;
+          if (validateCaptcha(captchaValue) == true) {
+            alert("Captcha Matched");
+            setDisable(false);
+          } else {
+            alert("Captcha Does Not Match");
+          }
+          console.log(captchaValue);
+      };
   return (
     <div>
       <h6 className="text-center text-lg font-semibold mt-4">Log IN Please</h6>
@@ -70,25 +94,22 @@ const Login = () => {
                 />
 
                 {/* Show/Hide Button */}
-                <span 
+                <span
                   onClick={() => setShowPassword(!showPassword)}
                   className=" w-7  absolute right-3 top-[50%] transform  cursor-pointer text-gray-500 hover:text-gray-700 "
                 >
                   {showPassword ? (
                     // Eye Open Icon
-                    // Eye Open Icon
-                    // Eye Open Icon
-                    // Eye Open Icon
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="22"
-                      height="22"
+                      width="30"
+                      height="27"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="2"
+                      strokeWidth="1"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="feather feather-eye"
+                      className="feather feather-eye "
                     >
                       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                       <circle cx="12" cy="12" r="3" />
@@ -97,14 +118,14 @@ const Login = () => {
                     // Eye Closed Icon
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="22"
-                      height="22"
+                      width="28"
+                      height="28"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="2"
+                      strokeWidth="1"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="feather feather-eye-off"
+                      className="feather feather-eye-off "
                     >
                       <path d="M17.94 17.94A10.97 10.97 0 0 1 12 20c-7 0-11-8-11-8a21.12 21.12 0 0 1 5.06-5.94" />
                       <path d="M1 1l22 22" />
@@ -117,18 +138,23 @@ const Login = () => {
               {/* Captcha */}
               <div className="mb-6">
                 <div className="flex flex-col sm:flex-row items-center gap-4 mb-2">
-                  <div className="bg-gray-200 text-gray-800 font-serif font-bold text-2xl px-4 py-2 tracking-widest border border-gray-300 rounded select-none w-32 text-center">
-                    ChadR5
+                  <div className="ml-10">
+                    <LoadCanvasTemplate />
                   </div>
-                  <button
-                    type="button"
-                    className="text-sm text-blue-600 hover:text-blue-800 link-hover"
-                  >
-                    Reload Captcha
-                  </button>
+
+                  <div className=" ml-24">
+                    <button
+                      onClick={handleCaptchaVerify}
+                      className=" btn btn-neutral btn-dash w-16"
+                    >
+                      Captcha <br /> verify
+                    </button>
+                  </div>
                 </div>
                 <input
                   type="text"
+                  name="captcha"
+                  ref={captchaRef}
                   placeholder="Type the captcha"
                   className="input input-bordered w-full"
                 />
@@ -138,7 +164,8 @@ const Login = () => {
               <div className="mb-6">
                 <button
                   type="submit"
-                  className="btn w-full bg-[#d1b48b] text-[#5c3c0a] border-[#d1b48b] hover:bg-[#c9a77a]"
+                  disabled={disable}
+                  className=" btn w-full bg-[#d1b48b] text-[#5c3c0a] border-[#d1b48b] hover:bg-[#aa8d67]"
                 >
                   Sign In
                 </button>
