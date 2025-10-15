@@ -8,7 +8,8 @@ const Navbar = () => {
         <li><Link to="/ourmenu" className="text-[#fff] uppercase">Our Menu</Link></li>
         <li><Link to="/ourshop/salad" className="text-[#fff] uppercase">Our Shop</Link></li>
         <li><Link to="/login" className="text-[#fff] uppercase">Log In</Link></li>
-        <li tabIndex={0}>
+        <li><Link to="/signup" className="text-[#fff] uppercase">Sign Up</Link></li>
+        {/* <li tabIndex={0}>
             <details>
                 <summary  className="text-[#fff]">Parent</summary>
                 <ul className="p-2 bg-[#07acc944]">
@@ -16,7 +17,7 @@ const Navbar = () => {
                     <li><Link to="/submenu2" className="text-[#fff]">Submenu 2</Link></li>
                 </ul>
             </details>
-        </li>
+        </li> */}
     </>;
 
     return (
