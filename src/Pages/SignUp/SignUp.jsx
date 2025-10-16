@@ -1,14 +1,26 @@
 import signUpPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../providers/Authprovider";
+import { Link } from "react-router-dom";
 // capcha
 const SignUp = () => {
+
+  const {registrationUser, setUser } = useContext(AuthContext)
+
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password, captcha);
+    console.log(email, password);
+
+    registrationUser(email, password)
+     .then( result => {
+      const creatingUser = result.user;
+      console.log(creatingUser);
+      setUser(creatingUser);
+     })
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -16,7 +28,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <h6 className="text-center text-lg font-semibold mt-4">Log IN Please</h6>
+      <h6 className="text-center text-lg font-semibold mt-24 ">Sign_Up Please</h6>
 
       <div
         className="min-h-screen flex items-center justify-center p-4 sm:p-8 bg-gray-100"
@@ -32,6 +44,18 @@ const SignUp = () => {
             </h1>
 
             <form onSubmit={handleSignUp}>
+              {/* name */}
+              <div className="mb-4">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Type here"
+                  className="input input-bordered w-full"
+                />
+              </div>
               {/* Email */}
               <div className="mb-4">
                 <label className="label">
@@ -105,21 +129,19 @@ const SignUp = () => {
                   type="submit"
                   className=" btn w-full bg-[#d1b48b] text-[#5c3c0a] border-[#d1b48b] hover:bg-[#aa8d67]"
                 >
-                  Sign In
+                  Sign Up
                 </button>
               </div>
 
               {/* Create Account */}
               <div className="text-center text-sm mb-4">
                 New here?{" "}
-                <a
-                  href="#"
+                <Link to='/login'
                   className="font-semibold text-amber-600 hover:text-amber-700 link-hover"
                 >
-                  Create a New Account
-                </a>
+                  go to LogIn
+                </Link>
               </div>
-
               {/* Divider */}
               <div className="divider text-gray-400 text-sm my-6">
                 Or sign in with

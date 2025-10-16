@@ -1,5 +1,5 @@
 import loginPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 // capcha
 import {
   loadCaptchaEnginge,
@@ -7,7 +7,14 @@ import {
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthContext } from "../../providers/Authprovider";
+import { Link } from "react-router-dom";
+
+
 const Login = () => {
+
+  const {logInUser} = useContext(AuthContext);
+
   const captchaRef = useRef(null);
   // submit button
   const [disable, setDisable] = useState(true);
@@ -17,6 +24,13 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     const captcha = form.captcha.value;
+
+    logInUser(email, password)
+     .then(result => {
+      const user = result.user;
+      console.log(user)
+     })
+
     console.log(email, password, captcha);
   };
 
@@ -174,12 +188,11 @@ const Login = () => {
               {/* Create Account */}
               <div className="text-center text-sm mb-4">
                 New here?{" "}
-                <a
-                  href="#"
+                <Link to='/signup'
                   className="font-semibold text-amber-600 hover:text-amber-700 link-hover"
                 >
                   Create a New Account
-                </a>
+                </Link>
               </div>
 
               {/* Divider */}

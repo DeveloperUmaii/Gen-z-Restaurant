@@ -21,7 +21,7 @@ const Navbar = () => {
     </>;
 
     return (
-        <div className="navbar shadow-sm bg-[#00000028] fixed z-10">
+        <div className="navbar  bg-[#00000028] fixed z-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -32,19 +32,19 @@ const Navbar = () => {
                         </svg>
                     </div>
                     <ul tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow">
+                        className="bg-[#00000028]  menu menu-sm dropdown-content  rounded-b-2xl z-50 mt-3 w-52 p-2 ">
                         {navoption}
                     </ul>
                 </div>
                 <Link className="btn btn-ghost text-xl text-[#fff]" to="/"  >Gen-Z</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 ">
+                <ul className=" menu menu-horizontal px-1 ">
                     {navoption}
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to="/contact" className="btn text-[#fff]">Contact</Link>
+                <Link to="/contact" className="btn border border-orange-500 text-orange-500">Contact</Link>
             </div>
         </div>
     );

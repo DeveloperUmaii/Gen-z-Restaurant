@@ -3,10 +3,11 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
 
+//   const ParentContextHook =useContext(AuthContext);
 export const AuthContext = createContext(null)
 
 const googleProvider = new GoogleAuthProvider();
-//   export  const ParentContextHook =useContext(AuthContext);
+
 
 const AuthProvider = ({ children }) => {
 
