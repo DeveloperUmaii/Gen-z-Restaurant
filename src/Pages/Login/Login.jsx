@@ -8,48 +8,51 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../providers/Authprovider";
-import { Link } from "react-router-dom";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
-
-  const {logInUser} = useContext(AuthContext);
-
+  const { logInUser } = useContext(AuthContext);
   const captchaRef = useRef(null);
-  // submit button
-  const [disable, setDisable] = useState(true);
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    const captcha = form.captcha.value;
-
-    logInUser(email, password)
-     .then(result => {
-      const user = result.user;
-      console.log(user)
-     })
-
-    console.log(email, password, captcha);
-  };
-
+  const [disable, setDisable] = useState(true); // submit button
   const [showPassword, setShowPassword] = useState(false);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+  const redirectPath = location.state?.from?.pathname || "/";
+
   useEffect(() => {
-    loadCaptchaEnginge(6);
+    loadCaptchaEnginge(3);
   }, []);
 
   const handleCaptchaVerify = () => {
     const captchaValue = captchaRef.current.value;
-          if (validateCaptcha(captchaValue) == true) {
-            alert("Captcha Matched");
-            setDisable(false);
-          } else {
-            alert("Captcha Does Not Match");
-          }
-          console.log(captchaValue);
-      };
+    if (validateCaptcha(captchaValue) == true) {
+      alert("Captcha Matched");
+      setDisable(false); //Enable Submit
+    } else {
+      alert("Captcha Does Not Match");
+      setDisable(true); //disble Submit
+    }
+    // console.log(captchaValue);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (disable) return; // যদি captcha match না হয়, login চলবে না
+
+    //R যদি captcha match হয়, login চলবে
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    logInUser(email, password).then((result) => {
+      const user = result.user;
+      navigate(redirectPath, { replace: true });
+      console.log(user);
+    });
+  };
+
   return (
     <div>
       <h6 className="text-center text-lg font-semibold mt-4">Log IN Please</h6>
@@ -151,29 +154,24 @@ const Login = () => {
 
               {/* Captcha */}
               <div className="mb-6">
-                <div className="flex flex-col sm:flex-row items-center gap-4 mb-2">
-                  <div className="ml-10">
-                    <LoadCanvasTemplate />
-                  </div>
-
-                  <div className=" ml-24">
-                    <button
-                      onClick={handleCaptchaVerify}
-                      className=" btn btn-neutral btn-dash w-16"
-                    >
-                      Captcha <br /> verify
-                    </button>
-                  </div>
+                <LoadCanvasTemplate />
+                <div className="flex gap-2 mt-2">
+                  <input
+                    type="text"
+                    name="captcha"
+                    ref={captchaRef}
+                    placeholder="Type the captcha"
+                    className="input input-bordered w-full"
+                  />
+                  <button
+                    onClick={handleCaptchaVerify}
+                    type="button" // ✅ পূর্বে ছিল type="submit", এখন ঠিক করা হলো
+                    className="btn btn-neutral btn-dash w-24"
+                  >
+                    Verify
+                  </button>
                 </div>
-                <input
-                  type="text"
-                  name="captcha"
-                  ref={captchaRef}
-                  placeholder="Type the captcha"
-                  className="input input-bordered w-full"
-                />
               </div>
-
               {/* Submit Button */}
               <div className="mb-6">
                 <button
@@ -188,7 +186,8 @@ const Login = () => {
               {/* Create Account */}
               <div className="text-center text-sm mb-4">
                 New here?{" "}
-                <Link to='/signup'
+                <Link
+                  to="/signup"
                   className="font-semibold text-amber-600 hover:text-amber-700 link-hover"
                 >
                   Create a New Account

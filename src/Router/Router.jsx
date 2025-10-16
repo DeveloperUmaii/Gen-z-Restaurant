@@ -9,6 +9,7 @@ import OurShop from '../Pages/OurShop'
 import ContactUs from '../Pages/ContactUs'
 import Login from '../Pages/Login/Login'
 import SignUp from '../Pages/SignUp/SignUp'
+import Private from '../Pages/PrivateRoute/Private'
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       
       {
         path: '/dashbord',
-        element: <DashBoard  />
+        element: <Private><DashBoard  /></Private>
       },
       {
         path: '/ourmenu',

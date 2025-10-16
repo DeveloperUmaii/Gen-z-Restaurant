@@ -1,16 +1,15 @@
 
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
 
-//   const ParentContextHook =useContext(AuthContext);
 export const AuthContext = createContext(null)
 
 const googleProvider = new GoogleAuthProvider();
 
 
 const AuthProvider = ({ children }) => {
-
+//  
     const [user, setUser] = useState(null)
 
     const registrationUser = (email, password) => {

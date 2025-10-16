@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+// import { AuthContext } from "../providers/Authprovider";
+import UseAuthHook from "../providers/ContexHook/UseAuthHook";
 
 const Navbar = () => {
+    const {user, logOut} = UseAuthHook();
+    // const {user} = useContext(AuthContext);
     const navoption = <>
         <li><Link to="/" className="text-[#fff] uppercase">Home</Link></li>
         <li><Link to="/contact" className="text-[#fff] uppercase">Contact us</Link></li>
@@ -19,7 +24,7 @@ const Navbar = () => {
             </details>
         </li> */}
     </>;
-
+    // console.log('25noLine',user);
     return (
         <div className="navbar  bg-[#00000028] fixed z-10">
             <div className="navbar-start">
@@ -43,8 +48,21 @@ const Navbar = () => {
                     {navoption}
                 </ul>
             </div>
+
+            <div className="  w-full flex justify-center">
+                <div className="border-2 border-white rounded-xl">
+                    <h1 className="text-white px-6">{user?.email||'no User'}</h1>
+                </div>
+            </div>
+
             <div className="navbar-end">
-                <Link to="/contact" className="btn border border-orange-500 text-orange-500">Contact</Link>
+
+                {
+                    user?<Link to="/" className="btn border border-red-700 bg-red-400 text-white hover:bg-red-600  "onClick={logOut} >Log Out</Link> 
+                    :
+                    <Link to="/login" className="btn border border-green-700 bg-green-400 text-white hover:bg-green-600">Log In</Link> 
+                }
+                
             </div>
         </div>
     );
