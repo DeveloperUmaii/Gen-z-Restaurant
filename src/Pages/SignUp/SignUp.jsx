@@ -6,41 +6,38 @@ import { Link, useNavigate } from "react-router-dom";
 const SignUp = () => {
   const { registrationUser, setUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
+
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
   // ✅ Signup Handler
   const handleSignUp = (e) => {
     e.preventDefault();
-    setError(""); // Reset previous errors
+    // handleSignUp এর শুরুতে
+      setNameError("");
+      setEmailError("");
+      setPasswordError("");
+      setError("");
+
 
     const form = e.target;
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const password = form.password.value;
 
-    // Name validation
-    if (name.length < 2) {
-      setError("নাম কমপক্ষে ২ অক্ষরের হতে হবে।");
-      return;
-    }
 
-    // Email validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      setError("ইমেইল ঠিক নয়! অবশ্যই @ এবং . থাকতে হবে।");
-      return;
-    }
 
-    // Password validation
-    const passwordPattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-    if (!passwordPattern.test(password)) {
-      setError(
-        "পাসওয়ার্ডে থাকতে হবে: \n- কমপক্ষে ৬ অক্ষর \n- বড় হাতের অক্ষর \n- ছোট হাতের অক্ষর \n- সংখ্যা \n- বিশেষ চিহ্ন (@$!%*?&)"
-      );
-      return;
-    }
+    const valid = true;
+    if(name.length < 4){ setNameError("নাম কমপক্ষে 4 অক্ষরের হতে হবে।"); valid = false; }
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailPattern.test(email)){ setEmailError("ইমেইল ঠিক নয়!"); valid = false; }
+  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if(!passwordPattern.test(password)){ setPasswordError("পাসওয়ার্ডে থাকতে হবে: \n- কমপক্ষে ৬ অক্ষর \n- বড় হাতের অক্ষর \n- ছোট হাতের অক্ষর \n- সংখ্যা \n- বিশেষ চিহ্ন (@$!%*?&)"); valid = false; }
+    if(!valid) return; // ❌ একসাথে সব error দেখানো যাবে
+
+
 
     // ✅ Registration
     registrationUser(email, password)
@@ -76,12 +73,8 @@ const SignUp = () => {
               Sign Up
             </h1>
 
-            {/* Error Message */}
-            {error && (
-              <div className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">
-                {error}
-              </div>
-            )}
+
+            
 
             <form onSubmit={handleSignUp} className="space-y-4">
               {/* Name */}
@@ -97,6 +90,10 @@ const SignUp = () => {
                   required
                 />
               </div>
+              
+            {/* Error Message*************************************************** */}
+            { nameError && <p className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">{nameError}</p> }  
+
 
               {/* Email */}
               <div>
@@ -112,6 +109,10 @@ const SignUp = () => {
                 />
               </div>
 
+            {/* Error Message*************************************************** */}
+            { emailError && <p className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">{emailError}</p> }
+
+
               {/* Password */}
               <div className="relative">
                 <label className="label">
@@ -126,7 +127,7 @@ const SignUp = () => {
                 />
                 <span
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-[50%] transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-gray-700"
+                  className=" absolute right-3 top-[68%] transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-gray-700"
                 >
                   {showPassword ? (
                     <svg
@@ -138,7 +139,7 @@ const SignUp = () => {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="feather feather-eye"
+                      className="feather feather-eye "
                     >
                       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                       <circle cx="12" cy="12" r="3" />
@@ -153,7 +154,7 @@ const SignUp = () => {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="feather feather-eye-off"
+                      className="feather feather-eye-off "
                     >
                       <path d="M17.94 17.94A10.97 10.97 0 0 1 12 20c-7 0-11-8-11-8a21.12 21.12 0 0 1 5.06-5.94" />
                       <path d="M1 1l22 22" />
@@ -162,6 +163,9 @@ const SignUp = () => {
                   )}
                 </span>
               </div>
+
+            {/* Error Message*************************************************** */}
+            { passwordError && <p className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">{passwordError}</p> }
 
               {/* Submit */}
               <div>
