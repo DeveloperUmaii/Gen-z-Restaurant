@@ -1,37 +1,58 @@
 import signUpPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../providers/Authprovider";
-import { Link, useNavigate } from "react-router-dom"; // ✅ navigate যোগ করা হয়েছে সফল signup এর পরে redirect করার জন্য
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { registrationUser, setUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate(); // ✅ navigate hook
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  // ✅ Signup Function
+  // ✅ Signup Handler
   const handleSignUp = (e) => {
     e.preventDefault();
+    setError(""); // Reset previous errors
+
     const form = e.target;
-    const name = form.name.value; // ✅ name value নেয়া হয়েছে
-    const email = form.email.value;
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
     const password = form.password.value;
 
-    if (password.length < 6) {
-      alert("Password কমপক্ষে ৬ অক্ষরের হতে হবে!");
+    // Name validation
+    if (name.length < 2) {
+      setError("নাম কমপক্ষে ২ অক্ষরের হতে হবে।");
       return;
     }
 
-    // ✅ নতুন ইউজার রেজিস্ট্রেশন
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setError("ইমেইল ঠিক নয়! অবশ্যই @ এবং . থাকতে হবে।");
+      return;
+    }
+
+    // Password validation
+    const passwordPattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!passwordPattern.test(password)) {
+      setError(
+        "পাসওয়ার্ডে থাকতে হবে: \n- কমপক্ষে ৬ অক্ষর \n- বড় হাতের অক্ষর \n- ছোট হাতের অক্ষর \n- সংখ্যা \n- বিশেষ চিহ্ন (@$!%*?&)"
+      );
+      return;
+    }
+
+    // ✅ Registration
     registrationUser(email, password)
       .then((result) => {
         const creatingUser = result.user;
         setUser(creatingUser);
         console.log("✅ User created:", creatingUser);
-        navigate("/"); // ✅ সফল হলে হোমে নিয়ে যাবে
+        navigate("/"); // Redirect on success
       })
-      .catch((error) => {
-        console.error("❌ Signup Error:", error.message);
-        alert("Signup failed: " + error.message);
+      .catch((err) => {
+        console.error("❌ Signup Error:", err.message);
+        setError("Signup failed: " + err.message);
       });
   };
 
@@ -48,20 +69,26 @@ const SignUp = () => {
         }}
       >
         <div className="flex flex-col lg:flex-row bg-white rounded-xl shadow-2xl overflow-hidden max-w-5xl w-full">
-          {/* ✅ Left Side */}
+
+          {/* Left Side Form */}
           <div className="lg:w-1/2 p-8 sm:p-12 relative">
             <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
               Sign Up
             </h1>
 
-            <form onSubmit={handleSignUp}>
-              {/* ✅ Name */}
-              <div className="mb-4">
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleSignUp} className="space-y-4">
+              {/* Name */}
+              <div>
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
-                {/* ❌ আগের ভুল: {...register("name", { required: true })} */}
-                {/* ✅ ঠিক করা হয়েছে: শুধু input field */}
                 <input
                   type="text"
                   name="name"
@@ -71,8 +98,8 @@ const SignUp = () => {
                 />
               </div>
 
-              {/* ✅ Email */}
-              <div className="mb-4">
+              {/* Email */}
+              <div>
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
@@ -85,8 +112,8 @@ const SignUp = () => {
                 />
               </div>
 
-              {/* ✅ Password */}
-              <div className="mb-4 relative">
+              {/* Password */}
+              <div className="relative">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
@@ -102,14 +129,13 @@ const SignUp = () => {
                   className="absolute right-3 top-[50%] transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-gray-700"
                 >
                   {showPassword ? (
-                    // ✅ Eye Open Icon
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="30"
-                      height="27"
+                      width="24"
+                      height="24"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="1"
+                      strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       className="feather feather-eye"
@@ -118,14 +144,13 @@ const SignUp = () => {
                       <circle cx="12" cy="12" r="3" />
                     </svg>
                   ) : (
-                    // ✅ Eye Closed Icon
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="28"
-                      height="28"
+                      width="24"
+                      height="24"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="1"
+                      strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       className="feather feather-eye-off"
@@ -138,8 +163,8 @@ const SignUp = () => {
                 </span>
               </div>
 
-              {/* ✅ Submit Button */}
-              <div className="mb-6">
+              {/* Submit */}
+              <div>
                 <button
                   type="submit"
                   className="btn w-full bg-[#d1b48b] text-[#5c3c0a] border-[#d1b48b] hover:bg-[#aa8d67]"
@@ -148,8 +173,8 @@ const SignUp = () => {
                 </button>
               </div>
 
-              {/* ✅ Go to Login */}
-              <div className="text-center text-sm mb-4">
+              {/* Login Link */}
+              <div className="text-center text-sm">
                 Already have an account?{" "}
                 <Link
                   to="/login"
@@ -159,11 +184,10 @@ const SignUp = () => {
                 </Link>
               </div>
 
-              <div className="divider text-gray-400 text-sm my-6">
-                Or sign in with
-              </div>
+              {/* Divider */}
+              <div className="divider text-gray-400 text-sm my-4">Or sign in with</div>
 
-              {/* ✅ Social Icons */}
+              {/* Social Icons */}
               <div className="flex justify-center gap-6">
                 <button
                   type="button"
@@ -171,14 +195,12 @@ const SignUp = () => {
                 >
                   <i className="fa-brands fa-facebook-f"></i>
                 </button>
-
                 <button
                   type="button"
                   className="btn btn-circle btn-ghost text-gray-600 hover:text-red-600"
                 >
                   <i className="fa-brands fa-google"></i>
                 </button>
-
                 <button
                   type="button"
                   className="btn btn-circle btn-ghost text-gray-600 hover:text-gray-800"
@@ -189,8 +211,8 @@ const SignUp = () => {
             </form>
           </div>
 
-          {/* ✅ Right Side Image */}
-          <div className="lg:w-1/2 p-10 flex items-center justify-center bg-gray-50 border-r border-gray-100">
+          {/* Right Side Image */}
+          <div className="lg:w-1/2 p-10 flex items-center justify-center bg-gray-50 border-l border-gray-100">
             <div className="w-full max-w-sm text-center">
               <img
                 src={signUpPageThemeImage}
