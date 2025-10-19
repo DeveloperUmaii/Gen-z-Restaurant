@@ -1,6 +1,6 @@
 import loginPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 // capcha
 import {
   loadCaptchaEnginge,
@@ -10,6 +10,7 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../providers/Authprovider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 const Login = () => {
   const { logInUser } = useContext(AuthContext);
@@ -25,17 +26,38 @@ const Login = () => {
     loadCaptchaEnginge(3);
   }, []);
 
-  const handleCaptchaVerify = () => {
-    const captchaValue = captchaRef.current.value;
-    if (validateCaptcha(captchaValue) == true) {
-      alert("Captcha Matched");
-      setDisable(false); //Enable Submit
-    } else {
-      alert("Captcha Does Not Match");
-      setDisable(true); //disble Submit
-    }
-    // console.log(captchaValue);
-  };
+const handleCaptchaVerify = () => {
+  const captchaValue = captchaRef.current.value.trim();
+
+  if (!captchaValue) {
+    Swal.fire({
+      title: "Warning!",
+      text: "Please enter the captcha first!",
+      icon: "warning",
+      confirmButtonColor: "#d1b48b",
+    });
+    return;
+  }
+
+  if (validateCaptcha(captchaValue)) {
+    Swal.fire({
+      title: "✅ Captcha Matched!",
+      text: "You can now submit the form.",
+      icon: "success",
+      confirmButtonColor: "#5cb85c",
+    });
+    setDisable(false); // Enable Submit
+  } else {
+    Swal.fire({
+      title: "❌ Captcha Does Not Match!",
+      text: "Please try again.",
+      icon: "error",
+      confirmButtonColor: "#d9534f",
+    });
+    setDisable(true); // Disable Submit
+  }
+};
+
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -51,12 +73,13 @@ const Login = () => {
       const user = result.user;
       navigate(redirectPath, { replace: true });
       console.log(user);
+      console.log(location);
     });
   };
 
   return (
     <div>
-                  <Helmet title='Gen-Z_R|Log in' />
+      <Helmet title="Gen-Z_R|Log in" />
       <h6 className="text-center text-lg font-semibold mt-4">Log IN Please</h6>
 
       <div
