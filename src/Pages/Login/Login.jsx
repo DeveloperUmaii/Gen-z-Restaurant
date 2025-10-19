@@ -1,5 +1,6 @@
 import loginPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { Helmet } from 'react-helmet-async';
 // capcha
 import {
   loadCaptchaEnginge,
@@ -55,6 +56,7 @@ const Login = () => {
 
   return (
     <div>
+                  <Helmet title='Gen-Z_R|Log in' />
       <h6 className="text-center text-lg font-semibold mt-4">Log IN Please</h6>
 
       <div

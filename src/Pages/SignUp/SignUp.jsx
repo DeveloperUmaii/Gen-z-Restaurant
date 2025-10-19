@@ -1,5 +1,6 @@
 import signUpPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
 import React, { useContext, useState } from "react";
+import { Helmet } from 'react-helmet-async';
 import { AuthContext } from "../../providers/Authprovider";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -55,6 +56,7 @@ const SignUp = () => {
 
   return (
     <div>
+      <Helmet title='Gen-Z_R|SignUp' />
       <h6 className="text-center text-lg font-semibold mt-24">
         Sign Up Please
       </h6>
