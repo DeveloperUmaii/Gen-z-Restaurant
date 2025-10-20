@@ -10,7 +10,7 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../providers/Authprovider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { logInUser } = useContext(AuthContext);
@@ -26,38 +26,37 @@ const Login = () => {
     loadCaptchaEnginge(3);
   }, []);
 
-const handleCaptchaVerify = () => {
-  const captchaValue = captchaRef.current.value.trim();
+  const handleCaptchaVerify = () => {
+    const captchaValue = captchaRef.current.value.trim();
 
-  if (!captchaValue) {
-    Swal.fire({
-      title: "Warning!",
-      text: "Please enter the captcha first!",
-      icon: "warning",
-      confirmButtonColor: "#d1b48b",
-    });
-    return;
-  }
+    if (!captchaValue) {
+      Swal.fire({
+        title: "Warning!",
+        text: "Please enter the captcha first!",
+        icon: "warning",
+        confirmButtonColor: "#d1b48b",
+      });
+      return;
+    }
 
-  if (validateCaptcha(captchaValue)) {
-    Swal.fire({
-      title: "✅ Captcha Matched!",
-      text: "You can now submit the form.",
-      icon: "success",
-      confirmButtonColor: "#5cb85c",
-    });
-    setDisable(false); // Enable Submit
-  } else {
-    Swal.fire({
-      title: "❌ Captcha Does Not Match!",
-      text: "Please try again.",
-      icon: "error",
-      confirmButtonColor: "#d9534f",
-    });
-    setDisable(true); // Disable Submit
-  }
-};
-
+    if (validateCaptcha(captchaValue)) {
+      Swal.fire({
+        title: "Captcha Matched!",
+        text: "You can now submit the form.",
+        icon: "success",
+        confirmButtonColor: "#5cb85c",
+      });
+      setDisable(false); // Enable Submit
+    } else {
+      Swal.fire({
+        title: "Captcha Does Not Match!",
+        text: "Please try again.",
+        icon: "error",
+        confirmButtonColor: "#d9534f",
+      });
+      setDisable(true); // Disable Submit
+    }
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -71,6 +70,18 @@ const handleCaptchaVerify = () => {
 
     logInUser(email, password).then((result) => {
       const user = result.user;
+Swal.fire({
+  position: "top-end",
+  icon: "success", 
+  title: "Login Successful.",
+  showConfirmButton: false,
+  timer: 3000,
+  iconColor: "#01ff22",
+  customClass: {
+    popup: "rounded-xl p-2", 
+    title: "text-[#01ff22] font-semibold" 
+  }
+});
       navigate(redirectPath, { replace: true });
       console.log(user);
       console.log(location);
@@ -80,7 +91,7 @@ const handleCaptchaVerify = () => {
   return (
     <div>
       <Helmet title="Gen-Z_R|Log in" />
-      <h6 className="text-center text-lg font-semibold mt-4">Log IN Please</h6>
+      <h6 className=" text-center text-lg font-semibold mt-4">Log IN Please</h6>
 
       <div
         className="min-h-screen flex items-center justify-center p-4 sm:p-8 bg-gray-100"

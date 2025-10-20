@@ -1,8 +1,9 @@
 import signUpPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
 import React, { useContext, useState } from "react";
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../providers/Authprovider";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { registrationUser, setUser } = useContext(AuthContext);
@@ -17,34 +18,47 @@ const SignUp = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
     // handleSignUp এর শুরুতে
-      setNameError("");
-      setEmailError("");
-      setPasswordError("");
-      setError("");
-
+    setNameError("");
+    setEmailError("");
+    setPasswordError("");
 
     const form = e.target;
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const password = form.password.value;
 
-
-
     const valid = true;
-    if(name.length < 4){ setNameError("নাম কমপক্ষে 4 অক্ষরের হতে হবে।"); valid = false; }
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(!emailPattern.test(email)){ setEmailError("ইমেইল ঠিক নয়!"); valid = false; }
-  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-    if(!passwordPattern.test(password)){ setPasswordError("পাসওয়ার্ডে থাকতে হবে: \n- কমপক্ষে ৬ অক্ষর \n- বড় হাতের অক্ষর \n- ছোট হাতের অক্ষর \n- সংখ্যা \n- বিশেষ চিহ্ন (@$!%*?&)"); valid = false; }
-    if(!valid) return; // ❌ একসাথে সব error দেখানো যাবে
-
-
+    if (name.length < 4) {
+      setNameError("নাম কমপক্ষে 4 অক্ষরের হতে হবে।");
+      valid = false;
+    }
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setEmailError("ইমেইল ঠিক নয়!");
+      valid = false;
+    }
+    const passwordPattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!passwordPattern.test(password)) {
+      setPasswordError(
+        "পাসওয়ার্ডে থাকতে হবে: \n- কমপক্ষে ৬ অক্ষর \n- বড় হাতের অক্ষর \n- ছোট হাতের অক্ষর \n- সংখ্যা \n- বিশেষ চিহ্ন (@$!%*?&)"
+      );
+      valid = false;
+    }
+    if (!valid) return; // ❌ একসাথে সব error দেখানো যাবে
 
     // ✅ Registration
     registrationUser(email, password)
       .then((result) => {
         const creatingUser = result.user;
         setUser(creatingUser);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Account Created Successfully.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         console.log("✅ User created:", creatingUser);
         navigate("/"); // Redirect on success
       })
@@ -56,7 +70,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <Helmet title='Gen-Z_R|SignUp' />
+      <Helmet title="Gen-Z_R|SignUp" />
       <h6 className="text-center text-lg font-semibold mt-24">
         Sign Up Please
       </h6>
@@ -68,15 +82,11 @@ const SignUp = () => {
         }}
       >
         <div className="flex flex-col lg:flex-row bg-white rounded-xl shadow-2xl overflow-hidden max-w-5xl w-full">
-
           {/* Left Side Form */}
           <div className="lg:w-1/2 p-8 sm:p-12 relative">
             <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
               Sign Up
             </h1>
-
-
-            
 
             <form onSubmit={handleSignUp} className="space-y-4">
               {/* Name */}
@@ -92,10 +102,13 @@ const SignUp = () => {
                   required
                 />
               </div>
-              
-            {/* Error Message*************************************************** */}
-            { nameError && <p className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">{nameError}</p> }  
 
+              {/* Error Message*************************************************** */}
+              {nameError && (
+                <p className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">
+                  {nameError}
+                </p>
+              )}
 
               {/* Email */}
               <div>
@@ -111,9 +124,12 @@ const SignUp = () => {
                 />
               </div>
 
-            {/* Error Message*************************************************** */}
-            { emailError && <p className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">{emailError}</p> }
-
+              {/* Error Message*************************************************** */}
+              {emailError && (
+                <p className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">
+                  {emailError}
+                </p>
+              )}
 
               {/* Password */}
               <div className="relative">
@@ -166,8 +182,12 @@ const SignUp = () => {
                 </span>
               </div>
 
-            {/* Error Message*************************************************** */}
-            { passwordError && <p className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">{passwordError}</p> }
+              {/* Error Message*************************************************** */}
+              {passwordError && (
+                <p className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">
+                  {passwordError}
+                </p>
+              )}
 
               {/* Submit */}
               <div>
@@ -191,7 +211,9 @@ const SignUp = () => {
               </div>
 
               {/* Divider */}
-              <div className="divider text-gray-400 text-sm my-4">Or sign in with</div>
+              <div className="divider text-gray-400 text-sm my-4">
+                Or sign in with
+              </div>
 
               {/* Social Icons */}
               <div className="flex justify-center gap-6">
