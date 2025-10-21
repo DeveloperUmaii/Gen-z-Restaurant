@@ -2,14 +2,15 @@ import signUpPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
 import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../providers/Authprovider";
-import { Link, useNavigate } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
-  const { registrationUser, setUser } = useContext(AuthContext);
+  const { registrationUser, setUser, profileUpdate } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
 
   const [nameError, setNameError] = useState("");
+  const [photoUrlError, setPhotoUrlError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
@@ -21,15 +22,25 @@ const SignUp = () => {
     setNameError("");
     setEmailError("");
     setPasswordError("");
+    setPhotoUrlError("");
 
     const form = e.target;
     const name = form.name.value.trim();
+    const photoUrl = form.photoUrl.value.trim();
     const email = form.email.value.trim();
     const password = form.password.value;
-
-    const valid = true;
+    console.log(form,
+name,
+photoUrl,
+email,
+password,)
+    let valid = true;
     if (name.length < 4) {
       setNameError("নাম কমপক্ষে 4 অক্ষরের হতে হবে।");
+      valid = false;
+    }
+    if (!photoUrl) {
+      setPhotoUrlError("please input your photo url");
       valid = false;
     }
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -45,12 +56,21 @@ const SignUp = () => {
       );
       valid = false;
     }
+    //  (!valid) = (valid = false)
+    //  (valid) = (valid = true)
     if (!valid) return; // ❌ একসাথে সব error দেখানো যাবে
-
     // ✅ Registration
     registrationUser(email, password)
       .then((result) => {
         const creatingUser = result.user;
+        profileUpdate(name, photoUrl)
+          .then(() => {
+            console.log("user update");
+            reset();
+          })
+          .catch((err) => {
+            console.error("Profile update failed:", err.message);
+          });
         setUser(creatingUser);
         Swal.fire({
           position: "top-end",
@@ -64,7 +84,7 @@ const SignUp = () => {
       })
       .catch((err) => {
         console.error("❌ Signup Error:", err.message);
-        setError("Signup failed: " + err.message);
+        // setError("Signup failed: " + err.message);
       });
   };
 
@@ -107,6 +127,27 @@ const SignUp = () => {
               {nameError && (
                 <p className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">
                   {nameError}
+                </p>
+              )}
+
+              {/* Photo Url */}
+              <div>
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="url"
+                  name="photoUrl"
+                  placeholder="Type your photoUrl"
+                  className="input input-bordered w-full"
+                  required
+                />
+              </div>
+
+              {/* Error Message*************************************************** */}
+              {photoUrlError && (
+                <p className="bg-red-100 text-red-700 p-3 mb-4 rounded border border-red-300">
+                  {photoUrlError}
                 </p>
               )}
 
