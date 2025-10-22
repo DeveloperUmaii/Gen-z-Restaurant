@@ -1,6 +1,8 @@
 const ChefRecomendedCard = ({ ChefCard }) => {
   const { recipe, name, image } = ChefCard;
-
+  const handleAddCart = ( anyPeraMetre ) =>{
+    console.log(anyPeraMetre,'dfghjkm acii')
+  }
   return (
     <div className="w-full max-w-xs mx-auto bg-white border border-blue-500 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col">
       <figure className="p-4">
@@ -22,7 +24,7 @@ const ChefRecomendedCard = ({ ChefCard }) => {
 
         {/* button fixed bottom inside card */}
         <div className="mt-3 pb-4">
-          <button className="btn btn-sm btn-primary uppercase w-full">
+          <button  onClick={()=>{handleAddCart(ChefCard)}} className="btn btn-sm btn-primary uppercase w-full">
             Add to Cart
           </button>
         </div>

@@ -12,11 +12,13 @@
   "dependencies": {
     "@egjs/react-flicking": "^4.14.0",
     "@smastrom/react-rating": "^1.5.0",
+    "firebase": "^12.4.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-awesome-slider": "^4.1.0",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
+    "react-icons": "^5.5.0",
     "react-parallax": "^3.5.2",
     "react-router-dom": "^7.6.3",
     "react-simple-captcha": "^9.3.1",

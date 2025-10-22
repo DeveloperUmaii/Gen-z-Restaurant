@@ -2,12 +2,11 @@ import { Link } from "react-router-dom";
 // import { AuthContext } from "../providers/Authprovider";
 import UseAuthHook from "../providers/ContexHook/UseAuthHook";
 import Swal from "sweetalert2";
+import { TiShoppingCart } from "react-icons/ti";
 
 const Navbar = () => {
   const { user, logOut } = UseAuthHook();
   const { displayName, photoURL } = user || {};
-  // const { displayName, email, photoURL } = user || {};
-  // const {user} = useContext(AuthContext);
   const signOut = () => {
     logOut();
     Swal.fire({
@@ -99,13 +98,24 @@ const Navbar = () => {
       </div>
 
       <div className="  w-full flex justify-center items-center">
-        <Link to="/profile"  className="border-2 border-white rounded-xl">
-          {/* <h1 className="text-white px-6">{user?.email || "no User"}</h1> */}
+        <Link to="/profile" className="border-2 border-white rounded-xl">
           <h1 className="text-red-600 px-6">{displayName || "no Nane"}</h1>
         </Link>
-        <Link to="/profile"  className="w-20  h-20 flex justify-center items-center">
+        <Link
+          to="/profile"
+          className="w-20  h-20 flex justify-center items-center"
+        >
           <img className="mask mask-circle" src={photoURL} />
         </Link>
+      </div>
+
+
+      <div className="">
+        {/* <button onClick={()=>{handleAddCart(item)}} className="bg-[#ffff] px-2 rounded-lg flex justify-center items-center"> */}
+        <button className="bg-[#ffff] px-2 rounded-lg flex justify-center items-center">
+          <TiShoppingCart className="text-orange-600 text-3xl mr-1" />
+          <div className="badge badge-sm bg-orange-600 badge-secondary">+99</div>
+        </button>
       </div>
 
       <div className="navbar-end">
