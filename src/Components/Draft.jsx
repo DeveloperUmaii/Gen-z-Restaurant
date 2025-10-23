@@ -7,6 +7,14 @@ const Draft = () => {
             <h1>write something</h1>
             <h1>write something</h1>
             <h1>write something</h1>
+            <h1>write something</h1>
+            <h1>write something</h1>
+            <h1>write something</h1>
+            <h1>write something</h1>
+            <h1>write something</h1>
+            <h1>write something</h1>
+            <h1>write something</h1>
+            <h1>write something</h1>
         </div>
     );
 };
