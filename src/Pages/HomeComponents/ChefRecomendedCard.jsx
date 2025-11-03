@@ -1,7 +1,13 @@
+import UseAuthHook from "../../providers/ContexHook/UseAuthHook";
+
 const ChefRecomendedCard = ({ ChefCard }) => {
   const { recipe, name, image } = ChefCard;
+    const {user} = UseAuthHook();
+
   const handleAddCart = ( anyPeraMetre ) =>{
-    console.log(anyPeraMetre,'dfghjkm acii')
+    
+
+    console.log(anyPeraMetre,'Button add koira falaice ')
   }
   return (
     <div className="w-full max-w-xs mx-auto bg-white border border-blue-500 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col">

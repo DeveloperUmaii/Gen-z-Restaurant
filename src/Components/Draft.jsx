@@ -1,11 +1,50 @@
-import React from 'react';
+const ball = () =>{
 
-const Draft = () => {
-    return (
-        <div>
-            <h1>write something</h1>         
-        </div>
-    );
-};
 
-export default Draft;
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.post('/carts', async (requestAnimationFrame,res)=>{
+const resulst = await lCollection.find().toArray();
+res.send(resulst)
+})
+
+app.post('/carts', async (requestAnimationFrame,res)=>{
+    const focous = req.body
+const resulst =await lCollection.insertDocument(focous);
+res.send(resulst)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
