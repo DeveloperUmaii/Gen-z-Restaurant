@@ -1,14 +1,50 @@
+import { replace, useLocation, useNavigate } from "react-router-dom";
 import UseAuthHook from "../../providers/ContexHook/UseAuthHook";
+import Swal from "sweetalert2";
 
 const ChefRecomendedCard = ({ ChefCard }) => {
   const { recipe, name, image } = ChefCard;
-    const {user} = UseAuthHook();
+  const { user } = UseAuthHook();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleAddCart = ( anyPeraMetre ) =>{
-    
+const handleAddCart = (anyPeraMetre) => {
+  !user
+    ? Swal.fire({
+        title: "You are not logged in!",
+        text: "Please login to add this item to your cart.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Login!",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Redirecting...",
+            text: "Please wait while we take you to the login page.",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+          });
 
-    console.log(anyPeraMetre,'Button add koira falaice ')
-  }
+          // এখানে চাইলে তুমি React Router ব্যবহার করে রিডাইরেক্ট করতে পারো:
+          navigate("/login", { state: { from: location }, replace: true })
+          // <Navigate to="/login" state={{ from: location }} replace />;
+        }
+      })
+    : Swal.fire({
+        title: "Added to Cart!",
+        text: "The item has been successfully added to your cart.",
+        icon: "success",
+        confirmButtonColor: "#3085d6",
+      });
+    console.log(anyPeraMetre, "Button add koira falaice ");
+  };
+
+
+
   return (
     <div className="w-full max-w-xs mx-auto bg-white border border-blue-500 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col">
       <figure className="p-4">
@@ -30,7 +66,12 @@ const ChefRecomendedCard = ({ ChefCard }) => {
 
         {/* button fixed bottom inside card */}
         <div className="mt-3 pb-4">
-          <button  onClick={()=>{handleAddCart(ChefCard)}} className="btn btn-sm btn-primary uppercase w-full">
+          <button
+            onClick={() => {
+              handleAddCart(ChefCard);
+            }}
+            className="btn btn-sm btn-primary uppercase w-full"
+          >
             Add to Cart
           </button>
         </div>
