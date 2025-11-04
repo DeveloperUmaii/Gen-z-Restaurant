@@ -31,7 +31,6 @@ const handleAddCart = (anyPeraMetre) => {
 
           // এখানে চাইলে তুমি React Router ব্যবহার করে রিডাইরেক্ট করতে পারো:
           navigate("/login", { state: { from: location }, replace: true })
-          // <Navigate to="/login" state={{ from: location }} replace />;
         }
       })
     : Swal.fire({
