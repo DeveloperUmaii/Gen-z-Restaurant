@@ -108,8 +108,8 @@ const Navbar = () => {
           <img className="mask mask-circle" src={photoURL} />
         </Link>
       </div>
-
-
+ 
+{/* cart */}
       <div className="">
         {/* <button onClick={()=>{handleAddCart(item)}} className="bg-[#ffff] px-2 rounded-lg flex justify-center items-center"> */}
         <button className="bg-[#ffff] px-2 rounded-lg flex justify-center items-center">
