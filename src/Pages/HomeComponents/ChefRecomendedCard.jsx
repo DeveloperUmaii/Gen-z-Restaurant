@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import UseAuthHook from "../../providers/ContexHook/UseAuthHook";
 import Swal from "sweetalert2";
-import axios from "axios";
 import hookAxiosSecure from "../../hooks/hookAxiosSecure";
+import hookUseCart from "../../hooks/hookUseCart";
 
 const ChefRecomendedCard = ({ ChefCard }) => {
   const { recipe, name, image, _id, price } = ChefCard;
@@ -10,8 +10,9 @@ const ChefRecomendedCard = ({ ChefCard }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const backEndServerLink = hookAxiosSecure();
+  const [,refetch] = hookUseCart();
 
-  const handleAddCart = (anyPeraMetre) => {
+  const handleAddCart = () => {
     // 🔹 প্রথমে চেক করো ইউজার লগইন আছে কিনা
     if (user && user.email) {
       const cartItem = {
@@ -29,13 +30,17 @@ const ChefRecomendedCard = ({ ChefCard }) => {
 
         if (res.data.insertedId) {
           Swal.fire({
-            title: "Added to Cart!",
             text: "The item has been successfully added to your cart.",
             icon: "success",
+            title: `${name} Added to Cart!`,
             confirmButtonColor: "#3085d6",
-          });
-          console.log(anyPeraMetre, "Button add koira falaice ");
+            showConfirmButton: false,
+            timer:1500
+          })
+          refetch();
+          console.log(anyPeraMetre, "Button add koira falaice "); 
         }
+
       });
     } else {
       // 🔹 যদি ইউজার লগইন না করে থাকে
@@ -76,7 +81,7 @@ const ChefRecomendedCard = ({ ChefCard }) => {
 
         <div className="mt-3 pb-4">
           <button
-            onClick={() => handleAddCart(ChefCard)}
+            onClick={handleAddCart}
             className="btn btn-sm btn-primary uppercase w-full"
           >
             Add to Cart

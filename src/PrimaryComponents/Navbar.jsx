@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import UseAuthHook from "../providers/ContexHook/UseAuthHook";
 import Swal from "sweetalert2";
 import { TiShoppingCart } from "react-icons/ti";
+import hookUseCart from "../hooks/hookUseCart";
 
 const Navbar = () => {
   const { user, logOut } = UseAuthHook();
   const { displayName, photoURL } = user || {};
+  const [dataFromBackEnd] = hookUseCart();
+  
   const signOut = () => {
     logOut();
     Swal.fire({
@@ -114,7 +117,7 @@ const Navbar = () => {
         {/* <button onClick={()=>{handleAddCart(item)}} className="bg-[#ffff] px-2 rounded-lg flex justify-center items-center"> */}
         <button className="bg-[#ffff] px-2 rounded-lg flex justify-center items-center">
           <TiShoppingCart className="text-orange-600 text-3xl mr-1" />
-          <div className="badge badge-sm bg-orange-600 badge-secondary">+99</div>
+          <div className="badge badge-sm bg-orange-600 badge-secondary">+{dataFromBackEnd?.length}</div>
         </button>
       </div>
 
