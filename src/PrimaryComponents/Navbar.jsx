@@ -95,6 +95,9 @@ const Navbar = () => {
         <Link className="btn btn-ghost text-xl text-[#fff]" to="/">
           Gen-Z
         </Link>
+        <Link to='dashboardDrawer' className="btn btn-ghost text-xl text-[#fff]" >
+          DRAWER
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className=" menu menu-horizontal px-1 ">{navoption}</ul>

@@ -2,7 +2,6 @@ import { createBrowserRouter } from 'react-router-dom'
 import LayOut from '../LayOut/LayOut'
 import ErrorPage from '../Components/ErrorPage'
 import Home from '../Pages/Home'
-import Contact from '../Pages/HomeComponents/Contact'
 import OurMenu from '../Pages/OurMenu'
 import DashBoard from '../Pages/DashBoard'
 import OurShop from '../Pages/OurShop'
@@ -11,52 +10,37 @@ import Login from '../Pages/Login/Login'
 import SignUp from '../Pages/SignUp/SignUp'
 import Private from '../Pages/PrivateRoute/Private'
 import Profile from '../Pages/ProfilePage/Profile'
+import DashboardDrawer from '../LayOut/DashboardDrawer'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <LayOut />,
-    errorElement: <ErrorPage /> ,
+    errorElement: <ErrorPage />,
     children: [
-      {
-        index: true,
-        element: <Home />,
-      },
+      { index: true, element: <Home /> },
+      { path: 'contact', element: <ContactUs /> },
+      { path: '/dashbord', element: <Private><DashBoard  /></Private>},
+      { path: 'ourmenu', element: <OurMenu /> },
+      { path: 'ourshop/:category', element: <OurShop /> },
+      { path: 'login', element: <Login /> },
+      { path: 'signup', element: <SignUp /> },
+      { path: 'profile', element: <Private><Profile /></Private> },
+    ],
+  },
 
-      {
-        path: '/contact',
-        element: <ContactUs />
-      },
-      
-      {
-        path: '/dashbord',
-        element: <Private><DashBoard  /></Private>
-      },
-      {
-        path: '/profile',
-        element: <Private><Profile /> </Private>
-      },
-      {
-        path: '/ourmenu',
-        element: <OurMenu />
-      },
-      {
-        path: 'ourshop/:category',
-        element: <OurShop />
-      },
-
-      {
-        path: '/login',
-        element: <Login />
-      },
-
-      {
-        path: '/signup',
-        element: <SignUp />
-      },
-
+  // ✅ Dashboard layout route
+  {
+    path: '/dashboardDrawer',
+    element: <DashboardDrawer />, // Drawer as layout
+    children: [
+      { index: true, element: <DashBoard /> },
+      { path: 'additems', element: <p>Add Items Page</p> },
+      { path: 'manageitems', element: <p>Manage Items Page</p> },
+      { path: 'managebookings', element: <p>Manage Bookings Page</p> },
+      { path: 'users', element: <p>All Users Page</p> },
     ],
   },
 ])
 
-export default router;
+export default router
