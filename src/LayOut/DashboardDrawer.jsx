@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import {
   FaHome,
   FaUserAlt,
@@ -47,27 +47,33 @@ const DashboardDrawer = () => {
 
           <Link to="/dashboard" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
             <FaHome className="mr-3" />
-            <span>ADMIN HOME</span>
+            <span>USER HOME</span>
           </Link>
 
           <Link to="/additems" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
             <FaPlus className="mr-3" />
-            <span>ADD ITEMS</span>
+            <span>RESERVATION</span>
           </Link>
 
           <Link to="/manageitems" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
             <FaEdit className="mr-3" />
-            <span>MANAGE ITEMS</span>
+            <span>PAYMENT HISTORY</span>
           </Link>
 
-          <Link to="/managebookings" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+          <Link to="/dashboardDrawer/cart" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
             <FaBook className="mr-3" />
-            <span>MANAGE BOOKINGS</span>
+            <span>MY CART</span>
           </Link>
+
 
           <Link to="/users" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
             <FaUsers className="mr-3" />
-            <span>ALL USERS</span>
+            <span>ADD REVIEW</span>
+          </Link>
+          
+          <Link to="/users" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+            <FaUsers className="mr-3" />
+            <span>MY BOOKING</span>
           </Link>
         </div>
 
@@ -95,6 +101,9 @@ const DashboardDrawer = () => {
             <span>CONTACT</span>
           </Link>
         </div>
+      </div>
+      <div className="">
+        <Outlet></Outlet>
       </div>
     </div>
   );

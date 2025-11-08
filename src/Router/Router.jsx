@@ -11,6 +11,7 @@ import SignUp from '../Pages/SignUp/SignUp'
 import Private from '../Pages/PrivateRoute/Private'
 import Profile from '../Pages/ProfilePage/Profile'
 import DashboardDrawer from '../LayOut/DashboardDrawer'
+import Cart from '../Pages/DashBoard/Cart/Cart'
 
 const router = createBrowserRouter([
   {
@@ -34,8 +35,8 @@ const router = createBrowserRouter([
     path: '/dashboardDrawer',
     element: <DashboardDrawer />, // Drawer as layout
     children: [
-      { index: true, element: <DashBoard /> },
-      { path: 'additems', element: <p>Add Items Page</p> },
+      { index: true, element: <DashboardDrawer /> },
+      { path: 'cart', element: <Cart></Cart> },
       { path: 'manageitems', element: <p>Manage Items Page</p> },
       { path: 'managebookings', element: <p>Manage Bookings Page</p> },
       { path: 'users', element: <p>All Users Page</p> },

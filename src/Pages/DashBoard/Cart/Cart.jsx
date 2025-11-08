@@ -7,9 +7,8 @@ import Swal from "sweetalert2"; // ✅ (নতুন লাইন)
 // const Cart = ({ cart = [] }) => {
 const Cart = () => {
   // 🔹 cart state-কে আপডেট করার জন্য hookUseCart থেকে setCart যোগ করেছি
-  const [cart, setCart] = hookUseCart(); // ✅ (পরিবর্তন করা লাইন)
+  const [cart, refetch] = hookUseCart(); // ✅ (পরিবর্তন করা লাইন)
 
-  console.log(cart);
 
   // Calculate total price
   // acc বা accumulator বা 0 ধরে নেওয়া বা প্রিভিয়াস ভ্যালু;
@@ -34,9 +33,11 @@ const Cart = () => {
           .then((res) => {
             // 🔹 সার্ভারে সফলভাবে ডিলিট হলে UI থেকেও মুছে ফেলব
             if (res.data.deletedCount > 0) {
+              // UI আপডেট refetch()কে কল করে (reload ছাড়াই)
+              refetch();
 
-               // UI আপডেট (reload ছাড়াই) setCart()
-              setCart((prevCart) => prevCart.filter((item) => item._id !== id));
+              // UI আপডেট (reload ছাড়াই)
+              // setCart((prevCart) => prevCart.filter((item) => item._id !== id));
               // ব্যবহার করে 
 
               Swal.fire({

@@ -133,7 +133,7 @@ password,)
               {/* Photo Url */}
               <div>
                 <label className="label">
-                  <span className="label-text">Name</span>
+                  <span className="label-text">PhotoURL</span>
                 </label>
                 <input
                   type="url"
