@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import {
-  FaHome,
-  FaUserAlt,
-  FaBars,
-  FaTimes,
-  FaPlus,
-  FaEdit,
-  FaList,
-  FaUsers,
-  FaBook,
-  FaShoppingBag,
-  FaEnvelope,
-} from "react-icons/fa";
+
+import { FaHome, FaHistory, FaShoppingCart, FaStar, FaEnvelope,FaBars,FaTimes,FaList, } from 'react-icons/fa';
+import { IoCalendar, IoMenu } from 'react-icons/io5';
+import { FaShoppingBag } from 'react-icons/fa';
+import LayOut from "./LayOut";
+
+
 
 const DashboardDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +14,7 @@ const DashboardDrawer = () => {
 
   return (
     <div className="relative">
+      <LayOut></LayOut>
       {/* 🔹 Drawer Toggle Button */}
       <button
         onClick={toggleDrawer}
@@ -46,43 +41,43 @@ const DashboardDrawer = () => {
           </h2>
 
           <Link to="/dashboard" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <FaHome className="mr-3" />
+            <FaHome  className="mr-3 ml-4" />
             <span>USER HOME</span>
           </Link>
 
           <Link to="/additems" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <FaPlus className="mr-3" />
+            <IoCalendar  className="mr-3 ml-4" />
             <span>RESERVATION</span>
           </Link>
 
           <Link to="/manageitems" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <FaEdit className="mr-3" />
+            <FaHistory  className="mr-3 ml-4" />
             <span>PAYMENT HISTORY</span>
           </Link>
 
           <Link to="/dashboardDrawer/cart" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <FaBook className="mr-3" />
+            <FaShoppingCart  className="mr-3 ml-4" />
             <span>MY CART</span>
           </Link>
 
 
           <Link to="/users" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <FaUsers className="mr-3" />
+            <FaStar  className="mr-3 ml-4" />
             <span>ADD REVIEW</span>
           </Link>
           
           <Link to="/users" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <FaUsers className="mr-3" />
+            <IoMenu  className="mr-3 ml-4" />
             <span>MY BOOKING</span>
           </Link>
         </div>
 
         <hr className="border-yellow-800 my-4" />
 
-        {/* User Section */}
+        {/* User Section <FaShoppingBag  className="mr-3" /><FaEnvelope  className="mr-3" />*/}
         <div className="py-4">
           <Link to="/" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150 font-bold">
-            <FaHome className="mr-3" />
+            <FaHome className="mr-3 " />
             <span>HOME</span>
           </Link>
 
