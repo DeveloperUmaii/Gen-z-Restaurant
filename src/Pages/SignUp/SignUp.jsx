@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../providers/Authprovider";
 import { data, Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import hookAxiosLocal from "../../hooks/hookAxiosLocal";
 
 const SignUp = () => {
   const { registrationUser, setUser, profileUpdate } = useContext(AuthContext);
@@ -14,6 +15,7 @@ const SignUp = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
+  const backEndServerLinkLocal = hookAxiosLocal();
 
   // ✅ Signup Handler
   const handleSignUp = (e) => {
@@ -29,11 +31,8 @@ const SignUp = () => {
     const photoUrl = form.photoUrl.value.trim();
     const email = form.email.value.trim();
     const password = form.password.value;
-    console.log(form,
-name,
-photoUrl,
-email,
-password,)
+    console.log(form, name, photoUrl, email, password,)
+
     let valid = true;
     if (name.length < 4) {
       setNameError("নাম কমপক্ষে 4 অক্ষরের হতে হবে।");
@@ -65,22 +64,37 @@ password,)
         const creatingUser = result.user;
         profileUpdate(name, photoUrl)
           .then(() => {
-            console.log("user update");
-            reset();
+
+            userInfo = {
+              name :name,
+              email:email,
+            }
+            backEndServerLinkLocal.post('/users',userInfo )
+             .then(res => {
+                if(res.data.insertedId) {
+
+                  console.log("user update");
+                  reset();
+                    setUser(creatingUser);
+                    Swal.fire({
+                      position: "top-end",
+                      icon: "success",
+                      title: "Account Created Successfully.",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                  console.log("✅ User created:", creatingUser);
+                  navigate("/"); // Redirect on success
+
+                }
+             })
+
+
           })
           .catch((err) => {
             console.error("Profile update failed:", err.message);
           });
-        setUser(creatingUser);
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Account Created Successfully.",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        console.log("✅ User created:", creatingUser);
-        navigate("/"); // Redirect on success
+
       })
       .catch((err) => {
         console.error("❌ Signup Error:", err.message);
