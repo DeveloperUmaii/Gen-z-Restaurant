@@ -5,12 +5,14 @@ import { FaHome, FaHistory, FaShoppingCart, FaStar, FaEnvelope,FaBars,FaTimes,Fa
 import { IoCalendar, IoMenu } from 'react-icons/io5';
 import { FaShoppingBag } from 'react-icons/fa';
 import LayOut from "./LayOut";
+import hookUseCart from "../hooks/hookUseCart";
 
 
 
 const DashboardDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDrawer = () => setIsOpen(!isOpen);
+  const [cart] = hookUseCart();
 
   return (
     <div className="relative">
@@ -57,7 +59,7 @@ const DashboardDrawer = () => {
 
           <Link to="/dashboardDrawer/cart" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
             <FaShoppingCart  className="mr-3 ml-4" />
-            <span>MY CART</span>
+            <span>MY CART ({cart?.length})</span>
           </Link>
 
 
