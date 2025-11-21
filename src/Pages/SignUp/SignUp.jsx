@@ -1,13 +1,18 @@
 import signUpPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
 import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { AuthContext } from "../../providers/Authprovider";
+// import { AuthContext } from "../../providers/Authprovider";
 import { data, Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import hookAxiosLocal from "../../hooks/hookAxiosLocal";
+import UseAuthHook from "../../providers/ContexHook/UseAuthHook";
+import { FcGoogle } from "react-icons/fc";
+import { SiFacebook } from "react-icons/si";
+import { FaGithub } from "react-icons/fa";
 
 const SignUp = () => {
-  const { registrationUser, setUser, profileUpdate } = useContext(AuthContext);
+  // const { registrationUser, setUser, profileUpdate } = useContext(AuthContext);
+  const { registrationUser, setUser, profileUpdate } = UseAuthHook();
   const [showPassword, setShowPassword] = useState(false);
 
   const [nameError, setNameError] = useState("");
@@ -65,29 +70,28 @@ const SignUp = () => {
         profileUpdate(name, photoUrl)
           .then(() => {
 
-            userInfo = {
+        const userInfo = {
               name :name,
               email:email,
             }
             backEndServerLinkLocal.post('/users',userInfo )
              .then(res => {
-                if(res.data.insertedId) {
-
+              if (res.data.insertedId) {
                   console.log("user update");
-                  reset();
-                    setUser(creatingUser);
-                    Swal.fire({
-                      position: "top-end",
-                      icon: "success",
-                      title: "Account Created Successfully.",
-                      showConfirmButton: false,
-                      timer: 1500,
-                    });
-                  console.log("✅ User created:", creatingUser);
-                  navigate("/"); // Redirect on success
+                  form.reset();
+                  setUser(creatingUser);
 
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Account Created Successfully.",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+
+                  navigate("/");
                 }
-             })
+              })
 
 
           })
@@ -272,23 +276,29 @@ const SignUp = () => {
 
               {/* Social Icons */}
               <div className="flex justify-center gap-6">
+                {/* Facebook */}
                 <button
                   type="button"
                   className="btn btn-circle btn-ghost text-gray-600 hover:text-blue-600"
                 >
-                  <i className="fa-brands fa-facebook-f"></i>
+                  <SiFacebook className="h-7 w-7" />
                 </button>
+
+                {/* Google */}
                 <button
+                   onClick={googlelogIn} 
                   type="button"
                   className="btn btn-circle btn-ghost text-gray-600 hover:text-red-600"
                 >
-                  <i className="fa-brands fa-google"></i>
+                  <FcGoogle className="h-7 w-7" />
                 </button>
+
+                {/* GitHub */}
                 <button
                   type="button"
                   className="btn btn-circle btn-ghost text-gray-600 hover:text-gray-800"
                 >
-                  <i className="fa-brands fa-github"></i>
+                  <FaGithub className="h-7 w-7" />                 
                 </button>
               </div>
             </form>
