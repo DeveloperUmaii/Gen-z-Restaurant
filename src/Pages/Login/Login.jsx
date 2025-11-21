@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
+import SocialLogIn from "./SocialLogIn/SocialLogIn";
 
 
 const Login = () => {
@@ -240,32 +241,8 @@ Swal.fire({
               </div>
 
               {/* Social Icons */}
-              <div className="flex justify-center gap-6">
-                {/* Facebook */}
-                <button
-                  type="button"
-                  className="btn btn-circle btn-ghost text-gray-600 hover:text-blue-600"
-                >
-                  <SiFacebook className="h-7 w-7" />
-                </button>
 
-                {/* Google */}
-                <button
-                   onClick={googlelogIn} 
-                  type="button"
-                  className="btn btn-circle btn-ghost text-gray-600 hover:text-red-600"
-                >
-                  <FcGoogle className="h-7 w-7" />
-                </button>
-
-                {/* GitHub */}
-                <button
-                  type="button"
-                  className="btn btn-circle btn-ghost text-gray-600 hover:text-gray-800"
-                >
-                  <FaGithub className="h-7 w-7" />                 
-                </button>
-              </div>
+              <SocialLogIn />
             </form>
           </div>
         </div>
