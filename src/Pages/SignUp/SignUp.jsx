@@ -9,6 +9,7 @@ import UseAuthHook from "../../providers/ContexHook/UseAuthHook";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
+import SocialLogIn from "../Login/SocialLogIn/SocialLogIn";
 
 const SignUp = () => {
   // const { registrationUser, setUser, profileUpdate } = useContext(AuthContext);
@@ -69,29 +70,45 @@ const SignUp = () => {
         const creatingUser = result.user;
         profileUpdate(name, photoUrl)
           .then(() => {
+// update code 
+const userInfo = {
+  name: name,
+  email: email,
+};
 
-        const userInfo = {
-              name :name,
-              email:email,
-            }
-            backEndServerLinkLocal.post('/users',userInfo )
-             .then(res => {
-              if (res.data.insertedId) {
-                  console.log("user update");
-                  form.reset();
-                  setUser(creatingUser);
+backEndServerLinkLocal.post("/users", userInfo).then((res) => {
 
-                  Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Account Created Successfully.",
-                    showConfirmButton: false,
-                    timer: 1500,
-                  });
+  // যদি user আগেই থাকে
+  if (res.data.insertedId === null) {
+    Swal.fire({
+      position: "top-end",
+      icon: "warning",
+      title: "User Already Exists!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    return; 
+  }
 
-                  navigate("/");
-                }
-              })
+  // যদি নতুন user তৈরি হয়
+  if (res.data.insertedId) {
+    console.log("user update");
+
+    form.reset();
+    setUser(creatingUser);
+
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Account Created Successfully.",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+
+    navigate("/");
+  }
+});
+
 
 
           })
@@ -275,32 +292,7 @@ const SignUp = () => {
               </div>
 
               {/* Social Icons */}
-              <div className="flex justify-center gap-6">
-                {/* Facebook */}
-                <button
-                  type="button"
-                  className="btn btn-circle btn-ghost text-gray-600 hover:text-blue-600"
-                >
-                  <SiFacebook className="h-7 w-7" />
-                </button>
-
-                {/* Google */}
-                <button
-                   onClick={googlelogIn} 
-                  type="button"
-                  className="btn btn-circle btn-ghost text-gray-600 hover:text-red-600"
-                >
-                  <FcGoogle className="h-7 w-7" />
-                </button>
-
-                {/* GitHub */}
-                <button
-                  type="button"
-                  className="btn btn-circle btn-ghost text-gray-600 hover:text-gray-800"
-                >
-                  <FaGithub className="h-7 w-7" />                 
-                </button>
-              </div>
+              <SocialLogIn />
             </form>
           </div>
 
