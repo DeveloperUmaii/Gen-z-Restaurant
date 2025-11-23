@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
-import { FaHome, FaHistory, FaShoppingCart, FaStar, FaEnvelope,FaBars,FaTimes,FaList, } from 'react-icons/fa';
+import { FaHome, FaShoppingCart, FaStar, FaEnvelope,FaBars,FaTimes,FaList,FaShoppingBag,FaUtensils, FaListAlt, FaBook, FaUsers } from 'react-icons/fa';
 import { IoCalendar, IoMenu } from 'react-icons/io5';
-import { FaShoppingBag } from 'react-icons/fa';
+import { GiWallet } from 'react-icons/gi';
+import { LuCalendarMinus } from 'react-icons/lu';
 import LayOut from "./LayOut";
 import hookUseCart from "../hooks/hookUseCart";
+import {   } from "react-icons/fa";
 
 
 
@@ -13,6 +15,9 @@ const DashboardDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDrawer = () => setIsOpen(!isOpen);
   const [cart] = hookUseCart();
+
+  // TODO: get admin data from the data base
+  const isAdmin = true;
 
   return (
     <div className="relative">
@@ -36,43 +41,86 @@ const DashboardDrawer = () => {
           <p className="text-xs font-semibold text-yellow-300">RESTAURANT</p>
         </div>
 
-        {/* Admin Section */}
+                        {/* Drawe Section */}
         <div className="py-4">
-          <h2 className="px-4 mb-2 text-xs font-semibold uppercase text-yellow-300">
-            Admin Panel
-          </h2>
+          {
+            isAdmin ?   
+                      // Admin Section
+                      <>       
+                        <h2 className="px-4 mb-2 text-xs font-semibold uppercase text-yellow-300">
+                          Admin Panel
+                        </h2>
 
-          <Link to="/dashboard" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <FaHome  className="mr-3 ml-4" />
-            <span>USER HOME</span>
-          </Link>
+                        <Link to="/dashboardDrawer/adminhome" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                          <FaHome  className="mr-3 ml-4" />
+                          <span>#ADMIN HOME</span>
+                        </Link>
 
-          <Link to="/additems" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <IoCalendar  className="mr-3 ml-4" />
-            <span>RESERVATION</span>
-          </Link>
+                        <Link to="/dashboardDrawer/additems" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                          <FaUtensils  className="mr-3 ml-4" />
+                          <span>#ADD ITEMS</span>
+                        </Link>
 
-          <Link to="/manageitems" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <FaHistory  className="mr-3 ml-4" />
-            <span>PAYMENT HISTORY</span>
-          </Link>
+                        <Link to="/dashboardDrawer/manageitems" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                          <FaListAlt  className="mr-3 ml-4" />
+                          <span>#MANAGE ITEMS</span>
+                        </Link>
 
-          <Link to="/dashboardDrawer/cart" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <FaShoppingCart  className="mr-3 ml-4" />
-            <span>MY CART ({cart?.length})</span>
-          </Link>
+                        <Link to="/dashboardDrawer/managebooking" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                          <FaBook  className="mr-3 ml-4" />
+                          <span>#MANAGE BOOKING ({cart?.length})</span>
+                        </Link>
 
 
-          <Link to="/users" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <FaStar  className="mr-3 ml-4" />
-            <span>ADD REVIEW</span>
-          </Link>
-          
-          <Link to="/users" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
-            <IoMenu  className="mr-3 ml-4" />
-            <span>MY BOOKING</span>
-          </Link>
+                        <Link to="/dashboardDrawer/allusers" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                          <FaUsers  className="mr-3 ml-4" />
+                          <span>#ALL USERS</span>
+                        </Link>
+
+                      </> 
+                 : 
+                      // User section
+                      <>          
+                        <h2 className="px-4 mb-2 text-xs font-semibold uppercase text-yellow-300">
+                          User Panel
+                        </h2>
+
+                        <Link to="/dashboardDrawer/userhome" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                          <FaHome  className="mr-3 ml-4" />
+                          <span>USER HOME</span>
+                        </Link>
+
+                        <Link to="/dashboardDrawer/reservation" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                          <IoCalendar  className="mr-3 ml-4" />
+                          <span>RESERVATION</span>
+                        </Link>
+
+                        <Link to="/dashboardDrawer/paymenthistory" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                          <GiWallet  className="mr-3 ml-4" />
+                          <span>PAYMENT HISTORY</span>
+                        </Link>
+
+                        <Link to="/dashboardDrawer/cart" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                          <FaShoppingCart  className="mr-3 ml-4" />
+                          <span>MY CART ({cart?.length})</span>
+                        </Link>
+
+
+                        <Link to="/dashboardDrawer/addreview" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                          <FaStar  className="mr-3 ml-4" />
+                          <span>ADD REVIEW</span>
+                        </Link>
+                        
+                        <Link to="/dashboardDrawer/mybooking" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                          <LuCalendarMinus  className="mr-3 ml-4" />
+                          <span>MY BOOKING</span>
+                        </Link>
+                      </>
+          }
+
         </div>
+
+
 
         <hr className="border-yellow-800 my-4" />
 
