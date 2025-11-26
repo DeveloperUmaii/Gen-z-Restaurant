@@ -1,7 +1,11 @@
 // React-icons ব্যবহার করার জন্য, আপনাকে প্রথমে এটি ইনস্টল করতে হবে: npm install react-icons
-import { FaTrashAlt, FaUserCog } from 'react-icons/fa'; // FaUserCog হল Role আইকনের জন্য
-import { QueryClient, QueryClientProvider, useQuery} from '@tanstack/react-query'
-import hookAxiosSecure from '../../../hooks/hookAxiosSecure';
+import { FaTrashAlt, FaUserCog } from "react-icons/fa"; // FaUserCog হল Role আইকনের জন্য
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 
 // --- ডামি ডেটা (Dummy Data) ---
 // const DUMMY_USERS = [
@@ -14,32 +18,71 @@ const AllUsers = () => {
   const backEndServerLink = hookAxiosSecure();
 
   const { data: users = [] } = useQuery({
-    queryKey: ['users'],
+    queryKey: ["users"],
     queryFn: async () => {
-      const res = await backEndServerLink.get('/users')
-      return res.data;}
-  })
+      const res = await backEndServerLink.get("/users");
+      return res.data;
+    },
+  });
+
+const handleDeleteUser = (user) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: `You are about to delete ${user.name}!`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      backEndServerLink.delete(`/users/${user._id}`)
+        .then((res) => {
+          if (res.data.deletedCount > 0) {
+            // UI reload ছাড়া আপডেট
+            refetch();
+
+            Swal.fire({
+              title: "Deleted!",
+              text: `${user.name} has been removed successfully.`,
+              icon: "success",
+              timer: 1500,
+              showConfirmButton: false
+            });
+          }
+        })
+        .catch(() => {
+          Swal.fire({
+            title: "Error!",
+            text: "Something went wrong while deleting.",
+            icon: "error"
+          });
+        });
+    }
+  });
+};
+
 
   return (
     <div className="p-4 sm:p-8 bg-white shadow-lg rounded-lg max-w-4xl mx-auto my-10">
-      
       {/* --- হেডার সেকশন --- */}
       <div className="text-center mb-6">
-        <p className="text-sm font-light text-gray-500 tracking-widest">---How many?---</p>
+        <p className="text-sm font-light text-gray-500 tracking-widest">
+          ---How many?---
+        </p>
         <h2 className="text-2xl sm:text-3xl font-serif tracking-wide text-gray-800 mt-1">
           MANAGE ALL USERS
         </h2>
       </div>
-      
+
       {/* --- মোট ব্যবহারকারী সংখ্যা --- */}
       <h3 className="text-xl font-bold mb-4 text-gray-700">
         TOTAL USERS: <span className="text-2xl">{users?.length}</span>
       </h3>
-      
+
       {/* --- টেবিল কন্টেইনার --- */}
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
-          
           {/* --- টেবিল হেডার --- */}
           <thead className="bg-amber-800">
             <tr>
@@ -60,7 +103,7 @@ const AllUsers = () => {
               </th>
             </tr>
           </thead>
-          
+
           {/* --- টেবিল বডি --- */}
           <tbody className="bg-white divide-y divide-gray-100">
             {users.map((user, index) => (
@@ -69,17 +112,17 @@ const AllUsers = () => {
                 <td className="px-3 py-3 whitespace-nowrap text-sm font-semibold text-gray-900 bg-gray-50">
                   {index + 1}
                 </td>
-                
+
                 {/* নাম */}
                 <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-800">
                   {user.name}
                 </td>
-                
+
                 {/* ইমেল */}
                 <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell">
                   {user.email}
                 </td>
-                
+
                 {/* রোল আইকন */}
                 <td className="px-6 py-3 whitespace-nowrap text-center text-sm">
                   {/* ছবিতে হলুদ-বাদামী আইকনটি অনুসরণ করা হয়েছে */}
@@ -87,14 +130,16 @@ const AllUsers = () => {
                     <FaUserCog className="h-5 w-5" />
                   </span>
                 </td>
-                
+
                 {/* অ্যাকশন (ডিলিট) */}
                 <td className="px-6 py-3 whitespace-nowrap text-center text-sm">
                   <button
-                    onClick={() => console.log(`Deleting user: ${user.name}`)}
+                    onClick={() => {
+                      handleDeleteUser(user);
+                      console.log(`Deleting user: ${user.name}`);
+                    }}
                     className="p-2 rounded-lg bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-150 ease-in-out shadow-lg"
-                    title="Delete User"
-                  >
+                    title="Delete User">
                     <FaTrashAlt className="h-5 w-5" />
                   </button>
                 </td>
