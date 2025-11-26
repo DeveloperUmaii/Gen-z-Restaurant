@@ -148,7 +148,7 @@ const DashboardDrawer = () => {
         </div>
       </div>
       <div className="">
-        <Outlet></Outlet>
+        {/* <Outlet></Outlet> */}
       </div>
     </div>
   );

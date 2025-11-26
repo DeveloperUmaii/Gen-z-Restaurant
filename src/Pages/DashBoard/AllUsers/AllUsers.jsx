@@ -1,21 +1,24 @@
 // React-icons ব্যবহার করার জন্য, আপনাকে প্রথমে এটি ইনস্টল করতে হবে: npm install react-icons
 import { FaTrashAlt, FaUserCog } from 'react-icons/fa'; // FaUserCog হল Role আইকনের জন্য
+import { QueryClient, QueryClientProvider, useQuery} from '@tanstack/react-query'
+import hookAxiosSecure from '../../../hooks/hookAxiosSecure';
 
 // --- ডামি ডেটা (Dummy Data) ---
-const DUMMY_USERS = [
-  { id: 1, name: "John Doe", email: "john.doe@gmail.com", role: "Admin" },
-  { id: 2, name: "Jane Smith", email: "jane.s@gmail.com", role: "User" },
-  { id: 3, name: "Ruhul Amin", email: "ruhul.amin@gmail.com", role: "User" },
-  { id: 4, name: "Sonia Mirza", email: "sonia.m@gmail.com", role: "Admin" },
-  { id: 5, name: "Rajesh K.", email: "rajesh.k@gmail.com", role: "User" },
-  { id: 6, name: "Nabila F.", email: "nabila.f@gmail.com", role: "User" },
-  { id: 7, name: "Tariq H.", email: "tariq.h@gmail.com", role: "User" },
-  { id: 8, name: "Laila B.", email: "laila.b@gmail.com", role: "User" },
-  { id: 9, name: "Omar F.", email: "omar.f@gmail.com", role: "Admin" },
-];
+// const DUMMY_USERS = [
+//   { id: 1, name: "John Doe", email: "john.doe@gmail.com", role: "Admin" },
+//   { id: 2, name: "Jane Smith", email: "jane.s@gmail.com", role: "User" },
+// ];
 
 const AllUsers = () => {
-  const totalUsers = DUMMY_USERS.length;
+  // const totalUsers = DUMMY_USERS.length;
+  const backEndServerLink = hookAxiosSecure();
+
+  const { data: users = [] } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      const res = await backEndServerLink.get('/users')
+      return res.data;}
+  })
 
   return (
     <div className="p-4 sm:p-8 bg-white shadow-lg rounded-lg max-w-4xl mx-auto my-10">
@@ -30,7 +33,7 @@ const AllUsers = () => {
       
       {/* --- মোট ব্যবহারকারী সংখ্যা --- */}
       <h3 className="text-xl font-bold mb-4 text-gray-700">
-        TOTAL USERS: <span className="text-2xl">{totalUsers}</span>
+        TOTAL USERS: <span className="text-2xl">{users?.length}</span>
       </h3>
       
       {/* --- টেবিল কন্টেইনার --- */}
@@ -60,8 +63,8 @@ const AllUsers = () => {
           
           {/* --- টেবিল বডি --- */}
           <tbody className="bg-white divide-y divide-gray-100">
-            {DUMMY_USERS.map((user, index) => (
-              <tr key={user.id} className="hover:bg-amber-50">
+            {users.map((user, index) => (
+              <tr key={user._id} className="hover:bg-amber-50">
                 {/* সিরিয়াল নং */}
                 <td className="px-3 py-3 whitespace-nowrap text-sm font-semibold text-gray-900 bg-gray-50">
                   {index + 1}
