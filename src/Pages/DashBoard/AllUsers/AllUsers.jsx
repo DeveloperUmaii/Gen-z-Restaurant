@@ -1,11 +1,9 @@
 // React-icons ব্যবহার করার জন্য, আপনাকে প্রথমে এটি ইনস্টল করতে হবে: npm install react-icons
 import { FaTrashAlt, FaUserCog } from "react-icons/fa"; // FaUserCog হল Role আইকনের জন্য
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, useQuery,} from "@tanstack/react-query";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
+import Swal from "sweetalert2";
+
 
 // --- ডামি ডেটা (Dummy Data) ---
 // const DUMMY_USERS = [
@@ -26,6 +24,8 @@ const AllUsers = () => {
   });
 
 const handleDeleteUser = (user) => {
+
+  
   Swal.fire({
     title: "Are you sure?",
     text: `You are about to delete ${user.name}!`,
@@ -36,7 +36,7 @@ const handleDeleteUser = (user) => {
     confirmButtonText: "Yes, delete it!"
   }).then((result) => {
     if (result.isConfirmed) {
-      backEndServerLink.delete(`/users/${user._id}`)
+      backEndServerLink.delete(`/users/${_id}`)
         .then((res) => {
           if (res.data.deletedCount > 0) {
             // UI reload ছাড়া আপডেট
@@ -136,7 +136,7 @@ const handleDeleteUser = (user) => {
                   <button
                     onClick={() => {
                       handleDeleteUser(user);
-                      console.log(`Deleting user: ${user.name}`);
+                      // console.log(`Deleting user: ${user.name}`);
                     }}
                     className="p-2 rounded-lg bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-150 ease-in-out shadow-lg"
                     title="Delete User">
