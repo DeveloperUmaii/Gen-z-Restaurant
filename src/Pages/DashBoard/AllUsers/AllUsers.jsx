@@ -1,9 +1,13 @@
 // React-icons ব্যবহার করার জন্য, আপনাকে প্রথমে এটি ইনস্টল করতে হবে: npm install react-icons
 import { FaTrashAlt, FaUserCog } from "react-icons/fa"; // FaUserCog হল Role আইকনের জন্য
-import { QueryClient, QueryClientProvider, useQuery,} from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import Swal from "sweetalert2";
-
+import { RiShieldUserFill } from "react-icons/ri";
 
 // --- ডামি ডেটা (Dummy Data) ---
 // const DUMMY_USERS = [
@@ -23,44 +27,78 @@ const AllUsers = () => {
     },
   });
 
-const handleDeleteUser = (user) => {
-  
-  Swal.fire({
-    title: "Are you sure?",
-    text: `You are about to delete ${user.name}!`,
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!"
-  }).then((result) => {
-    if (result.isConfirmed) {
-      backEndServerLink.delete(`/users/${_id}`)
-        .then((res) => {
-          if (res.data.deletedCount > 0) {
-            // UI reload ছাড়া আপডেট
-            refetch();
-
+  const handleMakeAdminUser = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Do you want to make ${user.name} an Admin?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#16a34a",
+      cancelButtonColor: "#dc2626",
+      confirmButtonText: "Yes, make Admin",
+    }).then((result) => {
+      if (result.isConfirmed) {
+          backEndServerLink.patch(`/users/admin/${user._id}`)
+          .then((res) => {
+            if (res.data.modifiedCount > 0) {
+              refetch(); // UI আপডেট
+              Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: `${user.name} is now an Admin`,
+                timer: 1000,
+                showConfirmButton: false,
+              });
+            }
+          })
+          .catch(() => {
             Swal.fire({
-              title: "Deleted!",
-              text: `${user.name} has been removed successfully.`,
-              icon: "success",
-              timer: 1500,
-              showConfirmButton: false
+              icon: "error",
+              title: "Error!",
+              text: "Failed to make admin",
             });
-          }
-        })
-        .catch(() => {
-          Swal.fire({
-            title: "Error!",
-            text: "Something went wrong while deleting.",
-            icon: "error"
           });
-        });
-    }
-  });
-};
+      }
+    });
+  };
 
+  const handleDeleteUser = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You are about to delete ${user.name}!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        backEndServerLink
+          .delete(`/users/${_id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              // UI reload ছাড়া আপডেট
+              refetch();
+
+              Swal.fire({
+                title: "Deleted!",
+                text: `${user.name} has been removed successfully.`,
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false,
+              });
+            }
+          })
+          .catch(() => {
+            Swal.fire({
+              title: "Error!",
+              text: "Something went wrong while deleting.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
 
   return (
     <div className="p-4 sm:p-8 bg-white shadow-lg rounded-lg max-w-4xl mx-auto my-10">
@@ -124,15 +162,26 @@ const handleDeleteUser = (user) => {
 
                 {/* রোল আইকন */}
                 <td className="px-6 py-3 whitespace-nowrap text-center text-sm">
-                  <button
-                    onClick={() => {
-                      handleDeleteUser(user);
-                      // console.log(`Deleting user: ${user.name}`);
-                    }}
-                    className="p-2 rounded-lg bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-150 ease-in-out shadow-lg"
-                    title="Delete User">
-                    <FaUserCog className="h-5 w-5"  />
-                  </button>
+                  {/* ছবিতে হলুদ-বাদামী আইকনটি অনুসরণ করা হয়েছে */}
+                  {user.role === "admin" ? (
+                    <div
+                      className="flex flex-col items-center justify-center text-green-600 hover:text-green-700 transition"
+                      title="Admin">
+                      <RiShieldUserFill className="text-3xl text-green-600" />
+                      <span className="text-sm font-mono">Admin</span>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        handleMakeAdminUser(user);
+                        // console.log(`Deleting user: ${user.name}`);
+                      }}
+                      title="Make ADMIN User">
+                      <span className="inline-flex items-center justify-center p-2 rounded-full bg-yellow-600/20 text-yellow-800 shadow-md">
+                        <FaUserCog className="h-5 w-5" />
+                      </span>
+                    </button>
+                  )}
                 </td>
 
                 {/* অ্যাকশন (ডিলিট) */}
