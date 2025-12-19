@@ -124,10 +124,15 @@ const handleDeleteUser = (user) => {
 
                 {/* রোল আইকন */}
                 <td className="px-6 py-3 whitespace-nowrap text-center text-sm">
-                  {/* ছবিতে হলুদ-বাদামী আইকনটি অনুসরণ করা হয়েছে */}
-                  <span className="inline-flex items-center justify-center p-2 rounded-full bg-yellow-600/20 text-yellow-800 shadow-md">
-                    <FaUserCog className="h-5 w-5" />
-                  </span>
+                  <button
+                    onClick={() => {
+                      handleDeleteUser(user);
+                      // console.log(`Deleting user: ${user.name}`);
+                    }}
+                    className="p-2 rounded-lg bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-150 ease-in-out shadow-lg"
+                    title="Delete User">
+                    <FaUserCog className="h-5 w-5"  />
+                  </button>
                 </td>
 
                 {/* অ্যাকশন (ডিলিট) */}
