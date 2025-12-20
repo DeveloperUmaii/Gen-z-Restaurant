@@ -73,8 +73,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        backEndServerLink
-          .delete(`/users/${user._id}`)
+        backEndServerLink.delete(`/users/${user._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // UI reload ছাড়া আপডেট

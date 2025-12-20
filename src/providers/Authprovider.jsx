@@ -9,6 +9,7 @@ import {
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
 import { updateProfile } from "firebase/auth";
+import hookAxiosLocal from "../hooks/hookAxiosLocal";
 
 export const AuthContext = createContext(null);
 
@@ -17,6 +18,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   //
   const [user, setUser] = useState(null);
+  const backEndServerLinkLocal = hookAxiosLocal()
 
   const registrationUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -36,7 +38,7 @@ const AuthProvider = ({ children }) => {
   const profileUpdate = (name, photoUrl) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
-        photoURL:  photoUrl,
+      photoURL: photoUrl,
     });
   };
 
@@ -54,21 +56,34 @@ const AuthProvider = ({ children }) => {
     setUser,
     googlelogIn,
     logOut,
-    profileUpdate
+    profileUpdate,
   };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-          //Get Token & Store
-        
+        // ১. সার্ভার থেকে টোকেন নেওয়া
+        const userDetails = { email: currentUser.email };
+        backEndServerLinkLocal.post('/jwt', userDetails)
+        .then((res) => {
+          if (res.data.token) {
+            // ২. লোকাল স্টোরেজে টোকেন রাখা
+            localStorage.setItem("access-token", res.data.token);
+          }
+        });
       } else {
-          //Remove Token:if token store in client side _Local storage, caching, in memory
-        
+        // ৩. লগআউট করলে লোকাল স্টোরেজ থেকে টোকেন মুছে ফেলা
+        localStorage.removeItem("access-token");
       }
-        console.log(currentUser);
-        console.log("log out use Effect");
+      if (currentUser) {
+        //Get Token & Store
+      } else {
+        //Remove Token:if token store in client side _Local storage, caching, in memory
+      }
+
+      console.log(currentUser);
+      console.log("log out use Effect");
     });
     return () => {
       unSubscribe();
