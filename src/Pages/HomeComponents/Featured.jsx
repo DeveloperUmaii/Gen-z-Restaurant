@@ -16,7 +16,7 @@ const Featured = () => {
         <div className="mt-36">
             <div className="flex justify-between ">
                 <div className=" w-6/12  my-1 sm:my-10 md:my-12 rounded-lg px-1 sm:px-6 md:px-10 lg:px-20 py-1">
-                  <img src={FeaturedImage} className="w-full border-2 border-[#b8b8b868] " alt="" srcset="" />
+                  <img src={FeaturedImage} className="w-full border-2 border-[#b8b8b868] " alt="" srcSet="" />
                 </div>
 
                 <div className=" w-6/12  items-center  my-1 sm:my-10 md:my-12 rounded-lg px-1 sm:px-6 md:px-10 lg:px-20 py-1">

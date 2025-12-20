@@ -63,24 +63,25 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        // ১. সার্ভার থেকে টোকেন নেওয়া
+        // ১. সার্ভার থেকে টোকেন নেওয়া & Store kora
         const userDetails = { email: currentUser.email };
         backEndServerLinkLocal.post('/jwt', userDetails)
         .then((res) => {
           if (res.data.token) {
             // ২. লোকাল স্টোরেজে টোকেন রাখা
             localStorage.setItem("access-token", res.data.token);
+            console.log("Token Received and Saved:", res.data.token);
           }
         });
       } else {
         // ৩. লগআউট করলে লোকাল স্টোরেজ থেকে টোকেন মুছে ফেলা
         localStorage.removeItem("access-token");
       }
-      if (currentUser) {
-        //Get Token & Store
-      } else {
-        //Remove Token:if token store in client side _Local storage, caching, in memory
-      }
+      // if (currentUser) {
+      //   //Gnpm run devet Token & Store
+      // } else {
+      //   //Remove Token:if token store in client side _Local storage, caching, in memory
+      // }
 
       console.log(currentUser);
       console.log("log out use Effect");
