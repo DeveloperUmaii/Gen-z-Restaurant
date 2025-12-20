@@ -19,7 +19,7 @@ const AllUsers = () => {
   // const totalUsers = DUMMY_USERS.length;
   const backEndServerLink = hookAxiosSecure();
 
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await backEndServerLink.get("/users");
@@ -74,7 +74,7 @@ const AllUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         backEndServerLink
-          .delete(`/users/${_id}`)
+          .delete(`/users/${user._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // UI reload ছাড়া আপডেট
