@@ -22,7 +22,11 @@ const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await backEndServerLink.get("/users");
+      const res = await backEndServerLink.get("/users",{
+        headers: {
+            authorization: `bearer ${localStorage.getItem('access-token')}`
+        },
+      });
       return res.data;
     },
   });

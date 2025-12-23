@@ -40,3 +40,19 @@ step 05. Client side theke token recieve and Storage kora sathe
         // ৩. লগআউট করলে লোকাল স্টোরেজ থেকে টোকেন মুছে ফেলা
         localStorage.removeItem("access-token");
       }
+Step 06. Token ekhon Backend a pathaite hoibo [POst Operation SEND]
+        *Header er moddhe diye pathaite hobe 
+          const { data: users = [], refetch } = useQuery({
+            queryKey: ["users"],
+            queryFn: async () => {
+              const res = await backEndServerLink.get("/users",{
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('access-token')}`
+                },
+              });
+              return res.data;
+            },
+          });
+
+Step 07. Recieve Operation in BackEnd
+          

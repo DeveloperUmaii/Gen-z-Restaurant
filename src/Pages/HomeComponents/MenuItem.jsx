@@ -6,7 +6,7 @@ const MenuItem = ({item}) => {
             <h5 className="text-white">{item?.recipe}</h5> */}
 
                 {/* Image Section */}
-            <div className=" flex items-center w-2/12"><img className="h-12  w-14 rounded-br-full rounded-r-full rounded-b-full" src={recipeCover} alt="" srcset="" /></div>
+            <div className=" flex items-center w-2/12"><img className="h-12  w-14 rounded-br-full rounded-r-full rounded-b-full" src={recipeCover} alt="" srcSet="" /></div>
 
             {/* Details.. */}
             <div className=" w-9/12">
