@@ -57,14 +57,21 @@ Step 06. Token ekhon Backend a pathaite hoibo [POst Operation SEND]
 Step 07. Recieve Operation in BackEnd
           Console.log kore dekhbo token Backend server terminal a gece kina jaoar por VARIFY
 
-Step 08. VARIFY TOKEN 
-          Middleweare create
-          const verifyToken = (req, res, next) => {
-            console.log('inside verify Token', req.headers);
-            if (!req.headers.authorization){
-              return res.status(401).send({ message: 'forbidden - access' });
-            }
-            // const token = req.headers.authorization.split(' ')[1];
-            // next();
-    }
+Step 08. VARIFY TOKEN     //(verify hoile data asbe client side a data view hobe |verify na hole data SHOW hobe na client side )
+          //Middleweare create
+    const verifyToken = (req, res, next) => {
+      console.log("inside verify Token", req.headers);
+      if (!req.headers.authorization) {
+        return res.status(401).send({ message: "forbidden - access" });
+      }
+      const token = req.headers.authorization.split(" ")[1];
+      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+          return res.status(402).send({ message: "forbidden Access" });
+        }
+        req.decoded = decoded;
+        next();
+        console.log(decoded.foo); // bar
+      });
+    };
           
