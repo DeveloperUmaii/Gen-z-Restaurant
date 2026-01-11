@@ -74,4 +74,30 @@ Step 08. VARIFY TOKEN     //(verify hoile data asbe client side a data view hobe
         console.log(decoded.foo); // bar
       });
     };
-          
+Step 09. Header Token Axios Secure Secure a set kora
+            // Add a request interceptor
+                  backEndServerLink.interceptors.request.use(function (config) {
+                    const token = localStorage.getItem('access-token')
+                    console.log('Request stop bye Interceptors :_',token)
+                    config.headers.authorization = `Bearer ${token}`
+                  return config;
+                }),   
+                function (error) { return Promise.reject(error);}
+Step 10.All user theke header(Comment kora tuku) kete deoa
+                const res = await backEndServerLink.get("/users"
+      //             ,{
+      //   headers: {
+      //       authorization: `bearer ${localStorage.getItem('access-token')}`
+      //   },
+      // }
+    );
+Step 11. Axios secure a response
+          backEndServerLink.interceptors.response.use(function(response) {
+              return response;
+            }, (error) => {
+              const status = error.response.status;
+              console.log('status error in the INTERCEPTORS',status)
+              return Promise.reject(error);
+            });
+Step 12.
+Step 13.
