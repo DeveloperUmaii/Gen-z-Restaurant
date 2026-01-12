@@ -49,15 +49,7 @@ const AuthProvider = ({ children }) => {
   //   // An error occurred
   //   // ...
   // });
-  const contextInfo = {
-    registrationUser,
-    logInUser,
-    user,
-    setUser,
-    googlelogIn,
-    logOut,
-    profileUpdate,
-  };
+
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -77,11 +69,6 @@ const AuthProvider = ({ children }) => {
         // ৩. লগআউট করলে লোকাল স্টোরেজ থেকে টোকেন মুছে ফেলা
         localStorage.removeItem("access-token");
       }
-      // if (currentUser) {
-      //   //Gnpm run devet Token & Store
-      // } else {
-      //   //Remove Token:if token store in client side _Local storage, caching, in memory
-      // }
 
       console.log(currentUser);
       console.log("log out use Effect");
@@ -89,7 +76,17 @@ const AuthProvider = ({ children }) => {
     return () => {
       unSubscribe();
     };
-  }, []);
+  }, [backEndServerLinkLocal]);
+
+  const contextInfo = {
+    registrationUser,
+    logInUser,
+    user,
+    setUser,
+    googlelogIn,
+    logOut,
+    profileUpdate,
+  };
 
   return (
     <div>
