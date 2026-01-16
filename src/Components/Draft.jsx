@@ -138,4 +138,19 @@ Step 11. Axios secure a response
 
 
 Step 12. api er maddhome Admin make
+      // Dynamically Admin make with api ( make_admin step-1)
+        app.get("/user/admin/:email", verifyToken, async (req, res) => {
+          const email = req.params.email;
+          if (email !== req.decoded.email) {
+            return res.status(403).send({ message: "unauthorized access" });
+          }
+        
+          const query = { email: email };
+          const user = await userCollection.findOne(query);
+          let admin = false;
+          if (user) {
+            admin = user?.role === "admin";
+          }
+          res.send({ admin });
+        });
 Step 13.
