@@ -138,7 +138,7 @@ Step 11. Axios secure a response
 
 
 Step 12. api er maddhome Admin make
-      // Dynamically Admin make with api ( make_admin step-1)
+      // Dynamically Admin make with api ( make_admin step-1 in SERVER)
         app.get("/user/admin/:email", verifyToken, async (req, res) => {
           const email = req.params.email;
           if (email !== req.decoded.email) {
@@ -153,4 +153,24 @@ Step 12. api er maddhome Admin make
           }
           res.send({ admin });
         });
+  // (make_admin step-2 in clien Side) Hook create for use  every secret Component as a ADMIN
+  const hookAdmin = () => {
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  
+  const { data: isAdmin } = useQuery({
+    queryKey: [user?.email, 'isAdmin'],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/admin/${user.email}`);
+      console.log(res.data);
+      return res.data?.admin;
+    }
+  });
+  
+  return [isAdmin];
+};
+
+export default huookAdmin;
+// (no.3)import[dashboarddrawer] 
+
 Step 13.

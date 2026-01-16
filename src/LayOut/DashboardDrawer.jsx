@@ -8,6 +8,7 @@ import { LuCalendarMinus } from 'react-icons/lu';
 import LayOut from "./LayOut";
 import hookUseCart from "../hooks/hookUseCart";
 import {   } from "react-icons/fa";
+import hookAdmin from "../hooks/hookAdmin";
 
 
 
@@ -17,7 +18,8 @@ const DashboardDrawer = () => {
   const [cart] = hookUseCart();
 
   // TODO: get admin data from the data base
-  const isAdmin = true;
+  // const isAdmin = true;
+  const isAdmin = hookAdmin(); //(no.3) 
 
   return (
     <div className="relative">
