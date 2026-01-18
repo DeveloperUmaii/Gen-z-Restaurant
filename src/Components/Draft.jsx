@@ -189,4 +189,23 @@ Step 13. Admin verify in Server //(no.4)
 // er por sob Secure jaigai jekhane jeko chailei edit,delete,visit korte na pare oi sob jaigai 
 // server a (verifyToken, verifyAdmin,) diye dite hobe 
 step 13 . Crete Admin route in client side
+    //  create admin route for prtecting rote from NonAdminUser!
+        const AdminRroute = ({chilldren}) => {
+      const { user, loading } = UseAuthHook()
+      const location = useLocation();
+      const [isAdmin, isAdminLoading] = hookAdmin();
+      if (loading || isAdminLoading) {
+        return (
+          <div className="">
+            <progress className="progress w-56"></progress>
+            <h3>loading . . . .</h3>
+          </div>
+        );
+      }
+      if (user && isAdmin) {
+        return children;
+      }
+      return <Navigate to="/login" state={{ from: location }} replace />;
+    };
+    export deault AdmnRoute;
     
