@@ -1,11 +1,13 @@
-import UseAuthHook from "../../providers/ContexHook/UseAuthHook";
 import { Navigate, useLocation } from "react-router-dom";
+import hookAdmin from "../../hooks/hookAdmin";
+import UseAuthHook from "../../providers/ContexHook/UseAuthHook";
 
-const Private = ({ children }) => {
-  const { user, loading } = useContext();
+const AdminRoute = ({children}) => {
+  const { user, loading } = UseAuthHook()
   const location = useLocation();
+  const [isAdmin, isAdminLoading] = hookAdmin();
 
-  if (loading) {
+  if (loading || isAdminLoading) {
     return (
       <div className="">
         <progress className="progress w-56"></progress>
@@ -14,11 +16,11 @@ const Private = ({ children }) => {
     );
   }
 
-  if (user) {
+  if (user && isAdmin) {
     return children;
   }
 
   return <Navigate to="/login" state={{ from: location }} replace />;
 };
 
-export default Private;
+export default AdminRoute;

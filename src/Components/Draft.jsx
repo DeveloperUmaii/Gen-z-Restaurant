@@ -188,3 +188,5 @@ Step 13. Admin verify in Server //(no.4)
     // (no.5)
 // er por sob Secure jaigai jekhane jeko chailei edit,delete,visit korte na pare oi sob jaigai 
 // server a (verifyToken, verifyAdmin,) diye dite hobe 
+step 13 . Crete Admin route in client side
+    

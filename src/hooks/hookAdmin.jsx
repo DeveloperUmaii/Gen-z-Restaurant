@@ -5,7 +5,7 @@ import hookAxiosSecure, { backEndServerLink } from "./hookAxiosSecure";
 const hookAdmin = () => {
     const {user} = UseAuthHook()
     const backEndServerLink = hookAxiosSecure()
-    const { data: isAdmin } = useQuery( {
+    const { data: isAdmin, isPending: isAdminLoading, } = useQuery( {
         queryKey: [user?.email, 'isAdmin'],
         queryFn: async () => {
             const res = await backEndServerLink.get(`/user/admin/${user.email}`)
