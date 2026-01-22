@@ -16,22 +16,28 @@ export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
-  //
   const [user, setUser] = useState(null);
-  const backEndServerLinkLocal = hookAxiosLocal()
+  // loading state add kora holo
+  const [loading, setLoading] = useState(true); 
+  const backEndServerLinkLocal = hookAxiosLocal();
 
   const registrationUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const logInUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   const googlelogIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -50,12 +56,12 @@ const AuthProvider = ({ children }) => {
   //   // ...
   // });
 
-
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      
       if (currentUser) {
-        // ১. সার্ভার থেকে টোকেন নেওয়া & Store kora
+        // ১. সার্ভার থেকে টোকেন নেওয়া & Store kora
         const userDetails = { email: currentUser.email };
         backEndServerLinkLocal.post('/jwt', userDetails)
         .then((res) => {
@@ -63,11 +69,13 @@ const AuthProvider = ({ children }) => {
             // ২. লোকাল স্টোরেজে টোকেন রাখা
             localStorage.setItem("access-token", res.data.token);
             console.log("Token Received and Saved:", res.data.token);
+            setLoading(false); // token pawar por loading false
           }
         });
       } else {
         // ৩. লগআউট করলে লোকাল স্টোরেজ থেকে টোকেন মুছে ফেলা
         localStorage.removeItem("access-token");
+        setLoading(false); // user na thakle loading false
       }
 
       console.log(currentUser);
@@ -83,6 +91,7 @@ const AuthProvider = ({ children }) => {
     logInUser,
     user,
     setUser,
+    loading, // loading return kora holo
     googlelogIn,
     logOut,
     profileUpdate,

@@ -1,8 +1,8 @@
-import UseAuthHook from "../../providers/ContexHook/UseAuthHook";
 import { Navigate, useLocation } from "react-router-dom";
+import UseAuthHook from "../../providers/ContexHook/UseAuthHook";
 
 const Private = ({ children }) => {
-  const { user, loading } = useContext();
+  const { user, loading } = UseAuthHook()
   const location = useLocation();
 
   if (loading) {

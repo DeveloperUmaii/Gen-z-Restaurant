@@ -13,6 +13,7 @@ import Profile from '../Pages/ProfilePage/Profile'
 import DashboardDrawer from '../LayOut/DashboardDrawer'
 import Cart from '../Pages/DashBoard/Cart/Cart'
 import AllUsers from '../Pages/DashBoard/AllUsers/AllUsers'
+import AdminRoute from '../Pages/AdminRoute/AdminRoute'
 
 const router = createBrowserRouter([
   {
@@ -35,8 +36,9 @@ const router = createBrowserRouter([
   {
     path: '/dashboardDrawer',
     // element: <Private> <DashboardDrawer /> </Private>, // Drawer as layout
-    element: <DashboardDrawer />, // Drawer as layout
+    element:  <Private> <DashboardDrawer /> </Private>, // Drawer as layout
     children: [
+      // User Pannlel
       { index: true, element: <DashboardDrawer /> },
       { path: 'reservation', element: <p>Manage Items Page</p> },
       { path: 'paymenthistory', element: <p>Manage Bookings Page</p> },
@@ -44,7 +46,8 @@ const router = createBrowserRouter([
       { path: 'addreview', element: <p>Add Review</p> },
       { path: 'mybooking', element: <p>my Booking</p> },
       // Admin Pannel
-      { path: 'allusers', element: <AllUsers /> },
+      { path: 'allusers', element: <AdminRoute> <AllUsers /> </AdminRoute> },
+      // { path: 'allusers', element:  <AllUsers />  },
     ],
   },
 ])
