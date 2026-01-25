@@ -1,22 +1,20 @@
 import { useForm } from 'react-hook-form';
 import { FaUtensils } from 'react-icons/fa';
+import SecTionTitle from '../../../Components/SecTionTitle';
 
 const AddItem = () => {
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = (data) => {
         console.log(data);
+        reset();
         // আপনার API কল লজিক এখানে হবে
     };
 
     return (
         <div className="w-full px-4 md:px-10">
             {/* Section Title */}
-            <div className="text-center my-10">
-                <p className="text-yellow-600 italic text-sm mb-2">--- What's new? ---</p>
-                <h2 className="text-3xl uppercase border-y-4 py-3 inline-block px-10">Add An Item</h2>
-            </div>
-
+                  <SecTionTitle subHeading="What's new?" heading="Add An Item" />
             {/* Form Container */}
             <div className="bg-base-300 p-8 md:p-12 rounded-lg shadow-sm">
                 <form onSubmit={handleSubmit(onSubmit)}>

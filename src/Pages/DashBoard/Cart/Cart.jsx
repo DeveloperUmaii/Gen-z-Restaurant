@@ -3,6 +3,7 @@ import hookUseCart from "../../../hooks/hookUseCart";
 // 🔹 নতুনভাবে ইম্পোর্ট করছি axios এবং Swal
 import axios from "axios"; // ✅ (নতুন লাইন)
 import Swal from "sweetalert2"; // ✅ (নতুন লাইন)
+import SecTionTitle from "../../../Components/SecTionTitle";
 
 // const Cart = ({ cart = [] }) => {
 const Cart = () => {
@@ -63,11 +64,7 @@ const Cart = () => {
   return (
     <div className="max-w-5xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-6">
       {/* Heading */}
-      <div className="text-center mb-6">
-        <p className="text-yellow-600 italic">---My Cart---</p>
-        <h2 className="text-2xl font-semibold mt-2">WANNA ADD MORE?</h2>
-      </div>
-
+      <SecTionTitle subHeading="My Cart" heading="WANNA ADD MORE?" />
       {/* Summary Section */}
       <div className="flex justify-between items-center mb-6 border-b pb-3 text-lg font-medium">
         <p>
