@@ -60,7 +60,7 @@ const DashboardDrawer = () => {
                           <span>#ADMIN HOME</span>
                         </Link>
 
-                        <Link to="/dashboardDrawer/additems" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                        <Link to="/dashboardDrawer/additem" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
                           <FaUtensils  className="mr-3 ml-4" />
                           <span>#ADD ITEMS</span>
                         </Link>
