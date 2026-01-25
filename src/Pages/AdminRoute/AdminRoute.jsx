@@ -4,7 +4,7 @@ import UseAuthHook from "../../providers/ContexHook/UseAuthHook";
 
 const AdminRoute = ({children}) => {
   const { user, loading } = UseAuthHook()
-  const location = useLocation();
+  // const location = useLocation();
   const [isAdmin, isAdminLoading] = hookAdmin();
 
   if (loading || isAdminLoading) {
@@ -20,7 +20,8 @@ const AdminRoute = ({children}) => {
     return children;
   }
 
-  return <Navigate to="/" state={{ from: location }} replace />;
+  return <Navigate to="/" />;
+  // return <Navigate to="/" state={{ from: location }} replace />;
 };
 
 export default AdminRoute;

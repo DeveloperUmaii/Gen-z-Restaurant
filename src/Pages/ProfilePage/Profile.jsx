@@ -1,11 +1,15 @@
 import React, { useContext } from "react";
 import UseAuthHook from "../../providers/ContexHook/UseAuthHook";
 import { Helmet } from "react-helmet-async";
+import hookAdmin from "../../hooks/hookAdmin";
 
 const Profile = () => {
   const { user } = UseAuthHook();
-  const { displayName, email, photoURL, uid, role } = user || {};
-  console.log(displayName, email, uid, role, "8 number line");
+  const { displayName, email, photoURL, uid } = user || {};
+  const [isAdmin] = hookAdmin();
+
+  console.log(isAdmin, "admin T,F");
+  console.log(displayName, email, uid, "8 number line");
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
@@ -24,14 +28,9 @@ const Profile = () => {
 
           {/* Role Badge */}
           <span
-            className={`absolute top-1 right-1 text-xs font-medium px-2 py-[2px] rounded-full
-      ${
-        user?.role === "admin"
-          ? "bg-green-100 text-green-700"
-          : "bg-blue-100 text-blue-700"
-      }
-    `}>
-            {user?.role === "admin" ? "Admin" : "User"}
+            className={`absolute badge-xs top-1 right-1 text-xs font-medium px-1.5  rounded-full
+              ${isAdmin ? "bg-green-100 text-green-700 border border-green-700" : "bg-blue-100 text-blue-700 border-blue-700"}` }>
+            {isAdmin ? "Admin" : "User"}
           </span>
         </div>
 
