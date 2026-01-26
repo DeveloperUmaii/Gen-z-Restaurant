@@ -1,13 +1,26 @@
 import { useForm } from 'react-hook-form';
 import { FaUtensils } from 'react-icons/fa';
 import SecTionTitle from '../../../Components/SecTionTitle';
+import hookAxiosLocal from '../../../hooks/hookAxiosLocal';
+
+   const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key
+   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddItem = () => {
     const { register, handleSubmit, reset } = useForm();
+    const backEndServerLinkLocal = hookAxiosLocal();
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log(data);
-        reset();
+        const image_file = { image: data.image[0] }
+        const res = await backEndServerLinkLocal.post(image_hosting_api,image_file,{
+            headers: {
+                'Content-Type': 'multipart/form-data' 
+            }
+        } );
+        console.log(res.data);
+
+        // reset();
         // আপনার API কল লজিক এখানে হবে
     };
 
