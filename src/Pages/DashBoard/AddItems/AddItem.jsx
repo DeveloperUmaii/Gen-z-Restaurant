@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FaUtensils } from 'react-icons/fa';
 import SecTionTitle from '../../../Components/SecTionTitle';
 import hookAxiosLocal from '../../../hooks/hookAxiosLocal';
+import hookAxiosSecure from '../../../hooks/hookAxiosSecure';
 
    const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key
    const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -9,6 +10,7 @@ import hookAxiosLocal from '../../../hooks/hookAxiosLocal';
 const AddItem = () => {
     const { register, handleSubmit, reset } = useForm();
     const backEndServerLinkLocal = hookAxiosLocal();
+    const backEndServerLink = hookAxiosSecure();
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -19,7 +21,22 @@ const AddItem = () => {
             }
         } );
         console.log(res.data);
-
+    if (res.data.success) {
+        const menuItem = {
+                // _id: res.data.data.id,
+                name: data.name ,
+                recipe: data.recipe ,
+                image: res.data.data.display_url,
+                category: data.category,
+                price: parseFloat(data.price),
+            }
+            console.log('CONSOLE KORLAM',menuItem)
+    const menuRes = await backEndServerLink.post('/menu',menuItem)
+    console.log(menuRes.data)
+    if (menuRes.data.insertedId) {
+        console.log('Data server a GECHE')
+    }
+  }
         // reset();
         // আপনার API কল লজিক এখানে হবে
     };

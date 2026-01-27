@@ -12,6 +12,7 @@ const PopularMenu = ({
   const [menu] = useMenu();
   const popularItem = menu.filter((item) => item.category === categoryFilter);
   
+  
   return (
     <section className="px-4">
       <SecTionTitle
