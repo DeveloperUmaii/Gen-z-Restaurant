@@ -16,7 +16,7 @@ const hookAxiosSecure = () => {
     const reqInterceptor = backEndServerLink.interceptors.request.use(
       (config) => {
         const token = localStorage.getItem("access-token");
-        console.log('Request stop bye Interceptors :_',token)
+        // console.log('Request stop bye Interceptors :_',token)
         config.headers.authorization = `Bearer ${token}`;
         return config;
       }

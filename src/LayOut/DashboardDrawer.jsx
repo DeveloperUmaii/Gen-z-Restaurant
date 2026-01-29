@@ -33,12 +33,35 @@ const DashboardDrawer = () => {
       >
         {isOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
       </button>
+            {/* 🔹 Overlay (ফাঁকা জায়গায় ক্লিক করলে drawer বন্ধ করার জন্য) */}
+      {
+        isOpen && (
+          <div
+            onClick={() => setIsOpen(false)} 
+            className="fixed inset-0 bg-black/40 z-40"
+          >
+            {/* 
+              এখানে onClick দেওয়া হয়েছে
+              কারণ: ফাঁকা জায়গায় ক্লিক করলে drawer বন্ধ হবে 
+            */}
+          </div>
+        )
+      }
 
       {/* 🔹 Drawer */}
       <div
-        className={`fixed top-0 left-0 h-screen w-64 bg-yellow-900 text-white shadow-xl transform transition-transform duration-300 ease-in-out 
+        onClick={(e) => e.stopPropagation()} 
+        /* 
+          stopPropagation ব্যবহার করা হয়েছে
+          কারণ: drawer-এর ভিতরে ক্লিক করলে overlay-তে যেন event না যায়
+        */
+        className={`fixed top-0 left-0 h-screen w-64 bg-yellow-900 text-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out 
         ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
+
+
+      {/* 🔹 Drawer */}
+
         {/* Header */}
         <div className="p-4 border-b border-yellow-800">
           <h1 className="text-xl font-bold tracking-wider">Gen-Z</h1>

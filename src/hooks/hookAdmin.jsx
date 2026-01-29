@@ -32,7 +32,7 @@ const hookAdmin = () => {
       const res = await backEndServerLink.get(
         `/user/admin/${user.email}`
       );
-      console.log("Admin Check Response:", res.data);
+      // console.log("Admin Check Response:", res.data);
       return res.data?.admin;
     },
   });

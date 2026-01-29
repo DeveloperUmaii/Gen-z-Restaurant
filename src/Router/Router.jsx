@@ -15,6 +15,7 @@ import Cart from '../Pages/DashBoard/Cart/Cart'
 import AllUsers from '../Pages/DashBoard/AllUsers/AllUsers'
 import AdminRoute from '../Pages/AdminRoute/AdminRoute'
 import AddItem from '../Pages/DashBoard/AddItems/AddItem'
+import ManageItems from '../Pages/DashBoard/ManageItems/ManageItems'
 
 const router = createBrowserRouter([
   {
@@ -49,7 +50,8 @@ const router = createBrowserRouter([
       // Admin Pannel
       { path: 'allusers', element: <AdminRoute> <AllUsers /> </AdminRoute> },
       { path: 'additem', element: <AdminRoute> <AddItem /> </AdminRoute> },
-      // { path: 'allusers', element:  <AllUsers />  },
+      // { path: 'manageitems', element: <AdminRoute> <ManageItems /> </AdminRoute> },
+      { path: 'manageitems', element:  <ManageItems /> },
     ],
   },
 ])
