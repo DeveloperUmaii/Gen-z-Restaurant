@@ -9,12 +9,6 @@ import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import Swal from "sweetalert2";
 import { RiShieldUserFill } from "react-icons/ri";
 
-// --- ডামি ডেটা (Dummy Data) ---
-// const DUMMY_USERS = [
-//   { id: 1, name: "John Doe", email: "john.doe@gmail.com", role: "Admin" },
-//   { id: 2, name: "Jane Smith", email: "jane.s@gmail.com", role: "User" },
-// ];
-
 const AllUsers = () => {
   // const totalUsers = DUMMY_USERS.length;
   const backEndServerLink = hookAxiosSecure();
