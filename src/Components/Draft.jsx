@@ -101,3 +101,9 @@ const UpdateItem = () => {
 };
 
 export default UpdateItem;
+
+
+data paici ami tumake sob eksathe diteci tumi sobgula ke 
+jevabe amar delete function toyri kora oirokm vabe kore dao 
+
+

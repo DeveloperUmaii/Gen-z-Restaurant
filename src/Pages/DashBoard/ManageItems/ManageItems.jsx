@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 
 const ManageItems = () => {
-  const [menu] = useMenu();
+  const [menu, , refetch] = useMenu();
   const backEndServerLink = hookAxiosSecure();
   const handleDeleteItem = (item) => {
     Swal.fire({
@@ -15,15 +15,13 @@ const ManageItems = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then( async (result) => {
       if (result.isConfirmed) {
-        backEndServerLink.delete(`/item/${item._id}`)
-          .then((res) => {
-            console.log(res.data)
+          const res = await backEndServerLink.delete(`/item/${item._id}`)
+              console.log(res.data)
             if (res.data.deletedCount > 0) {
               // UI reload ছাড়া আপডেট
               refetch();
-
               Swal.fire({
                 title: "Deleted!",
                 text: `${item.name} has been removed successfully.`,
@@ -32,15 +30,14 @@ const ManageItems = () => {
                 showConfirmButton: false,
               });
             }
-          })
-          .catch((err) => {
-            console.log(err)
-            Swal.fire({
-              title: "Error!",
-              text: "Something went wrong while deleting.",
-              icon: "error",
-            });
-          });
+          // .catch((err) => {
+          //   console.log(err)
+          //   Swal.fire({
+          //     title: "Error!",
+          //     text: "Something went wrong while deleting.",
+          //     icon: "error",
+          //   });
+          // });
       }
     });
   };
