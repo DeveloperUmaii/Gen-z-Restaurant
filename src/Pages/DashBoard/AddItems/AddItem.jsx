@@ -15,9 +15,7 @@ const AddItem = () => {
 
   const onSubmit = async (data) => {
     const image_file = { image: data.image[0] };
-    const res = await backEndServerLinkLocal.post(
-      image_hosting_api,
-      image_file,
+    const res = await backEndServerLinkLocal.post( image_hosting_api, image_file,
       {
         headers: {
           "Content-Type": "multipart/form-data",
