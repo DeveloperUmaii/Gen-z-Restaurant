@@ -2,6 +2,8 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import useMenu from "../../../hooks/useMenu";
 import Swal from "sweetalert2";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
+import { NavLink } from "react-router-dom";
+import SecTionTitle from "../../../Components/SecTionTitle";
 
 const ManageItems = () => {
   const [menu, , refetch] = useMenu();
@@ -45,12 +47,7 @@ const ManageItems = () => {
   return (
     <div className="w-full px-4 md:px-10 py-10">
       {/* Title Section */}
-      <div className="text-center mb-12">
-        <p className="text-yellow-600 italic mb-2">---Hurry Up!---</p>
-        <h2 className="text-3xl uppercase border-y-4 py-3 inline-block px-10">
-          Manage All Items
-        </h2>
-      </div>
+            <SecTionTitle subHeading="Hurry Up!" heading="Manage All Items" />
 
       {/* Content Container */}
       <div className="bg-white p-6 md:p-12 shadow-sm rounded-sm">
@@ -95,9 +92,9 @@ const ManageItems = () => {
                   <td className="text-gray-500">${item.price}</td>
 
                   <td>
-                    <button className="btn btn-md bg-[#D1A054] hover:bg-[#b88a42] text-white border-none rounded-md p-2">
+                    <NavLink to={`/dashboardDrawer/updateitem/${item._id}`} className="btn btn-md bg-[#D1A054] hover:bg-[#b88a42] text-white border-none rounded-md p-2">
                       <FaEdit className="text-xl" />
-                    </button>
+                    </NavLink>
                   </td>
                   <td>
                     <div

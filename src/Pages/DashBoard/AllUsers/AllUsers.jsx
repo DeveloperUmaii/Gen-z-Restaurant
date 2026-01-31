@@ -8,6 +8,7 @@ import {
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import Swal from "sweetalert2";
 import { RiShieldUserFill } from "react-icons/ri";
+import SecTionTitle from "../../../Components/SecTionTitle";
 
 const AllUsers = () => {
   // const totalUsers = DUMMY_USERS.length;
@@ -96,14 +97,7 @@ const AllUsers = () => {
   return (
     <div className="p-4 sm:p-8 bg-white shadow-lg rounded-lg max-w-4xl mx-auto my-10">
       {/* --- হেডার সেকশন --- */}
-      <div className="text-center mb-6">
-        <p className="text-sm font-light text-gray-500 tracking-widest">
-          ---How many?---
-        </p>
-        <h2 className="text-2xl sm:text-3xl font-serif tracking-wide text-gray-800 mt-1">
-          MANAGE ALL USERS
-        </h2>
-      </div>
+              <SecTionTitle subHeading="How many?" heading="MANAGE ALL USERS" />
 
       {/* --- মোট ব্যবহারকারী সংখ্যা --- */}
       <h3 className="text-xl font-bold mb-4 text-gray-700">
