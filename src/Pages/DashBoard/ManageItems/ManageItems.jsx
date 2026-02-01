@@ -98,8 +98,7 @@ const ManageItems = () => {
                   </td>
                   <td>
                     <div
-                      className="tooltip tooltip-top z-50"
-                      data-tip="Delete">
+                      className="">
                       <button
                         onClick={() => handleDeleteItem(item)}
                         className="btn btn-md bg-[#B91C1C] hover:bg-red-800 text-white border-none rounded-md p-2">
