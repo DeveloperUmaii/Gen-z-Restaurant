@@ -78,7 +78,7 @@ const UpdateItem = () => {
               type="text"
               defaultValue={name}
               // defaultValue={item?.name}
-              {...register("name", { required: true })}
+              // {...register("name", { required: true })}
               className="pl-3 input w-full rounded-md border-none focus:outline-none h-10"
             />
           </div>
@@ -93,7 +93,7 @@ const UpdateItem = () => {
               </label>
               <select
                 defaultValue={category}
-                {...register("category", { required: true })}
+                // {...register("category", { required: true })}
                 className="pl-3  select w-full rounded-md border-none focus:outline-none h-10 bg-white text-gray-400">
                 <option disabled value="default">
                   Category
@@ -117,7 +117,7 @@ const UpdateItem = () => {
                 type="number"
                 defaultValue={price}
                 // defaultValue={item?.price}
-                {...register("price", { required: true })}
+                // {...register("price", { required: true })}
                 className="pl-3 input w-full rounded-md border-none focus:outline-none h-10"
               />
             </div>
@@ -132,7 +132,7 @@ const UpdateItem = () => {
             </label>
             <textarea
               defaultValue={recipe}
-              {...register("recipe", { required: true })}
+              // {...register("recipe", { required: true })}
               className="pl-3 textarea w-full rounded-md border-none focus:outline-none h-30 pt-4"></textarea>
           </div>
 
@@ -140,7 +140,7 @@ const UpdateItem = () => {
           <div className="form-control w-full mb-9">
             <input
               type="file"
-              {...register("image", { required: true })}
+              // {...register("image", { required: true })}
               className="border-no file-input file-input-ghost w-full max-w-xs bg-[#fcfcfc31]"
             />
           </div>

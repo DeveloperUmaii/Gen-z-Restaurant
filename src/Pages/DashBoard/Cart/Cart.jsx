@@ -4,6 +4,7 @@ import hookUseCart from "../../../hooks/hookUseCart";
 import axios from "axios"; // ✅ (নতুন লাইন)
 import Swal from "sweetalert2"; // ✅ (নতুন লাইন)
 import SecTionTitle from "../../../Components/SecTionTitle";
+import { NavLink } from "react-router-dom";
 
 // const Cart = ({ cart = [] }) => {
 const Cart = () => {
@@ -75,9 +76,9 @@ const Cart = () => {
           TOTAL PRICE:{" "}
           <span className="font-bold text-yellow-700">${totalPrice}</span>
         </p>
-        <button className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-2 rounded-md font-semibold">
+        <NavLink to='/dashboardDrawer/payment/' className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-2 rounded-md font-semibold">
           Pay
-        </button>
+        </NavLink>
       </div>
 
       {/* Table */}

@@ -17,6 +17,7 @@ import AdminRoute from '../Pages/AdminRoute/AdminRoute'
 import AddItem from '../Pages/DashBoard/AddItems/AddItem'
 import ManageItems from '../Pages/DashBoard/ManageItems/ManageItems'
 import UpdateItem from '../Pages/DashBoard/UpdateMenuItem/UpdateItem'
+import Payment from '../Pages/DashBoard/Payment/Payment'
 
 const router = createBrowserRouter([
   {
@@ -46,15 +47,16 @@ const router = createBrowserRouter([
       { path: 'reservation', element: <p>Manage Items Page</p> },
       { path: 'paymenthistory', element: <p>Manage Bookings Page</p> },
       { path: 'cart', element: <Cart></Cart> },
+      { path: 'payment', element: <Payment /> },
       { path: 'addreview', element: <p>Add Review</p> },
       { path: 'mybooking', element: <p>my Booking</p> },
       // Admin Pannel
       { path: 'allusers', element: <AdminRoute> <AllUsers /> </AdminRoute> },
       { path: 'additem', element: <AdminRoute> <AddItem /> </AdminRoute> },
-      // { path: 'manageitems', element: <AdminRoute> <ManageItems /> </AdminRoute> },
-      { path: 'manageitems', element:  <ManageItems /> },
-      // { path: 'manageitems', element: <AdminRoute> <UpdateItem /> </AdminRoute> },
-      { path: 'updateitem/:id', element: <UpdateItem />,
+      { path: 'manageitems', element: <AdminRoute> <ManageItems /> </AdminRoute> },
+                                                        // { path: 'manageitems', element:  <ManageItems /> },dashboardDrawer/cart
+      { path: 'updateitem/:id', element: <AdminRoute> <UpdateItem /> </AdminRoute>,
+                                                        // { path: 'updateitem/:id', element:  <UpdateItem /> ,
         loader: ({params}) => fetch(`http://localhost:5000/menu/${params.id}`) 
       },
     ],
