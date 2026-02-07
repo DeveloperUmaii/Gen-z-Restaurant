@@ -1,8 +1,10 @@
 import { useElements, useStripe, CardNumberElement, CardExpiryElement, CardCvcElement } from "@stripe/react-stripe-js";
+import { useState } from "react";
 
 const CheckOutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
+    const [err, setErr] = useState(''); 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,8 +21,10 @@ const CheckOutForm = () => {
 
         if (error) {
             console.log('[error]', error);
+            setErr(error?.message)
         } else {
             console.log('[PaymentMethod]', paymentMethod);
+            setErr('')
         }
     };
 
@@ -59,7 +63,7 @@ const CheckOutForm = () => {
                     {/* Expiry and CVC Input (Combined in one row per your screenshot) */}
                     <div className="form-control w-full flex flex-row gap-2 input input-bordered h-14 items-center rounded-md border border-[#00000038] px-4">
                         <CardExpiryElement options={elementOptions} className="w-1/2" />
-                        <div className="divider divider-horizontal mx-0">|</div>
+                        <div className="divider divider-horizontal text-[#00000038] '''mx-0">|</div>
                         <CardCvcElement options={elementOptions} className="w-1/2" />
                     </div>
                 </div>
@@ -69,9 +73,10 @@ const CheckOutForm = () => {
                     <button
                         type="submit"
                         disabled={!stripe}
-                        className="btn bg-[#570DF8] hover:bg-[#4506cb] text-white w-full md:w-80 border-none rounded-md normal-case text-lg h-14">
+                        className="btn bg-[#570DF8] hover:bg-[#4506cb] text-white w-full md:w-80 border-none rounded-md normal-case text-lg h-11">
                         Pay
                     </button>
+                    <p className=" pl-3 text-red-500 ">{err}</p>
                 </div>
             </form>
         </div>
