@@ -1,10 +1,28 @@
 import { useElements, useStripe, CardNumberElement, CardExpiryElement, CardCvcElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
+import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
+import hookUseCart from "../../../hooks/hookUseCart";
+// import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 
 const CheckOutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const [err, setErr] = useState(''); 
+    const axiosSecure = hookAxiosSecure();
+    const [cart] = hookUseCart(); // ✅ (পরিবর্তন করা লাইন)
+    const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
+    
+      //Calculate total price
+      //acc বা accumulator বা 0 ধরে নেওয়া বা প্রিভিয়াস ভ্যালু;
+      //item= বর্তমান ভ্যালু বা cart থেকে পাওয়া ভ্যালু(10,50,23 etc) বা ইন্সার্ট করা ভ্যালু বা ইনপুট দেওয়া ভ্যালু বা  ভ্যালু পাইলাম সেইটা
+      //const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
+
+
+        useEffect( () =>{
+            axiosSecure.post("/create-payment-intent")
+
+        })
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();

@@ -14,6 +14,7 @@ const Cart = () => {
 
   // Calculate total price
   // acc বা accumulator বা 0 ধরে নেওয়া বা প্রিভিয়াস ভ্যালু;
+  //Acc/Accumulate মানে কী? Acc/Accumulate = ধীরে ধীরে জমা হওয়া / যোগ হতে থাকা
   //item= বর্তমান ভ্যালু বা cart থেকে পাওয়া ভ্যালু(10,50,23 etc) বা ইন্সার্ট করা ভ্যালু বা ইনপুট দেওয়া ভ্যালু বা  ভ্যালু পাইলাম সেইটা
   const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
 
