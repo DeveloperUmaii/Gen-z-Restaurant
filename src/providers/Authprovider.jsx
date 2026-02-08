@@ -48,13 +48,6 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  //.then(() => {
-  //   // Profile updated!
-  //   // ...
-  // }).catch((error) => {
-  //   // An error occurred
-  //   // ...
-  // });
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -68,7 +61,7 @@ const AuthProvider = ({ children }) => {
           if (res.data.token) {
             // ২. লোকাল স্টোরেজে টোকেন রাখা
             localStorage.setItem("access-token", res.data.token);
-            console.log("Token Received and Saved:", res.data.token);
+            // console.log("Token Received and Saved:", res.data.token);
             setLoading(false); // token pawar por loading false
           }
         });
@@ -78,8 +71,8 @@ const AuthProvider = ({ children }) => {
         setLoading(false); // user na thakle loading false
       }
 
-      console.log(currentUser);
-      console.log("log out use Effect");
+      // console.log(currentUser);
+      // console.log("log out use Effect");
     });
     return () => {
       unSubscribe();

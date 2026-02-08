@@ -27,7 +27,7 @@ const hookAxiosSecure = () => {
       (response) => response,
       async (error) => {
         const status = error.response?.status;
-        console.log('status error in the INTERCEPTORS',status)
+        // console.log('status error in the INTERCEPTORS',status)
         if (status === 401 || status === 403) {
           await logOut();
           navigate("/login");

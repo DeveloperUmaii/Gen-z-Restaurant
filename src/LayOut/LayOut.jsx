@@ -4,7 +4,7 @@ import Footer from "../PrimaryComponents/Footer";
 
 const LayOut = () => {
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
     const noFootNav = location.pathname.includes('login') || location.pathname.includes('signup')
     return (
         <div className="min-h-screen flex flex-col">

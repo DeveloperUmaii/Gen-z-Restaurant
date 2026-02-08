@@ -20,8 +20,8 @@ const DashboardDrawer = () => {
   // TODO: get admin data from the data base
   // const isAdmin = true;
   const [isAdmin] = hookAdmin(); //(no.3) 
-  console.log(isAdmin, 'true naki false')
-  console.log('24 numbr line true naki false')
+  // console.log(isAdmin, 'true naki false')
+  // console.log('24 numbr line true naki false')
 
   return (
     <div className="relative">
