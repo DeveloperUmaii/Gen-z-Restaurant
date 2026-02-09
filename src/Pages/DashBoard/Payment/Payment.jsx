@@ -11,8 +11,10 @@ const Payment = () => {
   return (
     <div className="w-full px-4 md:px-10 py-10">
       {/* Heading */}
-      <div className="mt-10"><SecTionTitle subHeading="Please Pay To Eat" heading="Payment" /></div>
-      
+      <div className="mt-10">
+        <SecTionTitle subHeading="Please Pay To Eat" heading="Payment" />
+      </div>
+
       {/* Payment Form Container */}
       <div className="max-w-3xl mx-auto">
         {/* Stripe Elements Provider */}

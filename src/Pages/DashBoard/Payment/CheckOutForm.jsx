@@ -1,4 +1,9 @@
-import { useElements, useStripe, CardNumberElement, CardExpiryElement, CardCvcElement,
+import {
+  useElements,
+  useStripe,
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
 } from "@stripe/react-stripe-js";
 import { useState, useEffect } from "react";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
@@ -23,12 +28,13 @@ const CheckOutForm = () => {
   //const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
 
   useEffect(() => {
-    axiosSecure.post("/create-payment-intent", { price: totalPrice })
+    axiosSecure
+      .post("/create-payment-intent", { price: totalPrice })
       .then((res) => {
         console.log(res.data.clientSecret);
-        // const clientSecret = res.data.clientSecret
-        // setClientSecret(clientSecret)
-        setClientSecret(res.data.clientSecret);
+        const clientSecret = res.data.clientSecret
+        setClientSecret(clientSecret)
+        // setClientSecret(res.data.clientSecret);
       });
   }, [axiosSecure, totalPrice]);
 
@@ -39,48 +45,53 @@ const CheckOutForm = () => {
     }
 
     const cardNumber = elements.getElement(CardNumberElement);
-
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: cardNumber, // এখানে split element-এর ক্ষেত্রে cardNumber দিলেই হয়
     });
 
     if (error) {
-      console.log("[error]", error);
+      // console.log("[error]", error);
       setErr(error?.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      // console.log("[PaymentMethod]", paymentMethod);
       setErr("");
     }
 
     const card = elements.getElement(CardNumberElement);
-
-        const { paymentIntent, error: paymentErr } = await stripe.confirmCardPayment(clientSecret, {
+    const { paymentIntent, error: paymentErr } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
           billing_details: {
-            email: user?.email || 'anonymous@',
-            name: user?.displayName || 'anonymous'
-          }
-        }
-    });
-
-
+            email: user?.email || "anonymous@",
+            name: user?.displayName || "anonymous",
+          },
+        },
+      });
 
     if (paymentErr) {
-      console.log('PayMent Error', paymentErr);
-    } 
-     else if (paymentIntent && paymentIntent.status === "succeeded") {
-        console.log('TransectionID',paymentIntent.id);
-                    setTransactionid(paymentIntent.id)
-                    Swal.fire({
-  icon: "success",
-  title: "Payment Successful!",
-  html: `<small>Transaction ID:</small><br/><b>${paymentIntent.id}</b>`,
-  showConfirmButton: false,
-  timer: 2500,
-});
+      console.log("PayMent Error", paymentErr);
+    } else if (paymentIntent && paymentIntent.status === "succeeded") {
+      console.log("TransectionID", paymentIntent.id);
+      setTransactionid(paymentIntent.id);
 
+        const  payment = {
+              email: user.email,
+              name: user.displayName,
+              price: totalPrice,
+              date: new Date(),
+              cardId: cart.map(item => item._id),
+              menuId: cart.map(item => item.menuId),
+              status: 'pending'
+            }
+
+      Swal.fire({
+        icon: "success",
+        title: "Payment Successful!",
+        html: `<small>Transaction ID:</small><br/><b>${paymentIntent.id}</b>`,
+        showConfirmButton: false,
+        timer: 2500,
+      });
     }
   };
 
@@ -99,10 +110,6 @@ const CheckOutForm = () => {
       },
     },
   };
-
-
-
-
 
   return (
     <div className="w-full px-4 md:px-10 py-10">
@@ -142,23 +149,22 @@ const CheckOutForm = () => {
 
         {/* Pay Button */}
         <div className="flex  justify-center mt-10">
+          <button
+            type="submit"
+            disabled={!stripe || !clientSecret}
+            className="btn bg-[#570DF8] hover:bg-[#4506cb] text-white w-full md:w-80 border-none rounded-md normal-case  h-11">
+            <span className=" text-xl font-bold pl-2 pb-2">Pay</span> $
+            {totalPrice.toFixed(2)}
+          </button>
 
-                  <button
-          type="submit"
-          disabled={!stripe || !clientSecret}
-          className="btn bg-[#570DF8] hover:bg-[#4506cb] text-white w-full md:w-80 border-none rounded-md normal-case  h-11"
-        >
-          <span className=" text-xl font-bold pl-2 pb-2">Pay</span> ${totalPrice.toFixed(2)}
-        </button>
+          {err && <p className="text-red-500">{err}</p>}
 
-        {err && <p className="text-red-500">{err}</p>}
-
-        {transactionId && (
-          <p className="text-green-600">
-            ✅ Payment Successful <br />
-            Transaction ID: {transactionId}
-          </p>
-        )}
+          {transactionId && (
+            <p className="text-green-600">
+              ✅ Payment Successful <br />
+              Transaction ID: {transactionId}
+            </p>
+          )}
           <p className=" pl-3 text-red-500 ">{err}</p>
         </div>
       </form>
