@@ -1,10 +1,4 @@
-import {
-  useElements,
-  useStripe,
-  CardNumberElement,
-  CardExpiryElement,
-  CardCvcElement,
-} from "@stripe/react-stripe-js";
+import { useElements, useStripe, CardNumberElement, CardExpiryElement, CardCvcElement,} from "@stripe/react-stripe-js";
 import { useState, useEffect } from "react";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import hookUseCart from "../../../hooks/hookUseCart";
@@ -31,7 +25,7 @@ const CheckOutForm = () => {
     axiosSecure
       .post("/create-payment-intent", { price: totalPrice })
       .then((res) => {
-        console.log(res.data.clientSecret);
+        // console.log(res.data.clientSecret);
         const clientSecret = res.data.clientSecret
         setClientSecret(clientSecret)
         // setClientSecret(res.data.clientSecret);
@@ -70,9 +64,9 @@ const CheckOutForm = () => {
       });
 
     if (paymentErr) {
-      console.log("PayMent Error", paymentErr);
+     // console.log("PayMent Error", paymentErr);
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
-      console.log("TransectionID", paymentIntent.id);
+      // console.log("TransectionID", paymentIntent.id);
       setTransactionid(paymentIntent.id);
 
         const  payment = {
@@ -80,10 +74,15 @@ const CheckOutForm = () => {
               name: user.displayName,
               price: totalPrice,
               date: new Date(),
-              cardId: cart.map(item => item._id),
-              menuId: cart.map(item => item.menuId),
+              transactionId: paymentIntent.id,
+              cartIds: cart.map(item => item._id),
+              menuIds: cart.map(item => item.menuId),
               status: 'pending'
             }
+      const res = await axiosSecure.post('/payments', payment);
+      
+      console.log('PAYMENT CLIENT SIDE POST CONSOLE', res.data)
+
 
       Swal.fire({
         icon: "success",
