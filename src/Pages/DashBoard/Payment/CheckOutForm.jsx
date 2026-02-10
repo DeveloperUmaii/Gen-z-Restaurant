@@ -1,4 +1,10 @@
-import { useElements, useStripe, CardNumberElement, CardExpiryElement, CardCvcElement,} from "@stripe/react-stripe-js";
+import {
+  useElements,
+  useStripe,
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+} from "@stripe/react-stripe-js";
 import { useState, useEffect } from "react";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import hookUseCart from "../../../hooks/hookUseCart";
@@ -20,17 +26,19 @@ const CheckOutForm = () => {
   //acc বা accumulator বা 0 ধরে নেওয়া বা প্রিভিয়াস ভ্যালু;
   //item= বর্তমান ভ্যালু বা cart থেকে পাওয়া ভ্যালু(10,50,23 etc) বা ইন্সার্ট করা ভ্যালু বা ইনপুট দেওয়া ভ্যালু বা  ভ্যালু পাইলাম সেইটা
   //const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
-
-  useEffect(() => {
-    axiosSecure
-      .post("/create-payment-intent", { price: totalPrice })
-      .then((res) => {
-        // console.log(res.data.clientSecret);
-        const clientSecret = res.data.clientSecret
-        setClientSecret(clientSecret)
-        // setClientSecret(res.data.clientSecret);
-      });
-  }, [axiosSecure, totalPrice]);
+ 
+    useEffect(() => {
+       if (totalPrice > 0) {
+            axiosSecure.post("/create-payment-intent", { price: totalPrice })
+              .then((res) => {
+                // console.log(res.data.clientSecret);
+                const clientSecret = res.data.clientSecret;
+                setClientSecret(clientSecret);
+                // setClientSecret(res.data.clientSecret);
+              });
+          }
+    }, [axiosSecure, totalPrice]);
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -53,7 +61,8 @@ const CheckOutForm = () => {
     }
 
     const card = elements.getElement(CardNumberElement);
-    const { paymentIntent, error: paymentErr } = await stripe.confirmCardPayment(clientSecret, {
+    const { paymentIntent, error: paymentErr } =
+      await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
           billing_details: {
@@ -64,25 +73,24 @@ const CheckOutForm = () => {
       });
 
     if (paymentErr) {
-     // console.log("PayMent Error", paymentErr);
+      // console.log("PayMent Error", paymentErr);
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
       // console.log("TransectionID", paymentIntent.id);
       setTransactionid(paymentIntent.id);
 
-        const  payment = {
-              email: user.email,
-              name: user.displayName,
-              price: totalPrice,
-              date: new Date(),
-              transactionId: paymentIntent.id,
-              cartIds: cart.map(item => item._id),
-              menuIds: cart.map(item => item.menuId),
-              status: 'pending'
-            }
-      const res = await axiosSecure.post('/payments', payment);
-      
-      console.log('PAYMENT CLIENT SIDE POST CONSOLE', res.data)
+      const payment = {
+        email: user.email,
+        name: user.displayName,
+        price: totalPrice,
+        date: new Date(),
+        transactionId: paymentIntent.id,
+        cartIds: cart.map((item) => item._id),
+        menuIds: cart.map((item) => item.menuId),
+        status: "pending",
+      };
+      const res = await axiosSecure.post("/payments", payment);
 
+      console.log("PAYMENT CLIENT SIDE POST CONSOLE", res.data);
 
       Swal.fire({
         icon: "success",
