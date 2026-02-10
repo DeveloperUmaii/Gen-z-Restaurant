@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 // import { AuthContext } from "../providers/Authprovider";
 import UseAuthHook from "../providers/ContexHook/UseAuthHook";
 import Swal from "sweetalert2";
@@ -9,7 +9,7 @@ const Navbar = () => {
   const { user, logOut } = UseAuthHook();
   const { displayName, photoURL } = user || {};
   const [dataFromBackEnd] = hookUseCart();
-  
+
   const signOut = () => {
     logOut();
     Swal.fire({
@@ -28,39 +28,82 @@ const Navbar = () => {
   const navoption = (
     <>
       <li>
-        <Link to="/" className="text-[#fff] uppercase">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "text-orange-600 border-b-2 border-orange-600 uppercase"
+              : "text-[#fff] uppercase"
+          }>
           Home
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="/contact" className="text-[#fff] uppercase">
+        {/* <NavLink to="/contact" className="text-[#fff] uppercase"> */}
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            isActive
+              ? "text-orange-600 border-b-2 border-orange-600 uppercase"
+              : "text-[#fff] uppercase"
+          }>
           Contact us
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="/dashbord" className="text-[#fff] uppercase">
+        <NavLink
+          to="/dashbord"
+          className={({ isActive }) =>
+            isActive
+              ? "text-orange-600 border-b-2 border-orange-600 uppercase"
+              : "text-[#fff] uppercase"
+          }>
           Dashboard
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="/ourmenu" className="text-[#fff] uppercase">
+        <NavLink
+          to="/ourmenu"
+          className={({ isActive }) =>
+            isActive
+              ? "text-orange-600 border-b-2 border-orange-600 uppercase"
+              : "text-[#fff] uppercase"
+          }>
           Our Menu
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="/ourshop/salad" className="text-[#fff] uppercase">
+        <NavLink
+          to="/ourshop/salad"
+          className={({ isActive }) =>
+            isActive
+              ? "text-orange-600 border-b-2 border-orange-600 uppercase"
+              : "text-[#fff] uppercase"
+          }>
           Our Shop
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="/login" className="text-[#fff] uppercase">
+        <NavLink
+          to="/login"
+          className={({ isActive }) =>
+            isActive
+              ? "text-orange-600 border-b-2 border-orange-600 uppercase"
+              : "text-[#fff] uppercase"
+          }>
           Log In
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="/signup" className="text-[#fff] uppercase">
+        <NavLink
+          to="/signup"
+          className={({ isActive }) =>
+            isActive
+              ? "text-orange-600 border-b-2 border-orange-600 uppercase"
+              : "text-[#fff] uppercase"
+          }>
           Sign Up
-        </Link>
+        </NavLink>
       </li>
     </>
   );
@@ -75,8 +118,7 @@ const Navbar = () => {
               className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+              stroke="currentColor">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -87,15 +129,16 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="bg-[#00000028]  menu menu-sm dropdown-content  rounded-b-2xl z-50 mt-3 w-52 p-2 "
-          >
+            className="bg-[#00000028]  menu menu-sm dropdown-content  rounded-b-2xl z-50 mt-3 w-52 p-2 ">
             {navoption}
           </ul>
         </div>
         <Link className="btn btn-ghost text-xl text-[#fff]" to="/">
           Gen-Z
         </Link>
-        <Link to='dashboardDrawer' className="btn btn-ghost text-xl text-[#fff]" >
+        <Link
+          to="dashboardDrawer"
+          className="btn btn-ghost text-xl text-[#fff]">
           DRAWER
         </Link>
       </div>
@@ -109,18 +152,19 @@ const Navbar = () => {
         </Link>
         <Link
           to="/profile"
-          className="w-20  h-20 flex justify-center items-center"
-        >
+          className="w-20  h-20 flex justify-center items-center">
           <img className="mask mask-circle" src={photoURL} />
         </Link>
       </div>
- 
-{/* cart */}
+
+      {/* cart */}
       <div className="">
         {/* <button onClick={()=>{handleAddCart(item)}} className="bg-[#ffff] px-2 rounded-lg flex justify-center items-center"> */}
         <button className="bg-[#ffff] px-2 rounded-lg flex justify-center items-center">
           <TiShoppingCart className="text-orange-600 text-3xl mr-1" />
-          <div className="badge badge-sm bg-orange-600 badge-secondary">+{dataFromBackEnd?.length}</div>
+          <div className="badge badge-sm bg-orange-600 badge-secondary">
+            +{dataFromBackEnd?.length}
+          </div>
         </button>
       </div>
 
@@ -129,15 +173,13 @@ const Navbar = () => {
           <Link
             to="/"
             className="btn border border-red-700 bg-red-400 text-white hover:bg-red-600  "
-            onClick={signOut}
-          >
+            onClick={signOut}>
             Log Out
           </Link>
         ) : (
           <Link
             to="/login"
-            className="btn border border-green-700 bg-green-400 text-white hover:bg-green-600"
-          >
+            className="btn border border-green-700 bg-green-400 text-white hover:bg-green-600">
             Log In
           </Link>
         )}
