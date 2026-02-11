@@ -19,7 +19,7 @@ const CheckOutForm = () => {
   const [clientSecret, setClientSecret] = useState("");
   const axiosSecure = hookAxiosSecure();
   const { user } = UseAuthHook();
-  const [cart] = hookUseCart(); // ✅ (পরিবর্তন করা লাইন)
+  const [cart, refetch] = hookUseCart(); // ✅ (পরিবর্তন করা লাইন)
   const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
 
   //Calculate total price
@@ -90,7 +90,7 @@ const CheckOutForm = () => {
       const res = await axiosSecure.post("/payments", payment);
 
       console.log("PAYMENT CLIENT SIDE POST CONSOLE", res.data);
-
+      refetch();
       Swal.fire({
         icon: "success",
         title: "Payment Successful!",
