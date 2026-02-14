@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import SecTionTitle from "../../../Components/SecTionTitle";
-import hookAxiosLocal from "../../../hooks/hookAxiosLocal";
 import UseAuthHook from "../../../providers/ContexHook/UseAuthHook";
+import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 
 const PaymentHistory = () => {
   const { user } = UseAuthHook();
-  const backEndServerLinkLocal = hookAxiosLocal();
+  const axiosSecure = hookAxiosSecure();
 
   const { data: paymenthistory=[] } = useQuery({
     queryKey: ["paymenthistory", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await backEndServerLinkLocal.get(`/paymenthistory/${user?.email}`);
+      const res = await axiosSecure.get(`/paymenthistory/${user?.email}`);
       console.log(res.data);
       return res.data;
     },

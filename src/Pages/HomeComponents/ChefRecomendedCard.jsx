@@ -40,6 +40,7 @@ const ChefRecomendedCard = ({ ChefCard }) => {
           refetch();
           // console.log(anyPeraMetre, "Button add koira falaice "); 
         }
+        navigate('/dashboardDrawer/cart')
 
       });
     } else {

@@ -1,6 +1,6 @@
 const MenuItem = ({item}) => {
     const {recipe, name, price, image} = item;
-    console.log('recepie item CONSOLELOG HOITACE IMG Check karo? menuitem|jsx 3 nmbr line',name,'PRICE=', price, 'IMG=',image)
+    // console.log('recepie item CONSOLELOG HOITACE IMG Check karo? menuitem|jsx 3 nmbr line',name,'PRICE=', price, 'IMG=',image)
     return (
         <div className="flex ">
             {/* <h5 className="text-red-500">{recipe}</h5>

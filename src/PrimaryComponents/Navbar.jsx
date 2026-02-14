@@ -160,12 +160,12 @@ const Navbar = () => {
       {/* cart */}
       <div className="">
         {/* <button onClick={()=>{handleAddCart(item)}} className="bg-[#ffff] px-2 rounded-lg flex justify-center items-center"> */}
-        <Link className="bg-[#ffff] px-2 rounded-lg flex justify-center items-center">
+        <NavLink to='/dashboardDrawer/cart' className="bg-[#ffff] px-2 rounded-lg flex justify-center items-center">
           <TiShoppingCart className="text-orange-600 text-3xl mr-1" />
           <div className="badge badge-sm bg-orange-600 badge-secondary">
             +{dataFromBackEnd?.length}
           </div>
-        </Link>
+        </NavLink>
       </div>
 
       <div className="navbar-end">

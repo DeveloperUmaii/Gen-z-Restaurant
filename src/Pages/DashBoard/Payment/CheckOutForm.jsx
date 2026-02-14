@@ -10,7 +10,7 @@ import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import hookUseCart from "../../../hooks/hookUseCart";
 import UseAuthHook from "../../../providers/ContexHook/UseAuthHook";
 import Swal from "sweetalert2";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = () => {
   const stripe = useStripe();
@@ -19,6 +19,7 @@ const CheckOutForm = () => {
   const [transactionId, setTransactionid] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const axiosSecure = hookAxiosSecure();
+  const navigate = useNavigate(); 
   const { user } = UseAuthHook();
   const [cart, refetch] = hookUseCart(); // ✅ (পরিবর্তন করা লাইন)
   const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
@@ -99,7 +100,7 @@ const CheckOutForm = () => {
         showConfirmButton: false,
         timer: 2500,
       });
-      redirect('/dashboardDrawer/paymenthistory')
+      navigate('/dashboardDrawer/paymenthistory')
     }
   };
 
