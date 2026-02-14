@@ -18,6 +18,7 @@ import AddItem from '../Pages/DashBoard/AddItems/AddItem'
 import ManageItems from '../Pages/DashBoard/ManageItems/ManageItems'
 import UpdateItem from '../Pages/DashBoard/UpdateMenuItem/UpdateItem'
 import Payment from '../Pages/DashBoard/Payment/Payment'
+import PaymentHistory from '../Pages/DashBoard/PaymentHistory/PaymentHistory'
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
       // User Pannlel
       { index: true, element: <DashboardDrawer /> },
       { path: 'reservation', element: <p>Manage Items Page</p> },
-      { path: 'paymenthistory', element: <p>Manage Bookings Page</p> },
+      { path: 'PaymentHistory', element: <PaymentHistory /> },
       { path: 'cart', element: <Cart></Cart> },
       { path: 'payment', element: <Payment /> },
       { path: 'addreview', element: <p>Add Review</p> },

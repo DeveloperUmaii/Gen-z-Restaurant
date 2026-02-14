@@ -15,18 +15,18 @@ const ChefRecomendedCard = ({ ChefCard }) => {
   const handleAddCart = () => {
     // 🔹 প্রথমে চেক করো ইউজার লগইন আছে কিনা
     if (user && user.email) {
-      const cartItem = {
-        menuId: _id,
-        email: user.email,
-        name,
-        image,
-        price,
-      };
+       const cartItem = {
+                  menuId: _id,
+                  email: user.email,
+                  name,
+                  image,
+                  price,
+              };
 
       // axios.post("http://localhost:5000/carts", cartItem)
       backEndServerLink.post('/carts', cartItem)
       .then((res) => {
-        console.log("AXIOS DATA SEND CART", res.data);
+        // console.log("AXIOS DATA SEND CART", res.data);
 
         if (res.data.insertedId) {
           Swal.fire({
@@ -38,7 +38,7 @@ const ChefRecomendedCard = ({ ChefCard }) => {
             timer:1500
           })
           refetch();
-          console.log(anyPeraMetre, "Button add koira falaice "); 
+          // console.log(anyPeraMetre, "Button add koira falaice "); 
         }
 
       });

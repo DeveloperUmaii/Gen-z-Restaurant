@@ -10,6 +10,7 @@ import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import hookUseCart from "../../../hooks/hookUseCart";
 import UseAuthHook from "../../../providers/ContexHook/UseAuthHook";
 import Swal from "sweetalert2";
+import { redirect } from "react-router-dom";
 
 const CheckOutForm = () => {
   const stripe = useStripe();
@@ -98,6 +99,7 @@ const CheckOutForm = () => {
         showConfirmButton: false,
         timer: 2500,
       });
+      redirect('/dashboardDrawer/paymenthistory')
     }
   };
 
