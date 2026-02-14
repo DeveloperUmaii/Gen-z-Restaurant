@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import SecTionTitle from "../../../Components/SecTionTitle";
-// import { backEndServerLinkLocal } from "../../../hooks/hookAxiosLocal";
 import hookAxiosLocal from "../../../hooks/hookAxiosLocal";
 import UseAuthHook from "../../../providers/ContexHook/UseAuthHook";
 
@@ -8,53 +7,17 @@ const PaymentHistory = () => {
   const { user } = UseAuthHook();
   const backEndServerLinkLocal = hookAxiosLocal();
 
-  const { data: paymenthistory = [] } = useQuery({
+  const { data: paymenthistory=[] } = useQuery({
     queryKey: ["paymenthistory", user?.email],
-    // কেন add করলাম → email change হলে query refetch হবে
-
     enabled: !!user?.email,
-    // কেন add করলাম → user load হওয়ার আগে request যাবে না
-
     queryFn: async () => {
-      const res = await backEndServerLinkLocal.get(`/paymenthistory/${user?.email}`,
-      );
+      const res = await backEndServerLinkLocal.get(`/paymenthistory/${user?.email}`);
       console.log(res.data);
       return res.data;
     },
   });
 
-  // উদাহরণস্বরূপ কিছু ডাটা (এটি আপনি API থেকে আনবেন)
   const payments = [
-    {
-      email: "info@gmail.com",
-      category: "Food Order",
-      price: 71.5,
-      date: "Monday, April 10, 2023",
-    },
-    {
-      email: "info@gmail.com",
-      category: "Food Order",
-      price: 71.5,
-      date: "Monday, April 10, 2023",
-    },
-    {
-      email: "info@gmail.com",
-      category: "Food Order",
-      price: 71.5,
-      date: "Monday, April 10, 2023",
-    },
-    {
-      email: "info@gmail.com",
-      category: "Food Order",
-      price: 71.5,
-      date: "Monday, April 10, 2023",
-    },
-    {
-      email: "info@gmail.com",
-      category: "Food Order",
-      price: 71.5,
-      date: "Monday, April 10, 2023",
-    },
     {
       email: "info@gmail.com",
       category: "Food Order",
@@ -94,7 +57,7 @@ const PaymentHistory = () => {
             </thead>
             <tbody>
               {paymenthistory.map((paymenthistory, index) => (
-                <tr key={index} className="border-b">
+                <tr key={paymenthistory._id} className="border-b">
                   <td className="py-5 text-gray-500">{paymenthistory?.email}</td>
                   <td className="text-gray-500">{paymenthistory?.category}</td>
                   <td className="text-gray-500 font-medium">
