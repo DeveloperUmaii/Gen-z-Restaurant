@@ -19,6 +19,7 @@ import ManageItems from '../Pages/DashBoard/ManageItems/ManageItems'
 import UpdateItem from '../Pages/DashBoard/UpdateMenuItem/UpdateItem'
 import Payment from '../Pages/DashBoard/Payment/Payment'
 import PaymentHistory from '../Pages/DashBoard/PaymentHistory/PaymentHistory'
+import AdminHome from '../Pages/DashBoard/AdminHome/AdminHome'
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,8 @@ const router = createBrowserRouter([
       { path: 'addreview', element: <p>Add Review</p> },
       { path: 'mybooking', element: <p>my Booking</p> },
       // Admin Pannel
+      { path: 'adminhome', element: <AdminHome /> },
+      // { path: 'adminhome', element: <AdminRoute> <AllUsers /> </AdminRoute> },
       { path: 'allusers', element: <AdminRoute> <AllUsers /> </AdminRoute> },
       { path: 'additem', element: <AdminRoute> <AddItem /> </AdminRoute> },
       { path: 'manageitems', element: <AdminRoute> <ManageItems /> </AdminRoute> },
