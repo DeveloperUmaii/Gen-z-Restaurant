@@ -43,7 +43,7 @@ const AdminHome = () => {
     };
 
     return (
-        <div className="w-full px-6 py-10">
+        <div className="w-full px-6 py-10 mt-16">
             <h2 className="text-3xl font-serif font-bold mb-8 uppercase">Hi, Welcome Back!</h2>
 
             {/* Stats Cards Section */}

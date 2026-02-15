@@ -20,6 +20,7 @@ import UpdateItem from '../Pages/DashBoard/UpdateMenuItem/UpdateItem'
 import Payment from '../Pages/DashBoard/Payment/Payment'
 import PaymentHistory from '../Pages/DashBoard/PaymentHistory/PaymentHistory'
 import AdminHome from '../Pages/DashBoard/AdminHome/AdminHome'
+import UserHome from '../Pages/DashBoard/UserHome/UserHome'
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
       // User Pannlel
       { index: true, element: <DashboardDrawer /> },
       { path: 'reservation', element: <p>Manage Items Page</p> },
+      { path: 'userhome', element: <UserHome /> },
       { path: 'PaymentHistory', element: <PaymentHistory /> },
       { path: 'cart', element: <Cart></Cart> },
       { path: 'payment', element: <Payment /> },
