@@ -1,12 +1,14 @@
 import React from 'react';
 import { FaWallet, FaStore, FaPhoneAlt, FaShoppingCart, FaStar, FaCalendarAlt } from 'react-icons/fa';
+import UseAuthHook from '../../../providers/ContexHook/UseAuthHook';
 
 const UserHome = () => {
     // উদাহরণস্বরূপ ইউজার ডাটা (আপনি useContext বা Auth থেকে পাবেন)
-    const user = {
-        displayName: "Awlad Hossain",
-        photoURL: "" // এখানে প্রোফাইল ইমেজের লিঙ্ক হবে
-    };
+    const {user} = UseAuthHook();
+    // const user = {
+    //     displayName: "Awlad Hossain",
+    //     photoURL: "" // এখানে প্রোফাইল ইমেজের লিঙ্ক হবে
+    // };
 
     // স্ট্যাটাস কার্ডের ডাটা
     const stats = [

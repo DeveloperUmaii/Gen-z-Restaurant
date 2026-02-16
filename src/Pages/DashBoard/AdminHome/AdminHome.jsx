@@ -1,15 +1,32 @@
-import React from 'react';
+import {useQuery} from '@tanstack/react-query';
 import { FaWallet, FaUsers, FaBook, FaTruck } from 'react-icons/fa';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, Legend, ResponsiveContainer } from 'recharts';
+import UseAuthHook from '../../../providers/ContexHook/UseAuthHook';
+import hookAxiosSecure from '../../../hooks/hookAxiosSecure';
 
 const AdminHome = () => {
+
+    const {user} = UseAuthHook();
+    // const {name, }
+
+    const axiosSecure = hookAxiosSecure();
+    const {data: serverStats} = useQuery({
+        queryKey: [statsData, 'stats'],
+        queryFn: async() => {
+            const res = await axiosSecure.get('admin-stats')
+            console.log(res.data)
+            return (res.data)
+        }
+    })
+
+
     // স্ট্যাটাস ডাটা (Card Data)
-    const stats = [
-        { label: 'Revenue', value: '1000', icon: <FaWallet />, bg: 'from-[#BB34F5] to-[#FCDBFF]' },
-        { label: 'Customers', value: '1500', icon: <FaUsers />, bg: 'from-[#D3A256] to-[#FDE8C0]' },
-        { label: 'Products', value: '103', icon: <FaBook />, bg: 'from-[#FE4880] to-[#FECDE9]' },
-        { label: 'Orders', value: '500', icon: <FaTruck />, bg: 'from-[#6AA4F8] to-[#98CCFB]' },
-    ];
+    // const stats = [
+    //     { label: 'Revenue', value: '1000', icon: <FaWallet />, bg: 'from-[#BB34F5] to-[#FCDBFF]' },
+    //     { label: 'Customers', value: '1500', icon: <FaUsers />, bg: 'from-[#D3A256] to-[#FDE8C0]' },
+    //     { label: 'Products', value: '103', icon: <FaBook />, bg: 'from-[#FE4880] to-[#FECDE9]' },
+    //     { label: 'Orders', value: '500', icon: <FaTruck />, bg: 'from-[#6AA4F8] to-[#98CCFB]' },
+    // ];
 
     // কাস্টম বার চার্ট ডাটা
     const barData = [
