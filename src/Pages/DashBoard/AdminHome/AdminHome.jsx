@@ -10,23 +10,22 @@ const AdminHome = () => {
     // const {name, }
 
     const axiosSecure = hookAxiosSecure();
-    const {data: serverStats} = useQuery({
-        queryKey: [statsData, 'stats'],
+    const {data: stats={}} = useQuery({
+        queryKey: ['stats'],
         queryFn: async() => {
-            const res = await axiosSecure.get('admin-stats')
+            const res = await axiosSecure.get('/admin-stats');
             console.log(res.data)
             return (res.data)
         }
     })
 
-
     // স্ট্যাটাস ডাটা (Card Data)
-    // const stats = [
-    //     { label: 'Revenue', value: '1000', icon: <FaWallet />, bg: 'from-[#BB34F5] to-[#FCDBFF]' },
-    //     { label: 'Customers', value: '1500', icon: <FaUsers />, bg: 'from-[#D3A256] to-[#FDE8C0]' },
-    //     { label: 'Products', value: '103', icon: <FaBook />, bg: 'from-[#FE4880] to-[#FECDE9]' },
-    //     { label: 'Orders', value: '500', icon: <FaTruck />, bg: 'from-[#6AA4F8] to-[#98CCFB]' },
-    // ];
+    const statsCss = [
+        { label: 'Revenue', value: stats.revenue || 0, icon: <FaWallet />, bg: 'from-[#BB34F5] to-[#FCDBFF]' },
+        { label: 'Customers', value: stats.customers || 0, icon: <FaUsers />, bg: 'from-[#D3A256] to-[#FDE8C0]' },
+        { label: 'Products', value: stats.products || 0, icon: <FaBook />, bg: 'from-[#FE4880] to-[#FECDE9]' },
+        { label: 'Orders', value: stats.orders || 0, icon: <FaTruck />, bg: 'from-[#6AA4F8] to-[#98CCFB]' },
+    ];
 
     // কাস্টম বার চার্ট ডাটা
     const barData = [
@@ -65,12 +64,12 @@ const AdminHome = () => {
 
             {/* Stats Cards Section */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                {stats.map((stat, idx) => (
-                    <div key={idx} className={`flex items-center justify-center gap-4 py-8 rounded-lg text-white bg-gradient-to-r ${stat.bg} shadow-md`}>
-                        <div className="text-4xl">{stat.icon}</div>
+                {statsCss.map((statCss, index) => (
+                    <div key={index} className={`flex items-center justify-center gap-4 py-8 rounded-lg text-white bg-gradient-to-r ${statCss.bg} shadow-md`}>
+                        <div className="text-4xl">{statCss.icon}</div>
                         <div>
-                            <div className="text-3xl font-bold">{stat.value}</div>
-                            <div className="text-lg">{stat.label}</div>
+                            <div className="text-3xl font-bold">{statCss.value}</div>
+                            <div className="text-lg">{statCss.label}</div>
                         </div>
                     </div>
                 ))}
