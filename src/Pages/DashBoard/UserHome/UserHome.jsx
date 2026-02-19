@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { FaWallet, FaStore, FaPhoneAlt, FaShoppingCart, FaStar, FaCalendarAlt } from 'react-icons/fa';
 import UseAuthHook from '../../../providers/ContexHook/UseAuthHook';
 import hookAxiosSecure from '../../../hooks/hookAxiosSecure';
@@ -15,10 +15,20 @@ const UserHome = () => {
       return res.data;
     },
   });
+  const { data: myPymnt = {} } = useQuery({
+    queryKey: ["myPymnt"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/user-stat-order-single-product-count/${user.email}`);
+      console.log('myPymnt',res.data)
+      return res.data;
+    },
+  });
+
+
     const stats = [
         { label: 'Menu', value: mystat.menu, icon: <FaWallet />, bg: 'from-[#BB34F5] to-[#FCDBFF]' },
         { label: 'Shop', value: mystat.shop, icon: <FaStore />, bg: 'from-[#D3A256] to-[#FDE8C0]' },
-        { label: 'Contact', value: '04 Total Contact?', icon: <FaPhoneAlt />, bg: 'from-[#FE4880] to-[#FECDE9]' },
+        { label: 'Contact', value: '/04 Total Contact?', icon: <FaPhoneAlt />, bg: 'from-[#FE4880] to-[#FECDE9]' },
     ];
 
     return (
@@ -60,16 +70,16 @@ const UserHome = () => {
                         <h3 className="text-3xl font-serif font-bold uppercase mb-8">Your Activities</h3>
                         <div className="space-y-4 text-xl font-bold uppercase">
                             <p className="flex items-center gap-3 text-blue-500">
-                                <FaShoppingCart /> Orders: 23 my user Ordr? 6
+                                <FaShoppingCart /> /Orders: 23 my user Ordr? 6
                             </p>
                             <p className="flex items-center gap-3 text-teal-500">
-                                <FaStar /> Reviews: total my User Review 2
+                                <FaStar /> /Reviews: total my User Review 2
                             </p>
                             <p className="flex items-center gap-3 text-yellow-600">
-                                <FaCalendarAlt /> Bookings: total my 1
+                                <FaCalendarAlt /> /Bookings: total my 1
                             </p>
                             <p className="flex items-center gap-3 text-orange-500">
-                                <FaWallet /> Payment: total my payment 3
+                                <FaWallet /> /Payment: total my payment 3
                             </p>
                         </div>
                     </div>
