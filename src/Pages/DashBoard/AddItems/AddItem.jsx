@@ -50,7 +50,7 @@ const AddItem = () => {
   return (
     <div className="w-full px-4 md:px-10">
       {/* Section Title */}
-
+                    <SecTionTitle subHeading="What's new?" heading="ADD AN ITEM" />
       {/* Form Container */}
       <div className="bg-base-300 p-8 md:p-12 rounded-lg shadow-sm">
         <form onSubmit={handleSubmit(onSubmit)}>

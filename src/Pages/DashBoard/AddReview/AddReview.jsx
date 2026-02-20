@@ -8,6 +8,7 @@ import hookAxiosLocal from "../../../hooks/hookAxiosLocal";
 // import { useQuery } from '@tanstack/react-query';
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import SecTionTitle from "../../../Components/SecTionTitle";
 
 const AddReview = () => {
   const [rating, setRating] = useState(0);
@@ -26,47 +27,26 @@ const AddReview = () => {
     console.log(reviewRespo.data);
     if (reviewRespo.data.insertedId) {
       reset();
-      Swal.fire({
-        icon: "success",
-        title: "Review Submitted 🎉",
-        html: `
-    <p style="font-size:16px; margin-top:5px;">
-      Your review has been sent successfully 🚀
-    </p>
-  `,
-        showConfirmButton: true,
-        confirmButtonText: "Awesome!",
-        timer: 3000,
-        timerProgressBar: true,
-        background: "#f0fdf4",
-        color: "#166534",
-        backdrop: `
-    rgba(0,150,0,0.2)
-    url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZThjY2YxY2JhZDJhYzYwNmQ3ZTE5NDJkZjNjYzY5M2QyY2E1YzBkYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/111ebonMs90YLu/giphy.gif")
-    left top
-    no-repeat
-  `,
-        confirmButtonColor: "#22c55e",
-        showClass: {
-          popup: "animate__animated animate__zoomIn",
-        },
-        hideClass: {
-          popup: "animate__animated animate__zoomOut",
-        },
-      });
-    }
-  };
+       Swal.fire({
+         icon: "success",
+         title: "Review Sent Successfully! 🚀",
+         text: "Thank you for your valuable feedback ❤️",
+         timer: 2300,
+         showConfirmButton: false,
+         background: "#f8fafc",       // soft light background
+         color: "#0f172a",            // dark text
+         iconColor: "#22c55e",        // green icon
+         padding: "2em",
+         backdrop: `rgba(0,0,0,0.4)`
+          });
+         }
+        };
 
   return (
     <div className="w-full px-4 md:px-10 py-10">
       {/* Header Section */}
       <div className="text-center mb-10">
-        <p className="text-yellow-600 italic mb-2">
-          ---Sharing is Caring!!!---
-        </p>
-        <h2 className="text-4xl uppercase border-y-4 py-3 inline-block px-10 font-medium">
-          Give a Review...
-        </h2>
+            <SecTionTitle subHeading="Sharing is Caring!!!" heading="Give a Review..." />
       </div>
 
       {/* Form Section */}

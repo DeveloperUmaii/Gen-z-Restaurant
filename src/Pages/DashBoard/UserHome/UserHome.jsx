@@ -8,6 +8,7 @@ const UserHome = () => {
     const {user} = UseAuthHook();
   const axiosSecure = hookAxiosSecure();
 
+  // All Orders, All Shop/Order, All Contact.
   const { data: userStat = {} } = useQuery({
     queryKey: ["stats"],
     queryFn: async () => {
@@ -17,6 +18,7 @@ const UserHome = () => {
     },
   });
 
+//My Order, My reviews, My Bookings, My Payment.
 const { data: myStat = {} } = useQuery({
   queryKey: ["orders", user?.email],
   enabled: !!user?.email, // email না থাকলে call করবে না
@@ -32,7 +34,7 @@ const { data: myStat = {} } = useQuery({
     const stats = [
         { label: 'Menu', value: userStat?.menu, icon: <FaWallet />, bg: 'from-[#BB34F5] to-[#FCDBFF]' },
         { label: 'Shop', value: userStat?.shop, icon: <FaStore />, bg: 'from-[#D3A256] to-[#FDE8C0]' },
-                    { label: 'Contact', value: '/04 Total Contact?', icon: <FaPhoneAlt />, bg: 'from-[#FE4880] to-[#FECDE9]' },
+        { label: 'Contact', value: userStat?.contact, icon: <FaPhoneAlt />, bg: 'from-[#FE4880] to-[#FECDE9]' },
     ];
 
     return (
