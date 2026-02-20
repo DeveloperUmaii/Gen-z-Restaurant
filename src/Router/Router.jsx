@@ -22,6 +22,8 @@ import PaymentHistory from '../Pages/DashBoard/PaymentHistory/PaymentHistory'
 import AdminHome from '../Pages/DashBoard/AdminHome/AdminHome'
 import UserHome from '../Pages/DashBoard/UserHome/UserHome'
 import AddReview from '../Pages/DashBoard/AddReview/AddReview'
+import Reservation from '../Pages/DashBoard/Reservation/Reservation'
+import MyBookings from '../Pages/DashBoard/MyBookings/MyBookings'
 
 const router = createBrowserRouter([
   {
@@ -48,13 +50,13 @@ const router = createBrowserRouter([
     children: [
       // User Pannlel
       { index: true, element: <DashboardDrawer /> },
-      { path: 'reservation', element: <p>Manage Items Page</p> },
+      { path: 'reservation', element: <Reservation /> },
       { path: 'userhome', element: <UserHome /> },
       { path: 'PaymentHistory', element: <PaymentHistory /> },
       { path: 'cart', element: <Cart></Cart> },
       { path: 'payment', element: <Payment /> },
       { path: 'addreview', element: <AddReview /> },
-      { path: 'mybooking', element: <p>my Booking</p> },
+      { path: 'mybooking', element: <MyBookings /> },
       // Admin Pannel
       { path: 'adminhome', element: <AdminHome /> },
       // { path: 'adminhome', element: <AdminRoute> <AllUsers /> </AdminRoute> },

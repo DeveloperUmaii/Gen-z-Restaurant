@@ -34,7 +34,7 @@ const { data: myStat = {} } = useQuery({
     const stats = [
         { label: 'Menu', value: userStat?.menu, icon: <FaWallet />, bg: 'from-[#BB34F5] to-[#FCDBFF]' },
         { label: 'Shop', value: userStat?.shop, icon: <FaStore />, bg: 'from-[#D3A256] to-[#FDE8C0]' },
-        { label: 'Contact', value: userStat?.contact, icon: <FaPhoneAlt />, bg: 'from-[#FE4880] to-[#FECDE9]' },
+        { label: 'Contact', value: userStat?.contactn, icon: <FaPhoneAlt />, bg: 'from-[#FE4880] to-[#FECDE9]' },
     ];
 
     return (
