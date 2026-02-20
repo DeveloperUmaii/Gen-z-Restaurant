@@ -8,16 +8,16 @@ const UserHome = () => {
     const {user} = UseAuthHook();
   const axiosSecure = hookAxiosSecure();
 
-  const { data: mystat = {} } = useQuery({
+  const { data: userStat = {} } = useQuery({
     queryKey: ["stats"],
     queryFn: async () => {
       const res = await axiosSecure.get("/user-stats");
-      // console.log(res.data)
+    //   console.log(res.data)
       return res.data;
     },
   });
 
-const { data: orders = {} } = useQuery({
+const { data: myStat = {} } = useQuery({
   queryKey: ["orders", user?.email],
   enabled: !!user?.email, // email না থাকলে call করবে না
   queryFn: async () => {
@@ -30,9 +30,9 @@ const { data: orders = {} } = useQuery({
 
 
     const stats = [
-        { label: 'Menu', value: orders?.menu, icon: <FaWallet />, bg: 'from-[#BB34F5] to-[#FCDBFF]' },
-        { label: 'Shop', value: orders?.shop, icon: <FaStore />, bg: 'from-[#D3A256] to-[#FDE8C0]' },
-        { label: 'Contact', value: '/04 Total Contact?', icon: <FaPhoneAlt />, bg: 'from-[#FE4880] to-[#FECDE9]' },
+        { label: 'Menu', value: userStat?.menu, icon: <FaWallet />, bg: 'from-[#BB34F5] to-[#FCDBFF]' },
+        { label: 'Shop', value: userStat?.shop, icon: <FaStore />, bg: 'from-[#D3A256] to-[#FDE8C0]' },
+                    { label: 'Contact', value: '/04 Total Contact?', icon: <FaPhoneAlt />, bg: 'from-[#FE4880] to-[#FECDE9]' },
     ];
 
     return (
@@ -74,16 +74,16 @@ const { data: orders = {} } = useQuery({
                         <h3 className="text-3xl font-serif font-bold uppercase mb-8">Your Activities</h3>
                         <div className="space-y-4 text-xl font-bold uppercase">
                             <p className="flex items-center gap-3 text-blue-500">
-                                <FaShoppingCart />Orders:{orders?.totalOrders}
+                                <FaShoppingCart />Orders:{myStat?.myOrders}
                             </p>
                             <p className="flex items-center gap-3 text-teal-500">
-                                <FaStar /> Reviews:{orders?.reviews}
+                                <FaStar /> Reviews:{myStat?.myReviews}
                             </p>
-                            <p className="flex items-center gap-3 text-yellow-600">
-                                <FaCalendarAlt />"/Bookings: total my 1"
-                            </p>
+                                                            <p className="flex items-center gap-3 text-yellow-600">
+                                                                <FaCalendarAlt />"/Bookings: total my 1"
+                                                            </p>
                             <p className="flex items-center gap-3 text-orange-500">
-                                <FaWallet /> "/Payment: total my payment 3"
+                                <FaWallet /> Payment: {myStat?.myPayment}
                             </p>
                         </div>
                     </div>
