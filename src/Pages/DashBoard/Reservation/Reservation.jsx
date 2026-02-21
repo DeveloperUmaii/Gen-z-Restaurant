@@ -1,26 +1,62 @@
 import { useForm } from 'react-hook-form';
 import { FaClipboardList } from 'react-icons/fa';
+import hookAxiosLocal from '../../../hooks/hookAxiosLocal';
+import SecTionTitle from '../../../Components/SecTionTitle';
+import UseAuthHook from '../../../providers/ContexHook/UseAuthHook';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const Reservation = () => {
     const { register, handleSubmit, reset } = useForm();
+    const axiosLocal = hookAxiosLocal();
+    const {user} = UseAuthHook();
+    const navigate = useNavigate();
 
-    const onSubmit = (data) => {
-        console.log("Booking Data:", data);
-        // এখানে আপনার রিজার্ভেশন লজিক লিখুন
+const onSubmit = async (data) => {
+  try {
+     const bookingData = {
+       ...data,
+       email: user.email,
+     };
+    //console.log("Booking Data:",user, bookingData);
+    const bookingRes = await axiosLocal.post('/booking-data', bookingData);
+    // console.log(bookingRes.data);
+
+            if (bookingRes.data.insertedId) {
+            reset();
+            Swal.fire({
+                icon: "success",
+                title: "Reservation Successful! 🚀",
+                text: "Your booking has been confirmed. See you soon! ❤️",
+                timer: 2300,
+                showConfirmButton: false,
+                background: "#f8fafc",
+                color: "#0f172a",
+                iconColor: "#22c55e",
+                padding: "2em",
+                backdrop: `rgba(0,0,0,0.4)`
+            });
+            // navigate('/dashboarddrawer/mybookings')
+            }
+        } catch (error) {
+            console.error("Error creating reservation:", error);
+            Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong! Please try again.",
+            });
+        }
     };
 
     return (
-        <div className="w-full px-4 md:px-10 py-10 bg-white">
+        <div className="mt-10 w-full px-4 md:px-10 py-10 bg-white">
             {/* Title Section */}
             <div className="text-center mb-12">
-                <p className="text-yellow-600 italic mb-2">---Reservation---</p>
-                <h2 className="text-4xl uppercase border-y-4 py-3 inline-block px-10 font-medium">
-                    Book A Table
-                </h2>
+                <SecTionTitle subHeading='Reservation' heading='Book A Table' />
             </div>
 
             {/* Form Section */}
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-6xl mx-auto bg-[#14141410] px-16 py-10 rounded-md">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {/* First Row: Date, Time, Guest */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -31,7 +67,7 @@ const Reservation = () => {
                             <input
                                 type="date"
                                 {...register("date", { required: true })}
-                                className="input input-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none"
+                                className="pl-5 input input-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none"
                             />
                         </div>
                         <div className="form-control w-full">
@@ -41,7 +77,7 @@ const Reservation = () => {
                             <input
                                 type="time"
                                 {...register("time", { required: true })}
-                                className="input input-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none"
+                                className="pl-5 input input-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none"
                             />
                         </div>
                         <div className="form-control w-full">
@@ -51,7 +87,7 @@ const Reservation = () => {
                             <select
                                 defaultValue="1 Person"
                                 {...register("guest", { required: true })}
-                                className="select select-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none font-normal"
+                                className="pl-5 select select-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none font-normal"
                             >
                                 <option>1 Person</option>
                                 <option>2 Persons</option>
@@ -72,7 +108,7 @@ const Reservation = () => {
                                 type="text"
                                 placeholder="Your Name"
                                 {...register("name", { required: true })}
-                                className="input input-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none"
+                                className="pl-5 input input-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none"
                             />
                         </div>
                         <div className="form-control w-full">
@@ -83,7 +119,7 @@ const Reservation = () => {
                                 type="tel"
                                 placeholder="Phone Number"
                                 {...register("phone", { required: true })}
-                                className="input input-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none"
+                                className="pl-5 input input-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none"
                             />
                         </div>
                         <div className="form-control w-full">
@@ -92,9 +128,10 @@ const Reservation = () => {
                             </label>
                             <input
                                 type="email"
-                                placeholder="Email"
-                                {...register("email", { required: true })}
-                                className="input input-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none"
+                                // placeholder={user?.email}
+                                defaultValue={user?.email}
+                                {...register("bookingEmail", { required: true })}
+                                className="pl-5 input input-bordered w-full h-14 rounded-md border-gray-200 focus:outline-none"
                             />
                         </div>
                     </div>

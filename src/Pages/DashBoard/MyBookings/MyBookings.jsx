@@ -1,7 +1,11 @@
-import React from 'react';
 import { FaTrashAlt, FaCheck } from 'react-icons/fa';
+import hookAxiosLocal from '../../../hooks/hookAxiosLocal';
+import { useQuery } from '@tanstack/react-query';
+import UseAuthHook from '../../../providers/ContexHook/UseAuthHook';
 
 const MyBookings = () => {
+    const axiosLocal = hookAxiosLocal();
+    const {user} = UseAuthHook();
     // উদাহরণস্বরূপ ডাটা
     const bookings = [
         {
@@ -15,7 +19,14 @@ const MyBookings = () => {
         },
         // আরো ডাটা এখানে যোগ করা যাবে
     ];
-
+    const {data: bbookings={}} = useQuery( {
+        queryKey: [bbookings?._id, 'bookings'],
+        queryFn: async () => {
+            const res = await axiosLocal.get(`/bookings/${user?.email}`)
+            console.log();
+            return res.data;
+        }
+    })
     const handleDelete = (id) => {
         console.log("Delete booking ID:", id);
     };
