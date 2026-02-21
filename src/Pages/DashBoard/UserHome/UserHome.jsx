@@ -34,11 +34,11 @@ const { data: myStat = {} } = useQuery({
     const stats = [
         { label: 'Menu', value: userStat?.menu, icon: <FaWallet />, bg: 'from-[#BB34F5] to-[#FCDBFF]' },
         { label: 'Shop', value: userStat?.shop, icon: <FaStore />, bg: 'from-[#D3A256] to-[#FDE8C0]' },
-        { label: 'Contact', value: userStat?.contactn, icon: <FaPhoneAlt />, bg: 'from-[#FE4880] to-[#FECDE9]' },
+        { label: 'Contact', value: userStat?.contact, icon: <FaPhoneAlt />, bg: 'from-[#FE4880] to-[#FECDE9]' },
     ];
 
     return (
-        <div className="w-full px-6 py-10 bg-white min-h-screen">
+        <div className="w-full px-6 py-10 bg-white min-h-screen mt-12">
             <h2 className="text-3xl font-serif font-bold mb-8 uppercase">Hi, Welcome Back!</h2>
 
             {/* Top Stats Section */}
@@ -81,9 +81,9 @@ const { data: myStat = {} } = useQuery({
                             <p className="flex items-center gap-3 text-teal-500">
                                 <FaStar /> Reviews:{myStat?.myReviews}
                             </p>
-                                                            <p className="flex items-center gap-3 text-yellow-600">
-                                                                <FaCalendarAlt />"/Bookings: total my 1"
-                                                            </p>
+                            <p className="flex items-center gap-3 text-yellow-600">
+                                <FaCalendarAlt />Bookings: {myStat?.myBookings}
+                            </p>
                             <p className="flex items-center gap-3 text-orange-500">
                                 <FaWallet /> Payment: {myStat?.myPayment}
                             </p>

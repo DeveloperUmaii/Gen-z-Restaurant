@@ -5,6 +5,7 @@ import SecTionTitle from '../../../Components/SecTionTitle';
 import UseAuthHook from '../../../providers/ContexHook/UseAuthHook';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { MdOutlinePending } from "react-icons/md";
 
 const Reservation = () => {
     const { register, handleSubmit, reset } = useForm();
@@ -17,10 +18,11 @@ const onSubmit = async (data) => {
      const bookingData = {
        ...data,
        email: user.email,
+       status: 'pending'
      };
     //console.log("Booking Data:",user, bookingData);
     const bookingRes = await axiosLocal.post('/booking-data', bookingData);
-    // console.log(bookingRes.data);
+    console.log(bookingRes.data);
 
             if (bookingRes.data.insertedId) {
             reset();

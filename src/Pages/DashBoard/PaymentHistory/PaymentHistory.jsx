@@ -17,14 +17,14 @@ const PaymentHistory = () => {
     },
   });
 
-  const payments = [
-    {
-      email: "info@gmail.com",
-      category: "Food Order",
-      price: 71.5,
-      date: "Monday, April 10, 2023",
-    },
-  ];
+  // const payments = [
+  //   {
+  //     email: "info@gmail.com",
+  //     category: "Food Order",
+  //     price: 71.5,
+  //     date: "Monday, April 10, 2023",
+  //   },
+  // ];
 
   return (
     <div className="w-full px-4 md:px-10 py-10 bg-white min-h-screen">
