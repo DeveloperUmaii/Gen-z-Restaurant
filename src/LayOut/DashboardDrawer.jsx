@@ -93,7 +93,7 @@ const DashboardDrawer = () => {
                           <span>#MANAGE ITEMS</span>
                         </Link>
 
-                        <Link to="/dashboardDrawer/managebooking" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
+                        <Link to="/dashboardDrawer/managebookings" className="flex items-center px-4 py-2 hover:bg-yellow-800 transition duration-150">
                           <FaBook  className="mr-3 ml-4" />
                           <span>#MANAGE BOOKING ({cart?.length})</span>
                         </Link>

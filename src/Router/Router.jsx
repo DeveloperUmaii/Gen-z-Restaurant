@@ -24,6 +24,7 @@ import UserHome from '../Pages/DashBoard/UserHome/UserHome'
 import AddReview from '../Pages/DashBoard/AddReview/AddReview'
 import Reservation from '../Pages/DashBoard/Reservation/Reservation'
 import MyBookings from '../Pages/DashBoard/MyBookings/MyBookings'
+import ManageBookings from '../Pages/DashBoard/ManageBookings/ManageBookings'
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,7 @@ const router = createBrowserRouter([
       { path: 'allusers', element: <AdminRoute> <AllUsers /> </AdminRoute> },
       { path: 'additem', element: <AdminRoute> <AddItem /> </AdminRoute> },
       { path: 'manageitems', element: <AdminRoute> <ManageItems /> </AdminRoute> },
+      { path: 'manageBookings', element:  <ManageBookings />  },
                                                         // { path: 'manageitems', element:  <ManageItems /> },dashboardDrawer/cart
       { path: 'updateitem/:id', element: <AdminRoute> <UpdateItem /> </AdminRoute>,
                                                         // { path: 'updateitem/:id', element:  <UpdateItem /> ,

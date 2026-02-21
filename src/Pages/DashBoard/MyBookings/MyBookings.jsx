@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import UseAuthHook from "../../../providers/ContexHook/UseAuthHook";
 import Swal from "sweetalert2";
 import { MdOutlinePending } from "react-icons/md";
+import SecTionTitle from "../../../Components/SecTionTitle";
 
 const MyBookings = () => {
   const axiosSecure = hookAxiosSecure();
@@ -59,10 +60,7 @@ const MyBookings = () => {
     <div className="w-full px-4 md:px-10 py-10 bg-white min-h-screen">
       {/* Header Section */}
       <div className="text-center mb-12">
-        <p className="text-yellow-600 italic mb-2">---At a Glance!---</p>
-        <h2 className="text-4xl uppercase border-y-4 py-3 inline-block px-10 font-medium">
-          Manage All Bookings
-        </h2>
+        <SecTionTitle subHeading='At a Glance!' heading='Manage All Bookings'/>
       </div>
 
       {/* Table Container */}
@@ -97,15 +95,14 @@ const MyBookings = () => {
                   <td className="text-gray-500">{booking.date}</td>
                   <td className="text-gray-500">{booking.time}</td>
                   <td className="text-gray-500">{booking.guest}</td>
-                  <td className="text-gray-500">{booking.status}</td>
                   <td className="text-center py-4">
                     <div className="flex flex-col items-center justify-center gap-1">
                       {/* আইকন উপরে থাকবে */}
-                      <MdOutlinePending className="text-2xl text-yellow-600" />
+                      <MdOutlinePending className="text-2xl text-green-600" />
 
                       {/* টেক্সট একদম আইকনের নিচে থাকবে */}
                       <span
-                        className={`text-sm font-medium ${booking.status === "pending" ? "text-yellow-600" : "text-green-600"}`}>
+                        className={`text-sm font-medium ${booking.status === "pending" ? "text-green-600" : "text-orange-600"}`}>
                         {booking.status}
                       </span>
                     </div>
@@ -114,7 +111,7 @@ const MyBookings = () => {
                     <div className="flex items-center gap-3">
                       <button
                         onClick={() => handleDelete(booking._id)}
-                        className="ml-6 text-red-600">
+                        className="ml-6 mt-2 text-red-600">
                         <FaTrashAlt />
                       </button>
                     </div>
