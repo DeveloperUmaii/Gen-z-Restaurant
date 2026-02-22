@@ -4,6 +4,7 @@ import SecTionTitle from "../../../Components/SecTionTitle";
 import hookAxiosLocal from "../../../hooks/hookAxiosLocal";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -49,6 +50,7 @@ const AddItem = () => {
 
   return (
     <div className="w-full px-4 md:px-10">
+              <Helmet title="Gen-Z_R|AddItem" />
       {/* Section Title */}
                     <SecTionTitle subHeading="What's new?" heading="ADD AN ITEM" />
       {/* Form Container */}

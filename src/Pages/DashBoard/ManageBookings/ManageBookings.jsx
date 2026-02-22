@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import hookAxiosLocal from "../../../hooks/hookAxiosLocal";
 // import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { FcApproval } from "react-icons/fc";
+import { ImCancelCircle } from "react-icons/im";
+import { MdEditNotifications } from "react-icons/md";
 
 const ManageBookings = () => {
   // const axiosSecure = hookAxiosSecure();
@@ -49,65 +52,63 @@ const ManageBookings = () => {
   //     status: "pending",
   //   },
   // ];
-const handleUpdateStatus = async (id) => {
-  const action = await Swal.fire({
-    title: "Respond to booking request, Please!",
-    showDenyButton: true,
-    confirmButtonText: "Approve",
-    denyButtonText: "Reject",
-  });
-
-  let newStatus;
-
-  if (action.isConfirmed) {
-    const confirmApprove = await Swal.fire({
-      title: "Are you sure?",
-      text: "You want to APPROVE this booking",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#1bff13",
-      cancelButtonColor: "#1b1b1b34",
+  const handleUpdateStatus = async (id) => {
+    const action = await Swal.fire({
+      title: "Respond to booking request, Please!",
+      showDenyButton: true,
       confirmButtonText: "Approve",
+      denyButtonText: "Reject",
     });
 
-    if (!confirmApprove.isConfirmed) return;
-    newStatus = "approved";
+    let newStatus;
 
-  } else if (action.isDenied) {
-    const confirmReject = await Swal.fire({
-      title: "Are you sure?",
-      text: "You want to REJECT this booking",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#ff1313",
-      cancelButtonColor: "#1b1b1b34",
-      confirmButtonText: "Reject",
-    });
-
-    if (!confirmReject.isConfirmed) return;
-    newStatus = "rejected";
-
-  } else {
-    return;
-  }
-
-  try {
-    const res = await axiosLocal.patch(`/booking-manage/${id}`, {
-      status: newStatus,
-    });
-
-    if (res.data.modifiedCount > 0) {
-      await Swal.fire({
-        title: "Success!",
-        text: `Booking ${newStatus}`,
-        icon: "success",
+    if (action.isConfirmed) {
+      const confirmApprove = await Swal.fire({
+        title: "Are you sure?",
+        text: "You want to APPROVE this booking",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#1bff13",
+        cancelButtonColor: "#1b1b1b34",
+        confirmButtonText: "Approve",
       });
-      refetch();
+
+      if (!confirmApprove.isConfirmed) return;
+      newStatus = "Approved";
+    } else if (action.isDenied) {
+      const confirmReject = await Swal.fire({
+        title: "Are you sure?",
+        text: "You want to REJECT this booking",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#ff1313",
+        cancelButtonColor: "#1b1b1b34",
+        confirmButtonText: "Reject",
+      });
+
+      if (!confirmReject.isConfirmed) return;
+      newStatus = "Rejected";
+    } else {
+      return;
     }
-  } catch (error) {
-    Swal.fire("Error!", "Status update failed", "error");
-  }
-};
+
+    try {
+      const res = await axiosLocal.patch(`/booking-manage/${id}`, {
+        status: newStatus,
+      });
+
+      if (res.data.modifiedCount > 0) {
+        await Swal.fire({
+          title: "Success!",
+          text: `Booking ${newStatus}`,
+          icon: "success",
+        });
+        refetch();
+      }
+    } catch (error) {
+      Swal.fire("Error!", "Status update failed", "error");
+    }
+  };
   return (
     <div className="w-full px-4 md:px-10 py-10 bg-white">
       {/* Header Section */}
@@ -151,12 +152,21 @@ const handleUpdateStatus = async (id) => {
                   <td className="text-gray-500">{booking?.time}</td>
 
                   <td className="flex flex-col items-center justify-center gap-1">
-                    {/* আইকন উপরে থাকবে */}
-                    <MdOutlinePending className="text-2xl text-green-600" />
-
-                    {/* টেক্সট একদম আইকনের নিচে থাকবে */}
+                    {booking.status === "Approved" ? (
+                      <div className="">
+                        <FcApproval className="text-2xl text-[#03aa19]" />
+                      </div>
+                    ) : booking.status === "Rejected" ? (
+                      <div className="">
+                        <ImCancelCircle className="text-xl text-red-600" />
+                      </div>
+                    ) : (
+                      <div className="">
+                        <MdOutlinePending className="text-2xl text-orange-300" />
+                      </div>
+                    )}
                     <span
-                      className={`text-sm font-medium ${booking.status === "pending" ? "text-green-600" : "text-orange-600"}`}>
+                      className={`text-sm font-medium ${booking.status === "Approved" ? "text-[#03aa19]" : booking.status === "Rejected" ? "text-red-600" : "text-orange-300"}`}>
                       {booking.status}
                     </span>
                   </td>
@@ -165,11 +175,17 @@ const handleUpdateStatus = async (id) => {
                     <div className="flex items-center gap-3">
                       {/* Status Update/Confirm Button */}
                       <button
-                        onClick={() => {
-                          handleUpdateStatus(booking._id);
-                        }}
-                        className="btn btn-ghost bg-[#28A745] hover:bg-green-700 text-white btn-sm rounded-full p-2 h-10 w-10">
-                        <FaCheckCircle className="text-xl" />
+                        type="button"
+                        onClick={() => handleUpdateStatus(booking._id)}
+                        disabled={booking.status !== "Pending"}
+                        className={`btn btn-ghost text-white btn-sm rounded-full p-2 h-10 w-10
+                        ${
+                          booking.status === "Pending"
+                            ? "bg-[#28A745] hover:bg-green-700"
+                            : "bg-gray-300 text-gray-500 cursor-not-allowed grayscale"
+                        }`}
+                        aria-label="Update booking status">
+                        <MdEditNotifications className="text-xl" />
                       </button>
                     </div>
                   </td>

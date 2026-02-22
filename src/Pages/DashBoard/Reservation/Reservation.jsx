@@ -18,7 +18,7 @@ const onSubmit = async (data) => {
      const bookingData = {
        ...data,
        email: user.email,
-       status: 'pending'
+       status: 'Pending'
      };
     //console.log("Booking Data:",user, bookingData);
     const bookingRes = await axiosLocal.post('/booking-data', bookingData);
@@ -38,7 +38,7 @@ const onSubmit = async (data) => {
                 padding: "2em",
                 backdrop: `rgba(0,0,0,0.4)`
             });
-            // navigate('/dashboarddrawer/mybookings')
+            navigate('/dashboardDrawer/mybooking')
             }
         } catch (error) {
             console.error("Error creating reservation:", error);

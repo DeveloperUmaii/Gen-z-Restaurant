@@ -5,6 +5,8 @@ import UseAuthHook from "../../../providers/ContexHook/UseAuthHook";
 import Swal from "sweetalert2";
 import { MdOutlinePending } from "react-icons/md";
 import SecTionTitle from "../../../Components/SecTionTitle";
+import { FcApproval } from "react-icons/fc";
+import { ImCancelCircle } from "react-icons/im";
 
 const MyBookings = () => {
   const axiosSecure = hookAxiosSecure();
@@ -95,17 +97,24 @@ const MyBookings = () => {
                   <td className="text-gray-500">{booking.date}</td>
                   <td className="text-gray-500">{booking.time}</td>
                   <td className="text-gray-500">{booking.guest}</td>
-                  <td className="text-center py-4">
-                    <div className="flex flex-col items-center justify-center gap-1">
-                      {/* আইকন উপরে থাকবে */}
-                      <MdOutlinePending className="text-2xl text-green-600" />
-
-                      {/* টেক্সট একদম আইকনের নিচে থাকবে */}
-                      <span
-                        className={`text-sm font-medium ${booking.status === "pending" ? "text-green-600" : "text-orange-600"}`}>
-                        {booking.status}
-                      </span>
-                    </div>
+                  <td className="flex flex-col items-center justify-center gap-1">
+                    {booking.status === "Approved" ? (
+                      <div className="">
+                        <FcApproval className="text-2xl text-[#03aa19]" />
+                      </div>
+                    ) : booking.status === "Rejected" ? (
+                      <div className="">
+                        <ImCancelCircle className="text-xl text-red-600" />
+                      </div>
+                    ) : (
+                      <div className="">
+                        <MdOutlinePending className="text-2xl text-orange-300" />
+                      </div>
+                    )}
+                    <span
+                      className={`text-sm font-medium ${booking.status === "Approved" ? "text-[#03aa19]" : booking.status === "Rejected" ? "text-red-600" : "text-orange-300"}`}>
+                      {booking.status}
+                    </span>
                   </td>
                   <td>
                     <div className="flex items-center gap-3">
