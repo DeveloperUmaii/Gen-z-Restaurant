@@ -3,69 +3,111 @@ import { FaTrashAlt, FaCheckCircle } from "react-icons/fa";
 import { MdOutlinePending } from "react-icons/md";
 import SecTionTitle from "../../../Components/SecTionTitle";
 import Swal from "sweetalert2";
+import hookAxiosLocal from "../../../hooks/hookAxiosLocal";
+// import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const ManageBookings = () => {
-  const bookings = [
-    {
-      id: 1,
-      name: "musaA",
-      date: "26/10/24",
-      time: "07:30 PM",
-      guest: "2 Persons",
-      bookingEmail: "guest@mail.com",
-      status: "pending",
-    },
-    {
-      id: 2,
-      name: "musaB",
-      date: "26/10/24",
-      time: "07:30 PM",
-      guest: "2 Persons",
-      bookingEmail: "guest@mail.com",
-      status: "pending",
-    },
-    {
-      id: 3,
-      name: "musaC",
-      date: "26/10/24",
-      time: "07:30 PM",
-      guest: "2 Persons",
-      bookingEmail: "guest@mail.com",
-      status: "pending",
-    },
-  ];
+  // const axiosSecure = hookAxiosSecure();
+  const axiosLocal = hookAxiosLocal();
 
-  const handleUpdateStatus = async (id) => {
-    const result = await Swal.fire({
-      title: "Respond to booking request, Please!",
-      showDenyButton: true,
+  const { data: bookings = [], refetch } = useQuery({
+    queryKey: ["bookings"],
+    queryFn: async () => {
+      const bookingRes = await axiosLocal.get("/bookings");
+      console.log(bookingRes.data);
+      return bookingRes.data;
+    },
+  });
+
+  // const bookings = [
+  //   {
+  //     id: 1,
+  //     name: "musaA",
+  //     date: "26/10/24",
+  //     time: "07:30 PM",
+  //     guest: "2 Persons",
+  //     bookingEmail: "guest@mail.com",
+  //     status: "pending",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "musaB",
+  //     date: "26/10/24",
+  //     time: "07:30 PM",
+  //     guest: "2 Persons",
+  //     bookingEmail: "guest@mail.com",
+  //     status: "pending",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "musaC",
+  //     date: "26/10/24",
+  //     time: "07:30 PM",
+  //     guest: "2 Persons",
+  //     bookingEmail: "guest@mail.com",
+  //     status: "pending",
+  //   },
+  // ];
+const handleUpdateStatus = async (id) => {
+  const action = await Swal.fire({
+    title: "Respond to booking request, Please!",
+    showDenyButton: true,
+    confirmButtonText: "Approve",
+    denyButtonText: "Reject",
+  });
+
+  let newStatus;
+
+  if (action.isConfirmed) {
+    const confirmApprove = await Swal.fire({
+      title: "Are you sure?",
+      text: "You want to APPROVE this booking",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#1bff13",
+      cancelButtonColor: "#1b1b1b34",
       confirmButtonText: "Approve",
-      denyButtonText: "Reject",
     });
 
-    let newStatus;
+    if (!confirmApprove.isConfirmed) return;
+    newStatus = "approved";
 
-    if (result.isConfirmed) {
-      newStatus = "approved";
-    } else if (result.isDenied) {
-      newStatus = "rejected";
-    } else {
-      return; // কিছু না চাপলে কিছুই হবে না
-    }
+  } else if (action.isDenied) {
+    const confirmReject = await Swal.fire({
+      title: "Are you sure?",
+      text: "You want to REJECT this booking",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ff1313",
+      cancelButtonColor: "#1b1b1b34",
+      confirmButtonText: "Reject",
+    });
 
-    try {
-      const res = await axiosLocal.patch(`/bookings/${id}`, {
-        status: newStatus,
+    if (!confirmReject.isConfirmed) return;
+    newStatus = "rejected";
+
+  } else {
+    return;
+  }
+
+  try {
+    const res = await axiosLocal.patch(`/booking-manage/${id}`, {
+      status: newStatus,
+    });
+
+    if (res.data.modifiedCount > 0) {
+      await Swal.fire({
+        title: "Success!",
+        text: `Booking ${newStatus}`,
+        icon: "success",
       });
-
-      if (res.data.modifiedCount > 0) {
-        Swal.fire("Success!", "Status updated successfully", "success");
-        refetch(); // react-query হলে
-      }
-    } catch (error) {
-      Swal.fire("Error!", "Status update failed", "error");
+      refetch();
     }
-  };
+  } catch (error) {
+    Swal.fire("Error!", "Status update failed", "error");
+  }
+};
   return (
     <div className="w-full px-4 md:px-10 py-10 bg-white">
       {/* Header Section */}
@@ -98,7 +140,7 @@ const ManageBookings = () => {
             {/* Table Body */}
             <tbody>
               {bookings.map((booking, index) => (
-                <tr key={booking.id} className="border-b">
+                <tr key={booking._id} className="border-b">
                   <th className="py-6 font-medium text-gray-700">
                     {index + 1}
                   </th>
@@ -124,7 +166,7 @@ const ManageBookings = () => {
                       {/* Status Update/Confirm Button */}
                       <button
                         onClick={() => {
-                          handleUpdateStatus();
+                          handleUpdateStatus(booking._id);
                         }}
                         className="btn btn-ghost bg-[#28A745] hover:bg-green-700 text-white btn-sm rounded-full p-2 h-10 w-10">
                         <FaCheckCircle className="text-xl" />
