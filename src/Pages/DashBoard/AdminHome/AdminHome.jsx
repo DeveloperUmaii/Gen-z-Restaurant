@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaWallet, FaUsers, FaBook, FaTruck } from "react-icons/fa";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, Legend, ResponsiveContainer,} from "recharts";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const AdminHome = () => {
   const axiosSecure = hookAxiosSecure();
@@ -50,7 +51,7 @@ const AdminHome = () => {
     },
   ];
 
-  const COLORS = ["#00C49F", "#0088FE", "#FFBB28", "#FF8042"];
+  const COLORS = [ "#f5436a", "#e957f7", "#8757f7", "#579cf7", "#34f584", "#fc6b28" ];
 
   // কাস্টম সেপ বার চার্টের জন্য (Triangle Bar)
   const getPath = (x, y, width, height) => {
@@ -68,7 +69,8 @@ const AdminHome = () => {
     return { name: piedata?.categoryName, value: piedata?.revenue };
   });
   return (
-    <div className="w-full px-6 py-10 mt-16">
+    <div className="w-full px-6 py-10 mt-16 ">
+              <Helmet title="Gen-Z_R|AdminHome" />
       <h2 className="text-3xl font-serif font-bold mb-8 uppercase">
         Hi, Welcome Back!
       </h2>

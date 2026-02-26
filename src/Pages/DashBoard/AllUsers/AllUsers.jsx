@@ -9,15 +9,15 @@ import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import Swal from "sweetalert2";
 import { RiShieldUserFill } from "react-icons/ri";
 import SecTionTitle from "../../../Components/SecTionTitle";
+import { Helmet } from "react-helmet-async";
 
 const AllUsers = () => {
-  // const totalUsers = DUMMY_USERS.length;
-  const backEndServerLink = hookAxiosSecure();
+  const axiosSecure = hookAxiosSecure();
 
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await backEndServerLink.get("/users");
+      const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
@@ -33,7 +33,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes, make Admin",
     }).then((result) => {
       if (result.isConfirmed) {
-          backEndServerLink.patch(`/users/admin/${user._id}`)
+          axiosSecure.patch(`/users/admin/${user._id}`)
           .then((res) => {
             if (res.data.modifiedCount > 0) {
               refetch(); // UI আপডেট
@@ -68,7 +68,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        backEndServerLink.delete(`/users/${user._id}`)
+        axiosSecure.delete(`/users/${user._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               // UI reload ছাড়া আপডেট
@@ -97,6 +97,7 @@ const AllUsers = () => {
   return (
     <div className="p-4 sm:p-8 bg-white shadow-lg rounded-lg max-w-4xl mx-auto my-10">
       {/* --- হেডার সেকশন --- */}
+              <Helmet title="Gen-Z_R|All_Users" />
               <SecTionTitle subHeading="How many?" heading="MANAGE ALL USERS" />
 
       {/* --- মোট ব্যবহারকারী সংখ্যা --- */}

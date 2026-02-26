@@ -9,7 +9,7 @@ const ChefRecomendedCard = ({ ChefCard }) => {
   const { user } = UseAuthHook();
   const navigate = useNavigate();
   const location = useLocation();
-  const backEndServerLink = hookAxiosSecure();
+  const axiosSecure = hookAxiosSecure();
   const [,refetch] = hookUseCart();
 
   const handleAddCart = () => {
@@ -23,8 +23,7 @@ const ChefRecomendedCard = ({ ChefCard }) => {
                   price,
               };
 
-      // axios.post("http://localhost:5000/carts", cartItem)
-      backEndServerLink.post('/carts', cartItem)
+      axiosSecure.post('/carts', cartItem)
       .then((res) => {
         // console.log("AXIOS DATA SEND CART", res.data);
 

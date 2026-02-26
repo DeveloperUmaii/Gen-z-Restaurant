@@ -9,16 +9,17 @@ import { useQuery } from "@tanstack/react-query";
 import { FcApproval } from "react-icons/fc";
 import { ImCancelCircle } from "react-icons/im";
 import { MdEditNotifications } from "react-icons/md";
+import { Helmet } from "react-helmet-async";
+import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 
 const ManageBookings = () => {
-  // const axiosSecure = hookAxiosSecure();
-  const axiosLocal = hookAxiosLocal();
+  const axiosSecure = hookAxiosSecure();
 
-  const { data: bookings = [], refetch } = useQuery({
+  const { data: bookings = [], refetch, isPending } = useQuery({
     queryKey: ["bookings"],
     queryFn: async () => {
-      const bookingRes = await axiosLocal.get("/bookings");
-      console.log(bookingRes.data);
+      const bookingRes = await axiosSecure.get("/bookings");
+      // console.log(bookingRes.data);
       return bookingRes.data;
     },
   });
@@ -93,7 +94,7 @@ const ManageBookings = () => {
     }
 
     try {
-      const res = await axiosLocal.patch(`/booking-manage/${id}`, {
+      const res = await axiosSecure.patch(`/booking-manage/${id}`, {
         status: newStatus,
       });
 
@@ -111,7 +112,7 @@ const ManageBookings = () => {
   };
   return (
     <div className="w-full px-4 md:px-10 py-10 bg-white">
-      {/* Header Section */}
+              <Helmet title="Gen-Z_R|ManageBookings" />
       <div className="text-center mb-12">
         <SecTionTitle subHeading="At a Glance" heading="Manage All Bookings" />
       </div>

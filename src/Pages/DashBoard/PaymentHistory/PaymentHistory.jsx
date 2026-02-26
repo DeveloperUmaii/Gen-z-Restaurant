@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import SecTionTitle from "../../../Components/SecTionTitle";
 import UseAuthHook from "../../../providers/ContexHook/UseAuthHook";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const PaymentHistory = () => {
   const { user } = UseAuthHook();
@@ -28,7 +29,7 @@ const PaymentHistory = () => {
 
   return (
     <div className="w-full px-4 md:px-10 py-10 bg-white min-h-screen">
-      {/* Header Section */}
+                  <Helmet title="Gen-Z_R|PaymentHistory" />
       <div className="text-center mt-12">
         <SecTionTitle
           subHeading="---At a Glance!---"

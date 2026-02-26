@@ -32,7 +32,7 @@ const AddItem = () => {
         price: parseFloat(data.price),
       };
       const menuRes = await backEndServerLink.post("/menu", menuItem);
-      console.log(menuRes.data);
+      // console.log(menuRes.data);
       if (menuRes.data.insertedId) {
         reset();
         Swal.fire({

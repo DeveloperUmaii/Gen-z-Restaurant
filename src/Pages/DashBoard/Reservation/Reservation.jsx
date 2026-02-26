@@ -1,15 +1,17 @@
 import { useForm } from 'react-hook-form';
 import { FaClipboardList } from 'react-icons/fa';
-import hookAxiosLocal from '../../../hooks/hookAxiosLocal';
 import SecTionTitle from '../../../Components/SecTionTitle';
 import UseAuthHook from '../../../providers/ContexHook/UseAuthHook';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlinePending } from "react-icons/md";
+import { Helmet } from 'react-helmet-async';
+import OurLocation from '../../ContactUsComponents/OurLocation';
+import hookAxiosSecure from '../../../hooks/hookAxiosSecure';
 
 const Reservation = () => {
     const { register, handleSubmit, reset } = useForm();
-    const axiosLocal = hookAxiosLocal();
+    const axiosSecure = hookAxiosSecure();
     const {user} = UseAuthHook();
     const navigate = useNavigate();
 
@@ -21,7 +23,7 @@ const onSubmit = async (data) => {
        status: 'Pending'
      };
     //console.log("Booking Data:",user, bookingData);
-    const bookingRes = await axiosLocal.post('/booking-data', bookingData);
+    const bookingRes = await axiosSecure.post('/booking-data', bookingData);
     console.log(bookingRes.data);
 
             if (bookingRes.data.insertedId) {
@@ -52,7 +54,7 @@ const onSubmit = async (data) => {
 
     return (
         <div className="mt-10 w-full px-4 md:px-10 py-10 bg-white">
-            {/* Title Section */}
+                   <Helmet title="Gen-Z_R|Reservation" />
             <div className="text-center mb-12">
                 <SecTionTitle subHeading='Reservation' heading='Book A Table' />
             </div>
@@ -149,6 +151,7 @@ const onSubmit = async (data) => {
                     </div>
                 </form>
             </div>
+            <OurLocation />
         </div>
     );
 };

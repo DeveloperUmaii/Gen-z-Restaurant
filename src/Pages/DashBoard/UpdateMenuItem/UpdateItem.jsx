@@ -4,6 +4,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import hookAxiosLocal from "../../../hooks/hookAxiosLocal";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const image_hosting_key = import.meta.env.VITE_Image_Hosting_Key;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -60,8 +61,7 @@ const UpdateItem = () => {
 
   return (
     <div className="w-full min-h-screen bg-white py-10">
-      {/* Title Section */}
-      {/* <SecTionTitle  subHeading='Menu' heading="Update Item" /> */}
+              <Helmet title="Gen-Z_R|UpdateItem" />
       <SecTionTitle subHeading={name} heading="Update Item" />
 
       {/* Form Container */}
@@ -78,7 +78,7 @@ const UpdateItem = () => {
               type="text"
               defaultValue={name}
               // defaultValue={item?.name}
-              // {...register("name", { required: true })}
+              {...register("name", { required: true })}
               className="pl-3 input w-full rounded-md border-none focus:outline-none h-10"
             />
           </div>
@@ -93,7 +93,7 @@ const UpdateItem = () => {
               </label>
               <select
                 defaultValue={category}
-                // {...register("category", { required: true })}
+                {...register("category", { required: true })}
                 className="pl-3  select w-full rounded-md border-none focus:outline-none h-10 bg-white text-gray-400">
                 <option disabled value="default">
                   Category
@@ -116,8 +116,9 @@ const UpdateItem = () => {
               <input
                 type="number"
                 defaultValue={price}
+                step="any"
                 // defaultValue={item?.price}
-                // {...register("price", { required: true })}
+                {...register("price", { required: true })}
                 className="pl-3 input w-full rounded-md border-none focus:outline-none h-10"
               />
             </div>
@@ -132,7 +133,7 @@ const UpdateItem = () => {
             </label>
             <textarea
               defaultValue={recipe}
-              // {...register("recipe", { required: true })}
+              {...register("recipe", { required: true })}
               className="pl-3 textarea w-full rounded-md border-none focus:outline-none h-30 pt-4"></textarea>
           </div>
 
@@ -140,7 +141,7 @@ const UpdateItem = () => {
           <div className="form-control w-full mb-9">
             <input
               type="file"
-              // {...register("image", { required: true })}
+              {...register("image")}
               className="border-no file-input file-input-ghost w-full max-w-xs bg-[#fcfcfc31]"
             />
           </div>

@@ -5,11 +5,14 @@ import axios from "axios"; // ✅ (নতুন লাইন)
 import Swal from "sweetalert2"; // ✅ (নতুন লাইন)
 import SecTionTitle from "../../../Components/SecTionTitle";
 import { NavLink } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 
 // const Cart = ({ cart = [] }) => {
 const Cart = () => {
   // 🔹 cart state-কে আপডেট করার জন্য hookUseCart থেকে setCart যোগ করেছি
   const [cart, refetch] = hookUseCart(); // ✅ (পরিবর্তন করা লাইন)
+  const axiosSecure = hookAxiosSecure();
 
 
   // Calculate total price
@@ -31,12 +34,9 @@ const Cart = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // 🔹 axios দিয়ে DELETE রিকোয়েস্ট পাঠানো
-        axios
-          .delete(`http://localhost:5000/carts/${id}`)
+        axiosSecure.delete(`/carts/${id}`)
           .then((res) => {
-            // 🔹 সার্ভারে সফলভাবে ডিলিট হলে UI থেকেও মুছে ফেলব
             if (res.data.deletedCount > 0) {
-              // UI আপডেট refetch()কে কল করে (reload ছাড়াই)
               refetch();
 
               // UI আপডেট (reload ছাড়াই)
@@ -66,6 +66,7 @@ const Cart = () => {
   return (
     <div className="max-w-5xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-6">
       {/* Heading */}
+              <Helmet title="Gen-Z_R|Cart" />
       <SecTionTitle subHeading="My Cart" heading="WANNA ADD MORE?" />
       {/* Summary Section */}
       <div className="flex justify-between items-center mb-6 border-b pb-3 text-lg font-medium">

@@ -3,6 +3,7 @@ import { FaWallet, FaStore, FaPhoneAlt, FaShoppingCart, FaStar, FaCalendarAlt } 
 import UseAuthHook from '../../../providers/ContexHook/UseAuthHook';
 import hookAxiosSecure from '../../../hooks/hookAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet-async';
 
 const UserHome = () => {
     const {user} = UseAuthHook();
@@ -39,6 +40,7 @@ const { data: myStat = {} } = useQuery({
 
     return (
         <div className="w-full px-6 py-10 bg-white min-h-screen mt-12">
+                    <Helmet title="Gen-Z_R|UserHome" />
             <h2 className="text-3xl font-serif font-bold mb-8 uppercase">Hi, Welcome Back!</h2>
 
             {/* Top Stats Section */}

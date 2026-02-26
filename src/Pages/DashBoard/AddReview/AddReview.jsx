@@ -4,17 +4,18 @@ import { FaRocket } from "react-icons/fa";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import UseAuthHook from "../../../providers/ContexHook/UseAuthHook";
-import hookAxiosLocal from "../../../hooks/hookAxiosLocal";
 // import { useQuery } from '@tanstack/react-query';
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import SecTionTitle from "../../../Components/SecTionTitle";
+import { Helmet } from "react-helmet-async";
+import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 
 const AddReview = () => {
   const [rating, setRating] = useState(0);
   const { register, handleSubmit, reset } = useForm();
   const { user } = UseAuthHook();
-  const axiosLocal = hookAxiosLocal();
+  const axiosSecure = hookAxiosSecure();
 
   const onSubmit = async (data) => {
     const reviewData = {
@@ -23,7 +24,7 @@ const AddReview = () => {
       email: user.email,
     };
     console.log(reviewData);
-    const reviewRespo = await axiosLocal.post("/reviews", reviewData);
+    const reviewRespo = await axiosSecure.post("/reviews", reviewData);
     console.log(reviewRespo.data);
     if (reviewRespo.data.insertedId) {
       reset();
@@ -44,6 +45,7 @@ const AddReview = () => {
 
   return (
     <div className="w-full px-4 md:px-10 py-10">
+              <Helmet title="Gen-Z_R|AddReview" />
       {/* Header Section */}
       <div className="text-center mb-10">
             <SecTionTitle subHeading="Sharing is Caring!!!" heading="Give a Review..." />

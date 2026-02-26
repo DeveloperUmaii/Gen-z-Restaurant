@@ -4,10 +4,11 @@ import Swal from "sweetalert2";
 import hookAxiosSecure from "../../../hooks/hookAxiosSecure";
 import { NavLink } from "react-router-dom";
 import SecTionTitle from "../../../Components/SecTionTitle";
+import { Helmet } from "react-helmet-async";
 
 const ManageItems = () => {
   const [menu, , refetch] = useMenu();
-  const backEndServerLink = hookAxiosSecure();
+  const axiosSecure = hookAxiosSecure();
   const handleDeleteItem = (item) => {
     Swal.fire({
       title: "Are you sure?",
@@ -19,8 +20,8 @@ const ManageItems = () => {
       confirmButtonText: "Yes, delete it!",
     }).then( async (result) => {
       if (result.isConfirmed) {
-          const res = await backEndServerLink.delete(`/item/${item._id}`)
-              console.log(res.data)
+          const res = await axiosSecure.delete(`/item/${item._id}`)
+              // console.log(res.data)
             if (res.data.deletedCount > 0) {
               // UI reload ছাড়া আপডেট
               refetch();
@@ -32,21 +33,13 @@ const ManageItems = () => {
                 showConfirmButton: false,
               });
             }
-          // .catch((err) => {
-          //   console.log(err)
-          //   Swal.fire({
-          //     title: "Error!",
-          //     text: "Something went wrong while deleting.",
-          //     icon: "error",
-          //   });
-          // });
       }
     });
   };
 
   return (
     <div className="w-full px-4 md:px-10 py-10">
-      {/* Title Section */}
+              <Helmet title="Gen-Z_R|ManageItems" />
             <SecTionTitle subHeading="Hurry Up!" heading="Manage All Items" />
 
       {/* Content Container */}

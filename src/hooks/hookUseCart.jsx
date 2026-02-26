@@ -4,13 +4,14 @@ import UseAuthHook from '../providers/ContexHook/UseAuthHook';
 
 
 const hookUseCart = () => {
-  const backEndServerLink = hookAxiosSecure();
-  const {user} = UseAuthHook();
+  const axiosSecure = hookAxiosSecure();
+  const {user, loading} = UseAuthHook();
+  console.log()
     const {refetch,data: dataFromBackEnd = [] } = useQuery({
       queryKey: ['cart',user?.email],
-      staleTime: 0,
+      enabled: !loading && !!user?.email,
       queryFn: async () => {
-          const res = await backEndServerLink.get(`carts?email=${user?.email}`);
+          const res = await axiosSecure.get(`/carts/${user?.email}`);
          return res.data;
     }
   })

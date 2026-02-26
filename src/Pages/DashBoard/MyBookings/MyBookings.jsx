@@ -7,6 +7,7 @@ import { MdOutlinePending } from "react-icons/md";
 import SecTionTitle from "../../../Components/SecTionTitle";
 import { FcApproval } from "react-icons/fc";
 import { ImCancelCircle } from "react-icons/im";
+import { Helmet } from "react-helmet-async";
 
 const MyBookings = () => {
   const axiosSecure = hookAxiosSecure();
@@ -60,7 +61,7 @@ const MyBookings = () => {
   };
   return (
     <div className="w-full px-4 md:px-10 py-10 bg-white min-h-screen">
-      {/* Header Section */}
+                <Helmet title="Gen-Z_R|MyBookings" />
       <div className="text-center mb-12">
         <SecTionTitle subHeading='At a Glance!' heading='Manage All Bookings'/>
       </div>

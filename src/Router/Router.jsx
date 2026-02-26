@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'contact', element: <ContactUs /> },
-      { path: '/dashbord', element: <Private><DashBoard  /></Private>},
+      { path: '/dashbord', element: <DashBoard  />},
       { path: 'ourmenu', element: <OurMenu /> },
       { path: 'ourshop/:category', element: <OurShop /> },
       { path: 'login', element: <Login /> },
@@ -46,28 +46,27 @@ const router = createBrowserRouter([
   // ✅ Dashboard layout route
   {
     path: '/dashboardDrawer',
+    // element: <LayOut />,
     // element: <Private> <DashboardDrawer /> </Private>, // Drawer as layout
     element:  <Private> <DashboardDrawer /> </Private>, // Drawer as layout
     children: [
       // User Pannlel
-      { index: true, element: <DashboardDrawer /> },
+      // { index: true, element: <DashboardDrawer /> },
       { path: 'reservation', element: <Reservation /> },
       { path: 'userhome', element: <UserHome /> },
       { path: 'PaymentHistory', element: <PaymentHistory /> },
-      { path: 'cart', element: <Cart></Cart> },
+      { path: 'cart', element: <Cart /> },
       { path: 'payment', element: <Payment /> },
       { path: 'addreview', element: <AddReview /> },
       { path: 'mybooking', element: <MyBookings /> },
+
       // Admin Pannel
-      { path: 'adminhome', element: <AdminHome /> },
-      // { path: 'adminhome', element: <AdminRoute> <AllUsers /> </AdminRoute> },
+      { path: 'adminhome', element: <AdminRoute> <AdminHome /> </AdminRoute> },
       { path: 'allusers', element: <AdminRoute> <AllUsers /> </AdminRoute> },
       { path: 'additem', element: <AdminRoute> <AddItem /> </AdminRoute> },
       { path: 'manageitems', element: <AdminRoute> <ManageItems /> </AdminRoute> },
-      { path: 'manageBookings', element:  <ManageBookings />  },
-                                                        // { path: 'manageitems', element:  <ManageItems /> },dashboardDrawer/cart
+      { path: 'manageBookings', element: <AdminRoute> <ManageBookings /> </AdminRoute> },
       { path: 'updateitem/:id', element: <AdminRoute> <UpdateItem /> </AdminRoute>,
-                                                        // { path: 'updateitem/:id', element:  <UpdateItem /> ,
         loader: ({params}) => fetch(`http://localhost:5000/menu/${params.id}`) 
       },
     ],

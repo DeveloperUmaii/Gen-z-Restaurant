@@ -21,7 +21,7 @@ const SignUp = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
-  const backEndServerLinkLocal = hookAxiosLocal();
+  const axiosLocal = hookAxiosLocal();
 
   // ✅ Signup Handler
   const handleSignUp = (e) => {
@@ -61,8 +61,6 @@ const SignUp = () => {
       );
       valid = false;
     }
-    //  (!valid) = (valid = false)
-    //  (valid) = (valid = true)
     if (!valid) return; // ❌ একসাথে সব error দেখানো যাবে
     // ✅ Registration
     registrationUser(email, password)
@@ -76,7 +74,7 @@ const userInfo = {
   email: email,
 };
 
-backEndServerLinkLocal.post("/users", userInfo).then((res) => {
+axiosLocal.post("/users", userInfo).then((res) => {
 
   // যদি user আগেই থাকে
   if (res.data.insertedId === null) {

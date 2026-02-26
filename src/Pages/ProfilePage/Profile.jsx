@@ -8,8 +8,8 @@ const Profile = () => {
   const { displayName, email, photoURL, uid } = user || {};
   const [isAdmin] = hookAdmin();
 
-  console.log(isAdmin, "admin T,F");
-  console.log(displayName, email, uid, "8 number line");
+  // console.log(isAdmin, "admin T,F");
+  // console.log(displayName, email, uid, "8 number line");
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
