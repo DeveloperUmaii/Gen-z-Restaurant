@@ -275,7 +275,8 @@ const DashBoard = () => {
         </div>
         {/* Page content here */}
         <div className="">
-          <Home />
+          {/* <Home /> */}
+          <Outlet />
         </div>
       </div>
 

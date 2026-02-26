@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../PrimaryComponents/Navbar";
 import Footer from "../PrimaryComponents/Footer";
+import DashBoard from "../Pages/DashBoard";
 
 const LayOut = ({ toggleDrawer, isOpen }) => {
   const location = useLocation();
@@ -12,13 +13,13 @@ const LayOut = ({ toggleDrawer, isOpen }) => {
   return (
     <div>
       {/* Navbar-এ toggleDrawer এবং isOpen প্রপস হিসেবে পাঠানো হলো */}
-      {noHeaderFooter || <Navbar toggleDrawer={toggleDrawer} isOpen={isOpen} />}
-
+      {noHeaderFooter || <Navbar />}
+      {/* <DashBoard /> */}
       {/* মেইন কন্টেন্ট রেন্ডার করার জন্য Outlet */}
-      <div className="min-h-screen ">
+      {/* <div className="min-h-screen ">
         <Outlet />
-      </div>
-
+      </div> */}
+        {/* <Footer /> */}
       {noHeaderFooter || <Footer />}
     </div>
   );
