@@ -2,12 +2,7 @@ import loginPageThemeImage from "../../assets/Login/loginpageTheme1.jpg";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 // capcha
-import {
-  loadCaptchaEnginge,
-  LoadCanvasTemplate,
-  LoadCanvasTemplateNoReload,
-  validateCaptcha,
-} from "react-simple-captcha";
+import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha, } from "react-simple-captcha";
 import { AuthContext } from "../../providers/Authprovider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";

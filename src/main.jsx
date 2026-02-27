@@ -1,3 +1,6 @@
+import { EventEmitter } from "events";
+window.EventEmitter = EventEmitter;
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css"; // ইমপোর্ট না করলে টেল উইন্ড কাজ করবে না ইনডেক্স সিএসএস

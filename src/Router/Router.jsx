@@ -3,7 +3,7 @@ import LayOut from '../LayOut/LayOut'
 import ErrorPage from '../Components/ErrorPage'
 import Home from '../Pages/Home'
 import OurMenu from '../Pages/OurMenu'
-import DashBoard from '../Pages/DashBoard'
+// import DashBoard from '../Pages/DashBoard'
 import OurShop from '../Pages/OurShop'
 import ContactUs from '../Pages/ContactUs'
 import Login from '../Pages/Login/Login'
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'contact', element: <ContactUs /> },
-      { path: '/dashbord', element: <DashBoard  />},
+      // { path: '/dashbord', element: <DashBoard  />},
       { path: 'ourmenu', element: <OurMenu /> },
       { path: 'ourshop/:category', element: <OurShop /> },
       { path: 'login', element: <Login /> },
@@ -46,8 +46,6 @@ const router = createBrowserRouter([
   // ✅ Dashboard layout route
   {
     path: '/dashboardDrawer',
-    // element: <LayOut />,
-    // element: <Private> <DashboardDrawer /> </Private>, // Drawer as layout
     element:  <Private> <DashboardDrawer /> </Private>, // Drawer as layout
     children: [
       // User Pannlel

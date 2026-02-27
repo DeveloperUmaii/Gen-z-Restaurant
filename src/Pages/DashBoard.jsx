@@ -9,20 +9,7 @@ import hookUseCart from "../hooks/hookUseCart";
 import DashboardDrawer from "../LayOut/DashboardDrawer";
 import React, { useState } from "react";
 
-import {
-  FaHome,
-  FaShoppingCart,
-  FaStar,
-  FaEnvelope,
-  FaBars,
-  FaTimes,
-  FaList,
-  FaShoppingBag,
-  FaUtensils,
-  FaListAlt,
-  FaBook,
-  FaUsers,
-} from "react-icons/fa";
+import { FaHome, FaShoppingCart, FaStar, FaEnvelope, FaBars, FaTimes, FaList, FaShoppingBag, FaUtensils, FaListAlt, FaBook, FaUsers,} from "react-icons/fa";
 import { IoCalendar, IoMenu } from "react-icons/io5";
 import { GiWallet } from "react-icons/gi";
 import { LuCalendarMinus } from "react-icons/lu";
