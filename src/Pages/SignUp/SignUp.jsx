@@ -124,7 +124,7 @@ axiosLocal.post("/users", userInfo).then((res) => {
   return (
     <div>
       <Helmet title="Gen-Z_R|SignUp" />
-      <h6 className="text-center text-lg font-semibold mt-24">
+      <h6 className="text-center text-lg font-semibold mt-10">
         Sign Up Please
       </h6>
 

@@ -42,11 +42,11 @@ const NavbarContent = () => {
 
       {/* 🔹 Desktop Menu */}
       <ul className="hidden lg:flex w-full items-center text-white">
-        <label
+        { user && (<label
           htmlFor="my-drawer-4"
           className="btn btn-square btn-ghost text-orange-500 border-r-2 border-orange-600 hover:bg-[#ff68035b]">
           <IoMenu size={18} />
-        </label>
+        </label>)}
 
         <li className="flex-1 text-center">
           <NavLink to="/" className="btn btn-ghost text-xl text-white">

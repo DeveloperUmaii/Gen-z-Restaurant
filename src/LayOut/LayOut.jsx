@@ -16,9 +16,9 @@ const LayOut = ({ toggleDrawer, isOpen }) => {
       {noHeaderFooter || <Navbar />}
       {/* <DashBoard /> */}
       {/* মেইন কন্টেন্ট রেন্ডার করার জন্য Outlet */}
-      {/* <div className="min-h-screen ">
+      <div className=" ">
         <Outlet />
-      </div> */}
+      </div>
         {/* <Footer /> */}
       {noHeaderFooter || <Footer />}
     </div>

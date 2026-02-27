@@ -46,7 +46,7 @@ const router = createBrowserRouter([
   // ✅ Dashboard layout route
   {
     path: '/dashboardDrawer',
-    element:  <Private> <DashboardDrawer /> </Private>, // Drawer as layout
+    element:  <LayOut />, // Drawer as layout
     children: [
       // User Pannlel
       // { index: true, element: <DashboardDrawer /> },

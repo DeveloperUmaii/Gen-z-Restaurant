@@ -1,22 +1,8 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import UseAuthHook from "../providers/ContexHook/UseAuthHook";
 import Swal from "sweetalert2";
-import { TiShoppingCart } from "react-icons/ti";
 import hookUseCart from "../hooks/hookUseCart";
-import {
-  FaHome,
-  FaShoppingCart,
-  FaStar,
-  FaEnvelope,
-  FaBars,
-  FaTimes,
-  FaList,
-  FaShoppingBag,
-  FaUtensils,
-  FaListAlt,
-  FaBook,
-  FaUsers,
-} from "react-icons/fa";
+import { FaHome, FaShoppingCart, FaStar, FaEnvelope, FaList, FaShoppingBag, FaUtensils, FaListAlt, FaBook, FaUsers, } from "react-icons/fa";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { IoCalendar, IoMenu } from "react-icons/io5";
 import { GiWallet } from "react-icons/gi";
@@ -24,7 +10,7 @@ import { LuCalendarMinus } from "react-icons/lu";
 import {} from "react-icons/fa";
 import hookAdmin from "../hooks/hookAdmin";
 import NavbarContent from "./NavAndDrawerComponents/NavbarContent";
-import MobileDropdown from "./NavAndDrawerComponents/MobileDropdown";
+
 
 const Navbar = () => {
   const { user, logOut } = UseAuthHook();
@@ -171,83 +157,37 @@ const Navbar = () => {
       <input id="my-drawer-4" type="checkbox" className=" drawer-toggle" />
 
       <div className="drawer-content  ">
-        {/* ////<div className=" is-drawer-close:w-auto is-drawer-open:w-4/12 flex "> */}
         {/* <div className=" border-4 border-red-700 flex w-full justify-evenly items-center  w-full navbar border-2 border-[#00000036] h-8 bg-[#00000028] fixed z-10"> */}
-        {/* <div className=" mt-1 border-2 border-[#00000036] flex w-full items-center h-14 bg-[#00000028] fixed z-10"> */}
-        {/* <div className="mt-1 border-2 border-[#00000036] flex w-full items-center h-14 bg-[#00000028] fixed top-0 left-0 right-0 z-10">
-
-            <div className="lg:hidden">
-            drawer button 
-              <label
-                htmlFor="my-drawer-4"
-                aria-label="open sidebar"
-                className="btn btn-square btn-ghost shadow-[#ff68035b] text-orange-500 border-r-2 border-orange-600 hover:bg-[#ff68035b]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                  fill="none"
-                  stroke="currentColor"
-                  className="my-1.5 inline-block size-4">
-                  <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
-                  <path d="M9 4v16"></path>
-                  <path d="M14 10l2 2l-2 2"></path>
-                </svg>
-              </label> */}
-
-  <div className="lg:hidden flex items-center gap-52 fixed z-50 pl-3 border-y border-white mt-1">
-      <div className="">
-        <label
-          htmlFor="my-drawer-4"
-          className="btn btn-square btn-ghost text-orange-500 border-r-2 border-orange-600 hover:bg-[#ff68035b]">
-          <IoMenu size={25} />
-        </label>
-      </div> 
-        <div className="dropdown ">
-                <div tabIndex={0} >
-                <IoIosArrowDropdownCircle size={10} className="h-7 w-7 btn btn-circle  border-0 text-orange-600 border-orange-600 hover:bg-[#ff68035b]" /> </div>
-                
-                <ul
-                  tabIndex={0}
-                  className="bg-[#00000028] menu menu-sm dropdown-content rounded-b-2xl z-50 mt-3 w-52 p-2 ">
-                  {navoption}
-                </ul>
-
+        <div className="lg:hidden flex items-center gap-52 fixed z-50 pl-3 border-y border-white mt-1">
+          { user && (<div className="">
+            <label
+              htmlFor="my-drawer-4"
+              className="btn btn-square btn-ghost text-orange-500 border-r-2 border-orange-600 hover:bg-[#ff68035b]">
+              <IoMenu size={25} />
+            </label>
+          </div>)}
+          <div className="dropdown ">
+            <div tabIndex={0}>
+              <IoIosArrowDropdownCircle
+                size={10}
+                className="h-7 w-7 btn btn-circle  border-0 text-orange-600 border-orange-600 hover:bg-[#ff68035b]"
+              />{" "}
+            </div>
+            <ul
+              tabIndex={0}
+              className="bg-[#00000028] menu menu-sm dropdown-content rounded-b-2xl z-50 mt-3 w-52 p-2 ">
+              {navoption}
+            </ul>
+          </div>
         </div>
-        </div>
-
-
-        {/* Sidebar toggle icon */}
-
-        {/* <div className=""><DashboardDrawer /> </div> */}
-        {/* </div> */}
-
-        {/* ..........nav */}
-
-        {/* <div className="navbar-center hidden lg:flex items-center  ">
-              <ul className=" menu menu-horizontal  is-drawer-close:gap-x-1.5 ">
-                {navoption}
-              </ul>
-            </div> */}
-        {/* <div className="navbar-center hidden lg:flex items-center w-full">
-              <ul className="menu menu-horizontal w-full flex">{navoption}</ul>
-            </div> */}
-
-        {/* ........ */}
-        {/* </div>
-        </div>///// */}
-
 
         <div className=" hidden lg:flex lg:block border-2 border-[#00000036] h-10 py-1 bg-[#00000028] fixed top-0 left-0 right-0 z-50">
           <NavbarContent />
-        </div>
+        </div> 
         {/* Page content here */}
-        <div className="">
-          {/* <Home /> */}
+        {/* <div className="">
           <Outlet />
-        </div>
+        </div> */}
       </div>
 
       <div className="drawer-side is-drawer-close:overflow-visible ">
