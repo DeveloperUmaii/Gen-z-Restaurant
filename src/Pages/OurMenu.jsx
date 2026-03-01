@@ -1,10 +1,18 @@
 import { Helmet } from "react-helmet-async";
 import Cover from "../Components/Cover";
-import menuCover from "../assets/menu/banner3.jpg";
-import dessertCover from "../assets/menu/dessert-bg.jpeg";
-import pizzaCover from "../assets/menu/pizza-bg.jpg";
-import saladCover from "../assets/menu/salad-bg.jpg";
-import soupCover from "../assets/menu/soup-bg.jpg";
+// import menuCover from "../assets/menu/banner3.jpg";
+
+import menuCover from "../assets/menu/Bg-OurMenu.jpg";
+import dessertCover from "../assets/menu/Bg-Dessert.jpg";
+import pizzaCover from "../assets/menu/Bg-Pizza.jpg";
+import saladCover from "../assets/menu/Bg-Salad.jpg";
+import soupCover from "../assets/menu/Bg-Soup.jpg";
+
+
+// import dessertCover from "../assets/menu/dessert-bg.jpeg";
+// import pizzaCover from "../assets/menu/pizza-bg.jpg";
+// import saladCover from "../assets/menu/salad-bg.jpg";
+// import soupCover from "../assets/menu/soup-bg.jpg";
 import PopularMenu from './HomeComponents/PopularMenu';
 import PageCover from "../Components/PageCover";
 

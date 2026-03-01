@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 export const backEndServerLink = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://gen-z-resturant-server.vercel.app",
 });
 
 const hookAxiosSecure = () => {
@@ -19,7 +19,7 @@ const hookAxiosSecure = () => {
         // console.log('Request stop bye Interceptors :_',token)
         config.headers.authorization = `Bearer ${token}`;
         return config;
-      }
+      },
     );
 
     // response interceptor
@@ -33,7 +33,7 @@ const hookAxiosSecure = () => {
           navigate("/login");
         }
         return Promise.reject(error);
-      }
+      },
     );
 
     // cleanup (VERY IMPORTANT)

@@ -1,4 +1,5 @@
-import BistroBossBackground from "../assets/home/chef-service.jpg";
+// import BistroBossBackground from "../assets/home/chef-service.jpg";
+import BistroBossBackground from "../assets/home/BG_BANNER Fresh Fruit and Vegetable Smoothie Bowl.jpg";
 import BannerSlide from "./HomeComponents/BannerSlide";
 import FoodItemNameSlide from "./HomeComponents/FoodItemNameSlide";
 import BistroBossSection from "./HomeComponents/BistroBossSection";

@@ -1,12 +1,81 @@
-# React + Vite
+# 🍽️ Gen-Z Restaurant
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Gen-Z Restaurant** একটি modern full-stack restaurant management web application যেখানে user সহজে খাবার ব্রাউজ, cart manage, online payment, review এবং table reservation করতে পারে। Admin dashboard থেকে সম্পূর্ণ system control করা যায়।
 
-Currently, two official plugins are available:
+🌐 **Live Website:** https://gen-z-resturant.web.app/  
+📂 **Repository:** https://github.com/DeveloperUmaii/Gen-z-Restaurant  
+👨‍💻 **Developer GitHub:** https://github.com/DeveloperUmaii  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Key Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 👤 User Features
+- 🛒 Cart item add, remove এবং manage করতে পারে  
+- 💳 Secure online payment করতে পারে  
+- ⭐ Food review দিতে পারে  
+- 📅 Table reservation করতে পারে  
+- 📞 যে কোনো সময় contact করতে পারে  
+
+### 🛠️ Admin Features
+- 🍔 Food item add, edit এবং delete করতে পারে  
+- 👥 Normal user কে admin বানাতে পারে  
+- 📋 Table reservation approve বা cancel করতে পারে  
+- 📊 Complete dashboard control  
+
+---
+
+## 🧰 Technologies Used
+
+### Frontend
+- React.js  
+- React Router  
+- Tailwind CSS  
+- DaisyUI  
+- React Hook Form  
+- TanStack React Query  
+- Axios  
+- SweetAlert2  
+
+### Backend
+- Node.js  
+- Express.js  
+- MongoDB  
+- JWT Authentication  
+
+### Authentication
+- Firebase Authentication  
+- Role Based Authorization  
+
+### Payment System
+- Stripe Payment Gateway  
+
+### Deployment
+- Firebase Hosting (Client)  
+- Vercel (Server)  
+
+---
+
+## 🔐 Security Features
+- JWT Token Verification  
+- Protected API Routes  
+- Role-based Access Control (Admin/User)  
+- Secure Payment Integration  
+
+---
+
+## 💳 Payment Demo (Test Card)
+
+Use this card for testing payment:
+
+Card Number: `4242 4242 4242 4242`  
+Expiry Date: `06/30`  
+CVC: `333`  
+
+---
+
+## 📦 Installation & Setup
+
+### Clone the Repository
+```bash
+git clone https://github.com/DeveloperUmaii/Gen-z-Restaurant

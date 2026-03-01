@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const backEndServerLinkLocal = axios.create ({
-     baseURL:'http://localhost:5000' })
-     
+export const backEndServerLinkLocal = axios.create({
+  baseURL: "https://gen-z-resturant-server.vercel.app",
+});
+
 const hookAxiosLocal = () => {
-    
-    return backEndServerLinkLocal;
+  return backEndServerLinkLocal;
 };
 
 export default hookAxiosLocal;
