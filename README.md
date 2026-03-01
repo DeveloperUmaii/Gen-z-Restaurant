@@ -2,6 +2,7 @@
 
 **Gen-Z Restaurant** একটি modern full-stack restaurant management web application যেখানে user সহজে খাবার ব্রাউজ, cart manage, online payment, review এবং table reservation করতে পারে। Admin dashboard থেকে সম্পূর্ণ system control করা যায়।
 
+🌐 [**Gen-Z Resturant**](https://gen-z-resturant.web.app/) 
 🌐 **Live Website:** https://gen-z-resturant.web.app/  
 📂 **Repository:** https://github.com/DeveloperUmaii/Gen-z-Restaurant  
 👨‍💻 **Developer GitHub:** https://github.com/DeveloperUmaii  
@@ -73,6 +74,16 @@ Expiry Date: `06/30`
 CVC: `333`  
 
 ---
+
+### 📬 Contact Information
+
+## 👨‍💻 Developer: Umair Hossen
+## 📧 Email: umairhossenashik9906@gmail.com 
+## 📞 Phone: +880 1635-893037
+## 💬 WhatsApp: +880 1635-893037
+## 💬 [WhatsApp PROFILE](https://wa.me/8801635893037?text=Hello%20Asik%20From%20web%20)
+## 🌐 [GitHub](https://github.com/DeveloperUmaii): https://github.com/DeveloperUmaii
+## 📘 [Facebook](https://www.facebook.com/mdasiknlfasik): https://www.facebook.com/mdasiknlfasik
 
 ## 📦 Installation & Setup
 
